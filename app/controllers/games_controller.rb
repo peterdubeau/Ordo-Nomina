@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: [:show, :update, :destroy]
+  before_action :set_game, only: [:show, :show_by_code, :update, :destroy]
 
   # GET /games
   def index
@@ -14,13 +14,14 @@ class GamesController < ApplicationController
   # end
 
   def show_by_code
-    @game = Game.find_by code: (params[:code])
+    
     render json: @game
   end
 
   def show_users
-    @users = User.find_by(params[:code])
-    render json: @users
+    @game = Game.find_by code: (params[:code])
+    @users = @game.users.all
+    render json: @game, include: :users
   end
 
   # POST /games
