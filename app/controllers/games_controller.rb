@@ -9,9 +9,9 @@ class GamesController < ApplicationController
   end
 
   # GET /games/1
-  # def show
-  #   render json: @game
-  # end
+  def show
+    render json: @game
+  end
 
   def show_by_code
     render json: @game
@@ -59,6 +59,6 @@ class GamesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def game_params
-      params.require(:game).permit(:code, :string)
+      params.require(:game).permit(:code)
     end
 end
