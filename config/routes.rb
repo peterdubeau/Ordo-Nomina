@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :users
   resources :games
+  mount ActionCable.server => '/cable'
 
   get '/game/:code/', to: 'games#show_by_code'
   get '/game/:code/users', to: 'games#show_users'

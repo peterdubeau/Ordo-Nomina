@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_10_180220) do
+ActiveRecord::Schema.define(version: 2020_09_10_214529) do
 
   create_table "games", force: :cascade do |t|
     t.string "code", limit: 5

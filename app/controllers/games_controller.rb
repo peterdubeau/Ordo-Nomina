@@ -14,7 +14,6 @@ class GamesController < ApplicationController
   # end
 
   def show_by_code
-    
     render json: @game
   end
 
@@ -33,6 +32,9 @@ class GamesController < ApplicationController
     else
       render json: @game.errors, status: :unprocessable_entity
     end
+
+    ActionCable.server.broadcast 'games_channel', @game
+
   end
 
   # PATCH/PUT /games/1
