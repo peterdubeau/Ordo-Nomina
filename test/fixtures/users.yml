@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  username: MyString
+  is_admin: false
+  initiative: 
+  game: one
+
+two:
+  username: MyString
+  is_admin: false
+  initiative: 
+  game: two

@@ -9,8 +9,18 @@ class GamesController < ApplicationController
   end
 
   # GET /games/1
-  def show
+  # def show
+  #   render json: @game
+  # end
+
+  def show_by_code
+    @game = Game.find_by code: (params[:code])
     render json: @game
+  end
+
+  def show_users
+    @users = User.find_by(params[:code])
+    render json: @users
   end
 
   # POST /games
@@ -41,7 +51,7 @@ class GamesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_game
-      @game = Game.find(params[:id])
+      @game = Game.find_by code: (params[:code])
     end
 
     # Only allow a trusted parameter "white list" through.
