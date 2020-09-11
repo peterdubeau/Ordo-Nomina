@@ -44,10 +44,7 @@ class App extends Component {
         />
       <div>
           {this.state.users.map(thing =>
-            <p>{thing.username}</p>)}
-          
-          {this.state.games.map(code => 
-            <p>{code.code}</p>)}
+            <p>{thing.username}: {thing.initiative}</p>)}
       </div>
       </div>
     );
