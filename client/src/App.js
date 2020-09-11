@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { ActionCableConsumer } from 'react-actioncable-provider';
-import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
@@ -43,6 +42,13 @@ class App extends Component {
           channel={{ channel: 'UsersChannel' }}
           onReceived={this.handleReceivedGame}
         />
+      <div>
+          {this.state.users.map(thing =>
+            <p>{thing.username}</p>)}
+          
+          {this.state.games.map(code => 
+            <p>{code.code}</p>)}
+      </div>
       </div>
     );
   }
