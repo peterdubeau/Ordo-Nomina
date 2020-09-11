@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: [:show, :update, :destroy]
+  before_action :set_game, only: [:show, :show_by_code, :update, :destroy]
 
   # GET /games
   def index
@@ -9,8 +9,21 @@ class GamesController < ApplicationController
   end
 
   # GET /games/1
-  def show
+  # def show
+  #   render json: @game
+  # end
+
+  def show_by_code
     render json: @game
+  end
+
+  def show_users
+    @game = Game.find_by code: (params[:code])
+    @users = @game.users.all
+    render json: @game, include: :users
+
+    ActionCable.server.broadcast 'games_channel', @game.users.all
+
   end
 
   # POST /games
@@ -22,6 +35,9 @@ class GamesController < ApplicationController
     else
       render json: @game.errors, status: :unprocessable_entity
     end
+
+    ActionCable.server.broadcast 'games_channel', @game
+
   end
 
   # PATCH/PUT /games/1
@@ -41,7 +57,7 @@ class GamesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_game
-      @game = Game.find(params[:id])
+      @game = Game.find_by code: (params[:code])
     end
 
     # Only allow a trusted parameter "white list" through.
