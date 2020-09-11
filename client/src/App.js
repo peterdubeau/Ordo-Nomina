@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { ActionCableConsumer } from 'react-actioncable-provider';
+import { Route } from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom' 
 import './App.css';
+import DisplayPlayer from './Components/DisplayPlayers/DisplayPlayers'
 
 class App extends Component {
   state = {
@@ -42,10 +45,11 @@ class App extends Component {
           channel={{ channel: 'UsersChannel' }}
           onReceived={this.handleReceivedGame}
         />
-      <div>
-          {this.state.users.map(thing =>
-            <p>{thing.username}: {thing.initiative}</p>)}
-      </div>
+        <Router>
+          <Route path ='/users'>
+            <DisplayPlayer users={this.state.users} />
+          </Route>
+        </Router>
       </div>
     );
   }
