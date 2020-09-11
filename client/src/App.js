@@ -9,27 +9,27 @@ class App extends Component {
   }
 
   componentDidMount = () => {
-    fetch('http://localhost:3000/games')
+    fetch('http://localhost:3000/games/')
       .then(res => res.json())
       .then(gamesArr => this.setState({
         games: gamesArr
       }))
   }
 
-  handleReceivedRoom = response => {
+  handleReceivedGame = response => {
     console.log(response)
     this.setState({
-      games: [...this.state.games, response.game]
+      games: [...this.state.games, response]
     })
   }
 
   render() {
-  console.log(this.state.games)
+    console.log(this.state.games)
     return (
       <div className="App">
         <ActionCableConsumer
           channel={{ channel: 'GamesChannel' }}
-          onReceived={this.handleReceivedRoom}
+          onReceived={this.handleReceivedGame}
         />
       </div>
     );
