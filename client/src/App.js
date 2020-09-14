@@ -17,7 +17,7 @@ class App extends Component {
       .then(gamesArr => this.setState({
         games: gamesArr
       }))
-    fetch('http://localhost:3000/users/')
+    fetch(`http://localhost:3000/users`)
       .then(res => res.json())
       .then(usersArr => this.setState({
         users: usersArr
@@ -33,8 +33,8 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.games)
-    console.log(this.state.users)
+    // console.log(this.state.games)
+    // console.log(this.state.users)
     return (
       <div className="App">
         <ActionCableConsumer
@@ -46,7 +46,7 @@ class App extends Component {
           onReceived={this.handleReceivedGame}
         />
         <Router>
-          <Route path ='/users'>
+          <Route path ='/game/:code/users'>
             <DisplayPlayer users={this.state.users} />
           </Route>
         </Router>

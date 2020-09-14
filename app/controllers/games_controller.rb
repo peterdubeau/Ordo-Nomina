@@ -22,7 +22,7 @@ class GamesController < ApplicationController
     @users = @game.users.all
     render json: @game, include: :users
 
-    ActionCable.server.broadcast 'games_channel', @game.users.all
+    # ActionCable.server.broadcast 'games_channel', @game.users.all
 
   end
 

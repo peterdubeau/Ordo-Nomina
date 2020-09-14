@@ -3,7 +3,7 @@ class GamesChannel < ApplicationCable::Channel
     stream_from "games_channel"
   end
 
-  def unsubscribed
+  def unsubscribe
     # Any cleanup needed when channel is unsubscribed
     raise NotImplementedError
   end
