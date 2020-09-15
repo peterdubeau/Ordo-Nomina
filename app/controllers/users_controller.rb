@@ -34,11 +34,17 @@ class UsersController < ApplicationController
     else
       render json: @user.errors, status: :unprocessable_entity
     end
+
+    ActionCable.server.broadcast 'users_channel', @user
+
   end
 
   # DELETE /users/1
   def destroy
-    @user.destroy
+  @user.destroy
+  
+  ActionCable.server.broadcast 'users_channel', @user
+
   end
 
   private

@@ -14,7 +14,7 @@ class App extends Component {
       .then(gamesArr => this.setState({
         games: gamesArr
       }))
-    fetch('http://localhost:3000/users/')
+    fetch('http://localhost:3000/users')
       .then(res => res.json())
       .then(usersArr => this.setState({
         users: usersArr
@@ -22,16 +22,22 @@ class App extends Component {
   }
 
   handleReceivedGame = response => {
-    console.log(response)
+    // console.log(response)
     this.setState({
       games: [...this.state.games, response],
       users: [...this.state.users, response]
     })
   }
 
+  componentDidUpdate = () => {
+    if (this.handleReceivedGames) {
+      this.handleReceivedGames()
+    }
+  }
+
   render() {
-    console.log(this.state.games)
     console.log(this.state.users)
+    // console.log(Array.isArray(this.state.users[0]))
     return (
       <div className="App">
         <ActionCableConsumer
@@ -42,9 +48,12 @@ class App extends Component {
           channel={{ channel: 'UsersChannel' }}
           onReceived={this.handleReceivedGame}
         />
-      <div>
+        <div>
+      
+
           {this.state.users.map(thing =>
-            <p>{thing.username}: {thing.initiative}</p>)}
+            <p><span>{thing.id}</span>  {thing.username}: INI: {thing.initiative} </p>)}
+    
       </div>
       </div>
     );
