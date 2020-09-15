@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ActionCableConsumer } from 'react-actioncable-provider';
 import { Route } from 'react-router-dom'
 import { BrowserRouter as Router } from 'react-router-dom' 
+
 import './App.css';
 import DisplayPlayer from './Components/DisplayPlayers/DisplayPlayers'
 
@@ -12,7 +13,7 @@ class App extends Component {
   }
 
   componentDidMount = () => {
-    fetch('http://localhost:3000/games/')
+    fetch('http://localhost:3000/games/:code')
       .then(res => res.json())
       .then(gamesArr => this.setState({
         games: gamesArr
@@ -33,8 +34,8 @@ class App extends Component {
   }
 
   render() {
-    // console.log(this.state.games)
-    // console.log(this.state.users)
+    console.log(this.state.games)
+    console.log(this.state.users)
     return (
       <div className="App">
         <ActionCableConsumer

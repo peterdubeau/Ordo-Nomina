@@ -9,9 +9,9 @@ class GamesController < ApplicationController
   end
 
   # GET /games/1
-  # def show
-  #   render json: @game
-  # end
+  def show
+    render json: @game
+  end
 
   def show_by_code
     render json: @game

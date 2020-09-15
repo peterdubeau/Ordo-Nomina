@@ -3,13 +3,11 @@ import { withRouter } from 'react-router-dom'
 
 function DisplayPlayers(props) {
 
-  console.log(props.users)
-
   return (
 
     <div>
-          {props.users.map(thing =>
-            <p>{thing.username}: {thing.initiative}</p>)}
+          {props.users.map(player =>
+            <p className="player" key={player.id}>{player.username}: {player.id}</p>)}
       </div>
   )
 }
