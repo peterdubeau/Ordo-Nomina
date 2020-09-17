@@ -13,7 +13,7 @@ class App extends Component {
   }
 
   componentDidMount = () => {
-    fetch('http://localhost:3000/games/:code')
+    fetch('http://localhost:3000/games/')
       .then(res => res.json())
       .then(gamesArr => this.setState({
         games: gamesArr
