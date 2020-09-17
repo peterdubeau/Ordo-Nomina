@@ -3,6 +3,8 @@ import { withRouter } from 'react-router-dom'
 
 function DisplayPlayers(props) {
 
+  let i = 0
+
   return (
 
     <div>
