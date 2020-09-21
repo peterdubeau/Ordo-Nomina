@@ -9,7 +9,7 @@ function DisplayPlayers(props) {
 
     <div>
           {props.users.map(player =>
-            <p className="player" key={`player ${i+=1}`}>{player.username}: {player.initiative}</p>)}
+            <p className="player" key={`player ${i += 1}`}>{player.id} --- {player.username}: {player.initiative}</p>)}
       </div>
   )
 }

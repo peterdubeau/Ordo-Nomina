@@ -29,11 +29,14 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1
   def update
+    
     if @user.update(user_params)
-      ActionCable.server.broadcast "users_channel", @user
+      render json: @user
     else
       render json: @user.errors, status: :unprocessable_entity
     end
+    
+    ActionCable.server.broadcast "users_channel", {type: "update_user", data: @user}
 
   end
 

@@ -26,16 +26,30 @@ class App extends Component {
   }
 
   handleReceivedGame = response => {
-    console.log(response)
-    this.setState({
-      games: [...this.state.games, response],
-      users: [...this.state.users, response]
-    })
+    // console.log(response)
+    if (response.type === "update_user") {
+      let user = this.state.users.findIndex(user => user.id === response.data.id)
+      let userUpdate = [...this.state.users]
+      console.log(userUpdate)
+      userUpdate[user] = {...userUpdate[user], initiative: response.data.initiative }
+      this.setState({
+        users: userUpdate
+      })
+      console.log(this.state.users)
+      // this.setState({
+      //   users: [...this.state.users, user.initiative]
+      // })
+      // console.log(this.state.users)
+    } else {
+      console.log("Something went wrong")
+    }
+    
   }
 
+
+
   render() {
-    console.log(this.state.games)
-    console.log(this.state.users)
+    
     return (
       <div className="App">
         <ActionCableConsumer
