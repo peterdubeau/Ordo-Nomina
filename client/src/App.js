@@ -1,54 +1,14 @@
-import React, { Component } from 'react';
-import { ActionCableConsumer } from 'react-actioncable-provider';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom' 
+import Main from './Components/Main/Main'
 
-class App extends Component {
-  state = {
-    games: [],
-    users: []
-  }
+function App() {
 
-  componentDidMount = () => {
-    fetch('http://localhost:3000/games/')
-      .then(res => res.json())
-      .then(gamesArr => this.setState({
-        games: gamesArr
-      }))
-    fetch('http://localhost:3000/users/')
-      .then(res => res.json())
-      .then(usersArr => this.setState({
-        users: usersArr
-      }))
+  return (<>
+    <Router>
+      <Main />
+    </Router>
+      </>);
   }
-
-  handleReceivedGame = response => {
-    console.log(response)
-    this.setState({
-      games: [...this.state.games, response],
-      users: [...this.state.users, response]
-    })
-  }
-
-  render() {
-    console.log(this.state.games)
-    console.log(this.state.users)
-    return (
-      <div className="App">
-        <ActionCableConsumer
-          channel={{ channel: 'GamesChannel' }}
-          onReceived={this.handleReceivedGame}
-        />
-        <ActionCableConsumer
-          channel={{ channel: 'UsersChannel' }}
-          onReceived={this.handleReceivedGame}
-        />
-      <div>
-          {this.state.users.map(thing =>
-            <p>{thing.username}: {thing.initiative}</p>)}
-      </div>
-      </div>
-    );
-  }
-}
 
 export default App;

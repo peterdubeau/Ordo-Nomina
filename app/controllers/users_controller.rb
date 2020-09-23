@@ -23,22 +23,34 @@ class UsersController < ApplicationController
       render json: @user.errors, status: :unprocessable_entity
     end
 
-    ActionCable.server.broadcast 'users_channel', @user
+    ActionCable.server.broadcast 'users_channel', { type: "add_user", data: @user }
 
   end
 
   # PATCH/PUT /users/1
   def update
+    
     if @user.update(user_params)
       render json: @user
     else
       render json: @user.errors, status: :unprocessable_entity
     end
+    
+    ActionCable.server.broadcast "users_channel", { type: "update_user", data: @user }
+
   end
 
   # DELETE /users/1
   def destroy
-    @user.destroy
+
+    if @user.destroy
+      render json: @user
+    else 
+      render json: @user.errors, status: :unprocessable_entity
+    end
+
+    ActionCable.server.broadcast "users_channel", { type: "delete_user", data: @user }
+
   end
 
   private
