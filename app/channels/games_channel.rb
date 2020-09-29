@@ -1,10 +1,16 @@
 class GamesChannel < ApplicationCable::Channel
   def subscribed
-    stream_from "games_channel"
+    @game = Game.find_by code: (params[:code])
+    stream_for @game
   end
 
-  def unsubscribe
-    # Any cleanup needed when channel is unsubscribed
-    raise NotImplementedError
+  def received(data)
+    GamesChannel.broadcast_to(@game, { game: @game,  users: @game.users})
+
   end
+  
+  # def unsubscribed
+  #   # Any cleanup needed when channel is unsubscribed
+  #   raise NotImplementedError
+  # end
 end
