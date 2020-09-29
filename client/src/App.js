@@ -24,8 +24,8 @@ class App extends Component {
   //     }))
   // }
 
-  getGameData = () => {
-    fetch(`http://localhost:3000/game/TEST3/users`)
+  getGameData = (id) => {
+    fetch(`http://localhost:3000/game/${id}/users`)
       .then(response => response.json())
       .then(results => {
         this.setState({
@@ -39,14 +39,24 @@ class App extends Component {
   }
 
   updateAppStateGame = (newGame) => {
-    console.log(newGame.user)
-    this.setState({
-      currentGame: {
-        game: newGame.game.data,
-        users: newGame.users
-      }
-    })
+    if (newGame.type === "new_user") {
+      console.log("new_user")
+      this.setState({
+        currentGame: {
+          game: newGame.game,
+          users: [...this.state.currentGame.users, newGame.user]
+        }
+      })
+    } else if (newGame.type === "update_user") {
+      console.log("update_user")
+    } else if (newGame.type === "delete_user") {
+      console.log("delete_user")
+    } else {
+      console.log("whoopsie")
+    }
   }
+
+
 
   render() {
     
@@ -64,7 +74,7 @@ class App extends Component {
               currentUser={this.state.currentUser}
           />
     ) : (
-        <Redirect to='/game/TEST3/' />
+        <Redirect to='/' />
     )
         }}>
         </Route>

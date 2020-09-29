@@ -2,16 +2,6 @@ import React from 'react'
 import GameWebSocket from '../GameWebSocket/GameWebSocket'
 
 export default function ShowGame(props) {
-
-
-
-  const getUsers = async () => {
-  
-  } 
-
-  console.log(props.gameData)
-
-  if (getUsers !== {}) {
     return (<>
       <GameWebSocket
         cableApp={props.cableApp}
@@ -23,7 +13,5 @@ export default function ShowGame(props) {
         <p>{user.id} ------ {user.username} : {user.initiative}</p>
       )}
     </>)
-  } else {
-    return 'Loading...'
-  }
+
 }

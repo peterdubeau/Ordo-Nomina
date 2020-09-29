@@ -28,15 +28,17 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     @game = Game.find(user_params['game_id'])
     if @user.save
-      GamesChannel.broadcast_to(@game, {game: @game.code, user: @user})
+      GamesChannel.broadcast_to(@game, {game: @game.code, user: @user, type: "new_user"})
     end
     render json: @user
   end
 
   # PATCH/PUT /users/1
   def update
+    @user = User.new(user_params)
+    @game = Game.find(user_params['game_id'])
     if @user.update(user_params)
-      render json: @user
+      GamesChannel.broadcast_to(@game, {game: @game.code, user: @user, type: "update_user" })
     else
       render json: @user.errors, status: :unprocessable_entity
     end
@@ -44,7 +46,12 @@ class UsersController < ApplicationController
 
   # DELETE /users/1
   def destroy
-    @user.destroy
+    @game = Game.find(user_params['game_id'])
+    if @user.destroy
+      GamesChannel.broadcast_to(@game, {game: @game.code, user: @user, type: "delete_user" })
+    else
+      ender json: @user.errors, status: :unprocessable_entity
+    end
   end
 
   private
