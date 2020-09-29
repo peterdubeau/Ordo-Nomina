@@ -21,6 +21,9 @@ class GamesController < ApplicationController
     @game = Game.find_by code: (params[:code])
     @users = @game.users.all
     render json: @game, include: :users
+
+    # ActionCable.server.broadcast 'games_channel', @game.users.all
+
   end
 
   # POST /games
@@ -59,6 +62,6 @@ class GamesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def game_params
-      params.require(:game).permit(:code)
+      params.require(:game).permit(:code, :string)
     end
 end

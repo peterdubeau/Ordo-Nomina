@@ -35,13 +35,18 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1
   def update
+
     @user.update(user_params)
     @game = Game.find(user_params['game_id'])
+
     if @user.update(user_params)
       GamesChannel.broadcast_to(@game, {game: @game.code, user: @user, type: "update_user" })
     else
       render json: @user.errors, status: :unprocessable_entity
     end
+    
+    ActionCable.server.broadcast "users_channel", { type: "update_user", data: @user }
+
   end
 
   # DELETE /users/1
@@ -52,6 +57,7 @@ class UsersController < ApplicationController
     else
       ender json: @user.errors, status: :unprocessable_entity
     end
+
   end
 
   private

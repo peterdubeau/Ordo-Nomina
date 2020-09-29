@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2020_09_10_214529) do
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.boolean "is_admin"
-    t.bigint "initiative"
+    t.integer "initiative"
     t.integer "game_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
