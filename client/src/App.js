@@ -1,39 +1,76 @@
 import React, { Component } from 'react';
-import { ActionCableConsumer } from 'react-actioncable-provider';
-import logo from './logo.svg';
+import { Route, Redirect, withRouter } from 'react-router-dom'
+import ShowGame from './Components/ShowGame/ShowGame'
 import './App.css';
 
 class App extends Component {
-  state = {
-    games: []
+  constructor() {
+    super()
+    this.state = {
+      currentUser: null,
+      allRooms: [],
+      currentGame: {
+        game: {},
+        users: true
+      }
+    }
   }
 
-  componentDidMount = () => {
-    fetch('http://localhost:3000/games/')
-      .then(res => res.json())
-      .then(gamesArr => this.setState({
-        games: gamesArr
-      }))
+  // componentDidMount = () => {
+  //   fetch('http://localhost:3000/games/')
+  //     .then(res => res.json())
+  //     .then(gamesArr => this.setState({
+  //       game: gamesArr
+  //     }))
+  // }
+
+  getGameData = (id) => {
+    fetch(`http://localhost:3000/game/TEST3/users`)
+      .then(response => response.json())
+      .then(results => {
+        this.setState({
+          currentUser: true,
+          currentGame: {
+            game: results,
+            users: results.users
+          }
+        })
+      })
   }
 
-  handleReceivedGame = response => {
-    console.log(response)
+  updateAppStateGame = (newGame) => {
     this.setState({
-      games: [...this.state.games, response]
+      currentGame: {
+        game: newGame.game.data,
+        users: newGame.users
+      }
     })
   }
 
   render() {
-    console.log(this.state.games)
+    console.log(this.state.currentGame.users)
+
     return (
       <div className="App">
-        <ActionCableConsumer
-          channel={{ channel: 'GamesChannel' }}
-          onReceived={this.handleReceivedGame}
-        />
+        <Route exact path='/game/:code/' render={(props) => {
+          return this.state.currentGame.users ?
+          ( <ShowGame
+              {...props}
+              cableApp={this.props.cableApp}
+              updateApp={this.updateAppStateGame}
+              getGameData={this.getGameData}
+              gameData={this.state.currentGame}
+              currentUser={this.state.currentUser}
+          />
+    ) : (
+        <Redirect to='/game' />
+    )
+        }}>
+        </Route>
+        
       </div>
     );
   }
 }
 
-export default App;
+export default withRouter(App);
