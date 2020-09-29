@@ -35,7 +35,7 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1
   def update
-    @user = User.new(user_params)
+    @user.update(user_params)
     @game = Game.find(user_params['game_id'])
     if @user.update(user_params)
       GamesChannel.broadcast_to(@game, {game: @game.code, user: @user, type: "update_user" })

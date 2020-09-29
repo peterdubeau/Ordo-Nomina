@@ -49,8 +49,21 @@ class App extends Component {
       })
     } else if (newGame.type === "update_user") {
       console.log("update_user")
+      let user = this.state.currentGame.users.findIndex(user => user.id === newGame.user.id)
+      let userUpdate = [...this.state.currentGame.users]
+      console.log(userUpdate)
+      userUpdate[user] = {...userUpdate[user], initiative: newGame.user.initiative, username: newGame.user.username }
+      this.setState({
+         currentGame: { users: userUpdate }
+      })
     } else if (newGame.type === "delete_user") {
       console.log("delete_user")
+      let user = this.state.currentGame.users.findIndex(user => user.id === newGame.user.id)
+      let userUpdate = [...this.state.currentGame.users]
+      userUpdate.splice(userUpdate[user],1)
+      this.setState({
+        currentGame: { users: userUpdate }
+     })
     } else {
       console.log("whoopsie")
     }
