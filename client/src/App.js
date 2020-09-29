@@ -11,7 +11,7 @@ class App extends Component {
       allRooms: [],
       currentGame: {
         game: {},
-        users: true
+        users: []
       }
     }
   }
@@ -24,7 +24,7 @@ class App extends Component {
   //     }))
   // }
 
-  getGameData = (id) => {
+  getGameData = () => {
     fetch(`http://localhost:3000/game/TEST3/users`)
       .then(response => response.json())
       .then(results => {
@@ -39,6 +39,7 @@ class App extends Component {
   }
 
   updateAppStateGame = (newGame) => {
+    console.log(newGame.user)
     this.setState({
       currentGame: {
         game: newGame.game.data,
@@ -48,7 +49,7 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.currentGame.users)
+    
 
     return (
       <div className="App">
@@ -59,11 +60,11 @@ class App extends Component {
               cableApp={this.props.cableApp}
               updateApp={this.updateAppStateGame}
               getGameData={this.getGameData}
-              gameData={this.state.currentGame}
+              gameData={this.state.currentGame.users}
               currentUser={this.state.currentUser}
           />
     ) : (
-        <Redirect to='/game' />
+        <Redirect to='/game/TEST3/' />
     )
         }}>
         </Route>
