@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Redirect, withRouter } from 'react-router-dom'
+import CreateRoom from './Components/CreateRoom/CreateRoom'
 import ShowGame from './Components/ShowGame/ShowGame'
 import './App.css';
 
@@ -16,14 +17,6 @@ class App extends Component {
       }
     }
   }
-
-  // componentDidMount = () => {
-  //   fetch('http://localhost:3000/games/')
-  //     .then(res => res.json())
-  //     .then(gamesArr => this.setState({
-  //       game: gamesArr
-  //     }))
-  // }
 
   getGameData = (id) => {
     fetch(`http://localhost:3000/game/${id}/users`)
@@ -71,14 +64,23 @@ class App extends Component {
   }
 
 
+  generateCode = () => {
+    let code = ''
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    const charLength = characters.length
+    for (let i = 0; i < charLength; i++) {
+      code += characters.charAt(Math.floor(Math.random() * charLength))
+    }
+    return code.slice(0, 5)
+  }
 
   render() {
     
-
+    const roomCode = this.generateCode()
 
     return (
       <div className="App">
-        <Route exact path='/game/:code/' render={(props) => {
+        <Route exact path='/game/:code/users/' render={(props) => {
           return this.state.currentGame.users ?
             (<ShowGame
               {...props}
@@ -92,6 +94,9 @@ class App extends Component {
               <Redirect to='/' />
             )
         }}>
+        </Route>
+        <Route path='/create-game'>
+          <CreateRoom code={roomCode}/>
         </Route>
         
       </div>
