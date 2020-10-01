@@ -45,7 +45,7 @@ class UsersController < ApplicationController
       render json: @user.errors, status: :unprocessable_entity
     end
  
-    ActionCable.server.broadcast "users_channel", { type: "update_user", data: @user }
+    ActionCable.server.broadcast "users_channel", { type: "update_user", data: @user, id: @user.id }
 
   end
 

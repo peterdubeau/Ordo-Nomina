@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Route, Redirect, withRouter } from 'react-router-dom'
 import CreateRoom from './Components/CreateRoom/CreateRoom'
 import ShowGame from './Components/ShowGame/ShowGame'
+import JoinRoom from './Components/JoinRoom/JoinRoom'
 import './App.css';
 
 
@@ -10,7 +11,6 @@ class App extends Component {
     super()
     this.state = {
       currentUser: null,
-      allRooms: [],
       currentGame: {
         game: {},
         users: []
@@ -32,15 +32,16 @@ class App extends Component {
       })
   }
 
-  updateAppStateGame = (newGame) => {
+  updateAppStateGame = async (newGame) => {
     if (newGame.type === "new_user") {
+      await newGame
       console.log("new_user")
       this.setState({
         currentGame: {
           game: newGame.game,
           users: [...this.state.currentGame.users, newGame.user]
-        }
-      })
+        } 
+      }) 
     } else if (newGame.type === "update_user") {
       console.log("update_user")
       let user = this.state.currentGame.users.findIndex(user => user.id === newGame.user.id)
@@ -80,8 +81,8 @@ class App extends Component {
 
     return (
       <div className="App">
-        <Route exact path='/game/:code/users/' render={(props) => {
-          return this.state.currentGame.users ?
+        <Route exact path='/game/:code/user/:username' render={(props) => {
+          return this.state.currentGame ?
             (<ShowGame
               {...props}
               cableApp={this.props.cableApp}
@@ -95,8 +96,12 @@ class App extends Component {
             )
         }}>
         </Route>
-        <Route path='/create-game'>
+        <Route path='/' exact>
           <CreateRoom code={roomCode}/>
+        </Route>
+
+        <Route path='/join-room'>
+          <JoinRoom />
         </Route>
         
       </div>

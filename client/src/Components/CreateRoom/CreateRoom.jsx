@@ -6,8 +6,6 @@ import { postGame, getGames, postUser} from '../../services/games'
 function CreateRoom(props) {
   const [formData, setFormData] = useState({
     username: "",
-    initiative: "",
-    isAdmin: true
   })
 
   // const handleChange = (e) => {
@@ -25,15 +23,14 @@ function CreateRoom(props) {
   }
 
   const handleSubmit = async () => {
-    const newGame = await postGame({ code: props.code })
+    await postGame({ code: props.code })
   
     const findId = await getGames()
     let roomId = findId.filter(id => id.code === props.code)[0].id
     const addUser = await postUser({
       username: formData.username,
       game_id: roomId,
-      initiative: formData.initiative,
-      is_admin: props.admin
+      is_admin: true
     })
   }
 
@@ -43,21 +40,12 @@ function CreateRoom(props) {
       <input 
           name="username"
           type="text"
-          name="username"
           value={formData.username}
           onChange={handleChange}
-          placeholder = "Username"
-        />
-        <input
-          name="initiative"
-          type="text"
-          name="initiative"
-          value={formData.initiative}
-          onChange={handleChange}
-          placeholder = "Initiative"
+          placeholder = "Host Name"
         />
     </label>
-        <Link to={`/game/${props.code}/users/`}>
+        <Link to={`/game/${props.code}/user/${formData.username}`}>
           <button onClick={handleSubmit}>Enter Room</button>
         </Link>
     </form>
