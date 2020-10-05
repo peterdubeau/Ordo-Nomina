@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Route } from 'react-router-dom'
+import Main from '../Main/Main'
 import { postGame, getGames, postUser} from '../../services/games'
 
 
@@ -27,7 +28,7 @@ function CreateRoom(props) {
   
     const findId = await getGames()
     let roomId = findId.filter(id => id.code === props.code)[0].id
-    const addUser = await postUser({
+    await postUser({
       username: formData.username,
       game_id: roomId,
       is_admin: true
@@ -49,6 +50,9 @@ function CreateRoom(props) {
           <button onClick={handleSubmit}>Enter Room</button>
         </Link>
     </form>
+    <Route exact path='/game/:code/user/:username'>
+      <Main currentUser={formData} />
+    </Route>
   </div>)
 }
 

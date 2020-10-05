@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Route } from 'react-router-dom'
 import { getGames, postUser } from '../../services/games'
+import Main from '../Main/Main'
 
 export default function JoinRoom() {
   
   const [formData, setFormData] = useState({
+    id: "",
     username: "",
     initiative: "",
     code: ''
@@ -57,6 +59,9 @@ export default function JoinRoom() {
           <button onClick={handleSubmit}>Enter Room</button>
         </Link>
         </form>
+        <Route exact path='/game/:code/user/:username'>
+          <Main currentUser={formData} />
+        </Route>
       </div>
     )
   }

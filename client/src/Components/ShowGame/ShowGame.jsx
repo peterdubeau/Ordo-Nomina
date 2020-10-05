@@ -14,10 +14,10 @@ export default function ShowGame(props) {
   } else {
 
   
-   let findHost = (users) => {
-     let host = users.filter(host => host.is_admin === true)
-      return host
-   }
+  //  let findHost = (users) => {
+  //    let host = users.filter(host => host.is_admin === true)
+  //     return host
+  //  }
     
   
 
@@ -28,9 +28,9 @@ export default function ShowGame(props) {
       getGameData={props.getGameData}
       code={props.match.params.code}
     />
-    {props.gameData.filter(host => host.is_admin === true).map(hostName => <p>{hostName.username}'s Game:</p>)}
-    {props.gameData.filter(status => status.is_admin == false).map(user => 
-      <p>{user.id} -=-=-=- {user.username} : {user.initiative}</p>
+    {props.gameData.filter(host => host.is_admin === true).map(hostName => <p key ='host'>{hostName.username}'s Game:</p>)}
+    {props.gameData.filter(status => status.is_admin === false).map(user => 
+      <p key={user.username}>{user.id} -=-=-=- {user.username} : {user.initiative}</p>
     )}
   </>)
     

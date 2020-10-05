@@ -1,71 +1,14 @@
-import React, { Component } from 'react';
-import { Route, Redirect, withRouter } from 'react-router-dom'
+import React from 'react';
+import { Route } from 'react-router-dom'
 import CreateRoom from './Components/CreateRoom/CreateRoom'
-import ShowGame from './Components/ShowGame/ShowGame'
 import JoinRoom from './Components/JoinRoom/JoinRoom'
+import Main from './Components/Main/Main'
 import './App.css';
 
 
-class App extends Component {
-  constructor() {
-    super()
-    this.state = {
-      currentUser: null,
-      currentGame: {
-        game: {},
-        users: []
-      }
-    }
-  }
-
-  getGameData = (id) => {
-    fetch(`http://localhost:3000/game/${id}/users`)
-      .then(response => response.json())
-      .then(results => {
-        this.setState({
-          currentUser: true,
-          currentGame: {
-            game: results,
-            users: results.users
-          }
-        })
-      })
-  }
-
-  updateAppStateGame = async (newGame) => {
-    if (newGame.type === "new_user") {
-      await newGame
-      console.log("new_user")
-      this.setState({
-        currentGame: {
-          game: newGame.game,
-          users: [...this.state.currentGame.users, newGame.user]
-        } 
-      }) 
-    } else if (newGame.type === "update_user") {
-      console.log("update_user")
-      let user = this.state.currentGame.users.findIndex(user => user.id === newGame.user.id)
-      let userUpdate = [...this.state.currentGame.users]
-      console.log(userUpdate)
-      userUpdate[user] = { ...userUpdate[user], initiative: newGame.user.initiative, username: newGame.user.username }
-      this.setState({
-        currentGame: { users: userUpdate }
-      })
-    } else if (newGame.type === "delete_user") {
-      console.log("delete_user")
-      let user = this.state.currentGame.users.findIndex(user => user.id === newGame.user.id)
-      let userUpdate = [...this.state.currentGame.users]
-      userUpdate.splice(userUpdate[user], 1)
-      this.setState({
-        currentGame: { users: userUpdate }
-      })
-    } else {
-      console.log("whoopsie")
-    }
-  }
-
-
-  generateCode = () => {
+export default function App (props) {
+ 
+  const generateCode = () => {
     let code = ''
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
     const charLength = characters.length
@@ -74,39 +17,28 @@ class App extends Component {
     }
     return code.slice(0, 5)
   }
+  
+  let roomCode = generateCode()
+  console.log(props.cableApp)
+  
+  return (
 
-  render() {
-    
-    const roomCode = this.generateCode()
-
-    return (
       <div className="App">
-        <Route exact path='/game/:code/user/:username' render={(props) => {
-          return this.state.currentGame ?
-            (<ShowGame
-              {...props}
-              cableApp={this.props.cableApp}
-              updateApp={this.updateAppStateGame}
-              getGameData={this.getGameData}
-              gameData={this.state.currentGame.users}
-              currentUser={this.state.currentUser}
-            />
-            ) : (
-              <Redirect to='/' />
-            )
-        }}>
-        </Route>
         <Route path='/' exact>
           <CreateRoom code={roomCode}/>
         </Route>
 
         <Route path='/join-room'>
-          <JoinRoom />
+         <JoinRoom />
         </Route>
+      
+        <Route exact path='/game/:code/user/:username'>
+          <Main cableApp={props.cableApp}/>
+        </Route>
+
         
       </div>
     );
   }
-}
 
-export default withRouter(App);
+
