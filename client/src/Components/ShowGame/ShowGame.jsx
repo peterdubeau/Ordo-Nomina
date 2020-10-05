@@ -2,38 +2,24 @@ import React from 'react'
 import GameWebSocket from '../GameWebSocket/GameWebSocket'
 
 export default function ShowGame(props) {
-  console.log(props.gameData)
-  if (!props.gameData) {
-    setTimeout(function () {
-      window.location.reload(1);
-    }, 500);
-    return (<>
-      "loading game..."
-    </>)
-    
-  } else {
 
-  
-  //  let findHost = (users) => {
-  //    let host = users.filter(host => host.is_admin === true)
-  //     return host
-  //  }
-    
+  let host = props.gameData.filter(host => host.is_admin === true)
+  const hostDetails = host.map(hostName => hostName.username)
   
 
-  return (<>
-    <GameWebSocket
-      cableApp={props.cableApp}
-      updateApp={props.updateApp}
-      getGameData={props.getGameData}
-      code={props.match.params.code}
-    />
-    {props.gameData.filter(host => host.is_admin === true).map(hostName => <p key ='host'>{hostName.username}'s Game:</p>)}
-    {props.gameData.filter(status => status.is_admin === false).map(user => 
-      <p key={user.username}>{user.id} -=-=-=- {user.username} : {user.initiative}</p>
-    )}
-  </>)
-    
-    
-}
-}
+        return (<>
+          <GameWebSocket
+          cableApp={props.cableApp}
+          updateApp={props.updateApp}
+          getGameData={props.getGameData}
+          code={props.match.params.code}
+          />
+          user view
+        <h2>{hostDetails}'s game</h2>
+        {props.gameData.filter(status => status.is_admin === false).map(user => 
+          <p key={user.username}>{user.id} -=-=-=- {user.username} : {user.initiative}</p>
+          )}
+        </>)
+      }
+
+

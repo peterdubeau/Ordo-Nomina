@@ -18,6 +18,8 @@ export default function App (props) {
     return code.slice(0, 5)
   }
   
+  
+
   let roomCode = generateCode()
   console.log(props.cableApp)
   
@@ -32,7 +34,7 @@ export default function App (props) {
          <JoinRoom />
         </Route>
       
-        <Route exact path='/game/:code/user/:username'>
+        <Route>
           <Main cableApp={props.cableApp}/>
         </Route>
 

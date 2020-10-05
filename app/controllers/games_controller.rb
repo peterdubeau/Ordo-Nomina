@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: [:show, :show_by_code, :update, :destroy]
+  before_action :set_game, only: [:show, :show_by_code, :update, :destroy, :sort]
 
   # GET /games
   def index
@@ -53,6 +53,9 @@ class GamesController < ApplicationController
   def destroy
     @game.destroy
   end
+
+  #SORT /game/:code/sort
+  
 
   private
     # Use callbacks to share common setup or constraints between actions.

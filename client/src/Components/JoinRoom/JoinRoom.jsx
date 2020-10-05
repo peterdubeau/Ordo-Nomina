@@ -9,7 +9,8 @@ export default function JoinRoom() {
     id: "",
     username: "",
     initiative: "",
-    code: ''
+    code: '',
+    is_admin: false
   })
 
 
@@ -59,9 +60,6 @@ export default function JoinRoom() {
           <button onClick={handleSubmit}>Enter Room</button>
         </Link>
         </form>
-        <Route exact path='/game/:code/user/:username'>
-          <Main currentUser={formData} />
-        </Route>
       </div>
     )
   }

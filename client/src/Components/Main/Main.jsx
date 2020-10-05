@@ -1,18 +1,34 @@
 import React, { Component } from 'react';
 import { Route, Redirect, withRouter } from 'react-router-dom'
 import ShowGame from '../ShowGame/ShowGame'
+import AdminView from '../AdminView/AdminView'
 
 
 class Main extends Component {
-  constructor() {
+  constructor(props) {
     super()
     this.state = {
       currentUser: null,
       currentGame: {
         game: {},
         users: []
+        
       }
     }
+  }
+
+  getGameData = (id) => {
+    fetch(`http://localhost:3000/game/${id}/users`)
+      .then(response => response.json())
+      .then(results => {
+        this.setState({
+          currentUser: true,
+          currentGame: {
+            game: results,
+            users: results.users
+          }
+        })
+      })
   }
 
   updateAppStateGame = async (newGame) => {
@@ -29,7 +45,6 @@ class Main extends Component {
       console.log("update_user")
       let user = this.state.currentGame.users.findIndex(user => user.id === newGame.user.id)
       let userUpdate = [...this.state.currentGame.users]
-      console.log(userUpdate)
       userUpdate[user] = { ...userUpdate[user], initiative: newGame.user.initiative, username: newGame.user.username }
       this.setState({
         currentGame: { users: userUpdate }
@@ -38,6 +53,7 @@ class Main extends Component {
       console.log("delete_user")
       let user = this.state.currentGame.users.findIndex(user => user.id === newGame.user.id)
       let userUpdate = [...this.state.currentGame.users]
+      console.log(user)
       userUpdate.splice(userUpdate[user], 1)
       this.setState({
         currentGame: { users: userUpdate }
@@ -64,7 +80,7 @@ class Main extends Component {
 
     return (
       <div className="App">
-        {/* <Route exact path='/game/:code/user/:username' render={(props) => {
+        <Route exact path='/game/:code/user/:username' render={(props) => {
           return this.state.currentGame ?
             (<ShowGame
               {...props}
@@ -78,7 +94,23 @@ class Main extends Component {
               <Redirect to='/' />
             )
         }}>
-        </Route> */}
+        </Route>
+        
+        <Route exact path='/game/:code/DM/:username' render={(props) => {
+          return this.state.currentGame ?
+            (<AdminView
+              {...props}
+              cableApp={this.props.cableApp}
+              updateApp={this.updateAppStateGame}
+              getGameData={this.getGameData}
+              gameData={this.state.currentGame.users}
+              currentUser={this.state.currentUser}
+            />
+            ) : (
+              <Redirect to='/' />
+            )
+        }}>
+        </Route>
 
       </div>
     );

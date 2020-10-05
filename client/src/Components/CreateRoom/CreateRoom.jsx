@@ -30,6 +30,7 @@ function CreateRoom(props) {
     let roomId = findId.filter(id => id.code === props.code)[0].id
     await postUser({
       username: formData.username,
+      initiative: 10000,
       game_id: roomId,
       is_admin: true
     })
@@ -46,13 +47,10 @@ function CreateRoom(props) {
           placeholder = "Host Name"
         />
     </label>
-        <Link to={`/game/${props.code}/user/${formData.username}`}>
+        <Link to={`/game/${props.code}/DM/${formData.username}`}>
           <button onClick={handleSubmit}>Enter Room</button>
         </Link>
     </form>
-    <Route exact path='/game/:code/user/:username'>
-      <Main currentUser={formData} />
-    </Route>
   </div>)
 }
 

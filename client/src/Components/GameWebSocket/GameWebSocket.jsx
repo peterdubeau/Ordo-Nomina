@@ -19,7 +19,6 @@ export default class GameWebSocket extends Component {
     }
     
     render() {
-      console.log('shoob')
     return (
       <div>
 

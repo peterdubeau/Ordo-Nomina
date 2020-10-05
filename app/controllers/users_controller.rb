@@ -45,7 +45,7 @@ class UsersController < ApplicationController
       render json: @user.errors, status: :unprocessable_entity
     end
  
-    ActionCable.server.broadcast "users_channel", { type: "update_user", data: @user, id: @user.id }
+    ActionCable.server.broadcast "users_channel", { type: "update_user", data: @user }
 
   end
 
@@ -59,6 +59,16 @@ class UsersController < ApplicationController
     end
 
   end
+
+  # def sorted
+  #   @list = Game.find_by code: (params[:code])
+  #   @users = @list.users.all
+  #   @game = @users.sort_by{|k| k["initiative"]}
+    
+
+  #   render json: @game
+  #   GamesChannel.broadcast_to(@game, {game: @game.code, users: @game.users.all, type: "sort_list"})
+  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.
