@@ -60,15 +60,10 @@ class UsersController < ApplicationController
 
   end
 
-  # def sorted
-  #   @list = Game.find_by code: (params[:code])
-  #   @users = @list.users.all
-  #   @game = @users.sort_by{|k| k["initiative"]}
-    
-
-  #   render json: @game
-  #   GamesChannel.broadcast_to(@game, {game: @game.code, users: @game.users.all, type: "sort_list"})
-  # end
+  def sort
+    @game = Game.find_by code: (params[:code])
+    GamesChannel.broadcast_to(@game, {game: @game.code, type: "sort_players"})
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

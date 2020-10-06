@@ -32,6 +32,7 @@ class Main extends Component {
   }
 
   updateAppStateGame = async (newGame) => {
+    // console.log(newGame)
     if (newGame.type === "new_user") {
       await newGame
       console.log("new_user")
@@ -58,8 +59,15 @@ class Main extends Component {
       this.setState({
         currentGame: { users: userUpdate }
       })
+    } else if (newGame.type === "sort_players") {
+      let playerList = [...this.state.currentGame.users]
+      let sortedList = playerList.sort((a, b) => (a.initiative - b.initiative)) 
+      console.log(sortedList)
+      this.setState({
+        currentGame: { users: sortedList }
+      }) 
     } else {
-      console.log("whoopsie")
+      console.log("woopsie")
     }
   }
 
