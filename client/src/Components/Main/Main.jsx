@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Redirect, withRouter } from 'react-router-dom'
-import ShowGame from '../ShowGame/ShowGame'
+import PlayerView from '../PlayerView/PlayerView'
 import AdminView from '../AdminView/AdminView'
 
 
@@ -82,7 +82,7 @@ class Main extends Component {
       <div className="App">
         <Route exact path='/game/:code/user/:username' render={(props) => {
           return this.state.currentGame ?
-            (<ShowGame
+            (<PlayerView
               {...props}
               cableApp={this.props.cableApp}
               updateApp={this.updateAppStateGame}
