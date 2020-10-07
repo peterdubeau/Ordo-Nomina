@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Redirect, withRouter } from 'react-router-dom'
+import { updateGame } from '../../services/games'
 import PlayerView from '../PlayerView/PlayerView'
 import AdminView from '../AdminView/AdminView'
 
@@ -63,9 +64,11 @@ class Main extends Component {
       let playerList = [...this.state.currentGame.users]
       let sortedList = playerList.sort((a, b) => (a.initiative - b.initiative)) 
       console.log(sortedList)
+      updateGame(this.state.currentGame.game.code, sortedList)
       this.setState({
         currentGame: { users: sortedList }
       }) 
+
     } else {
       console.log("woopsie")
     }

@@ -54,8 +54,16 @@ class GamesController < ApplicationController
     @game.destroy
   end
 
-  #SORT /game/:code/sort
-  
+  #SORT /game/:code/Bsort
+  def backend_sort
+    @game = Game.find_by code: (params[:code])
+    @users = @game.users.all.sort_by(&:initiative).reverse
+    
+    # @game.update(game_params[game: @game.code])
+
+    GamesChannel.broadcast_to(@game, {game: @game.code, users: @game.users.all, type: "sort_players"})
+
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

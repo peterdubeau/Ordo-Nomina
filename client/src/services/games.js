@@ -20,6 +20,11 @@ export const destroyGame = async (code) => {
   return res
 }
 
+export const updateGame = async (code, userData) => {
+  const res = await api.put(`game/${code}`, { users: userData} )
+  return res.data
+}
+
 export const postUser = async (userData) => {
   const res = await api.post('/users/', {user: userData})
   return res.data
