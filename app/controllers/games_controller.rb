@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: [:show, :show_by_code, :update, :destroy, :sort]
+  before_action :set_game, only: [:show, :show_by_code, :update, :destroy, :sort, :backend_sort]
 
   # GET /games
   def index
@@ -43,7 +43,7 @@ class GamesController < ApplicationController
   # PATCH/PUT /games/1
   def update
     if @game.update(game_params)
-      render json: @game
+      render json: @game.users.sort_by(&:initiative).reverse
     else
       render json: @game.errors, status: :unprocessable_entity
     end
@@ -56,12 +56,15 @@ class GamesController < ApplicationController
 
   #SORT /game/:code/Bsort
   def backend_sort
-    @game = Game.find_by code: (params[:code])
-    @users = @game.users.all.sort_by(&:initiative).reverse
-    
-    # @game.update(game_params[game: @game.code])
 
-    GamesChannel.broadcast_to(@game, {game: @game.code, users: @game.users.all, type: "sort_players"})
+    users = @game.users.all.sort_by(&:initiative).reverse
+    users = users.sort
+    @users = users
+
+
+    render json: @users
+
+    GamesChannel.broadcast_to(@game, {game: @game.code, users: @users, type: "sort_players"})
 
   end
 

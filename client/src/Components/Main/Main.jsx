@@ -64,7 +64,7 @@ class Main extends Component {
       let playerList = [...this.state.currentGame.users]
       let sortedList = playerList.sort((a, b) => (a.initiative - b.initiative)) 
       console.log(sortedList)
-      updateGame(this.state.currentGame.game.code, sortedList)
+      // updateGame(this.state.currentGame.game.code, sortedList)
       this.setState({
         currentGame: { users: sortedList }
       }) 

@@ -62,6 +62,7 @@ class UsersController < ApplicationController
 
   def sort
     @game = Game.find_by code: (params[:code])
+    render json: @game.update(game_params)
     GamesChannel.broadcast_to(@game, {game: @game.code, type: "sort_players"})
   end
 
