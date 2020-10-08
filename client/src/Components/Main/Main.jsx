@@ -60,14 +60,14 @@ class Main extends Component {
       this.setState({
         currentGame: { users: userUpdate }
       })
-    } else if (newGame.type === "sort_players") {
-      let playerList = [...this.state.currentGame.users]
-      let sortedList = playerList.sort((a, b) => (a.initiative - b.initiative)) 
-      console.log(sortedList)
-      // updateGame(this.state.currentGame.game.code, sortedList)
-      this.setState({
-        currentGame: { users: sortedList }
-      }) 
+    // } else if (newGame.type === "sort_players") {
+    //   let playerList = [...this.state.currentGame.users]
+    //   let sortedList = playerList.sort((a, b) => (a.initiative - b.initiative)) 
+    //   console.log(sortedList)
+    //   // updateGame(this.state.currentGame.game.code, sortedList)
+    //   this.setState({
+    //     currentGame: { users: sortedList }
+    //   }) 
 
     } else {
       console.log("woopsie")

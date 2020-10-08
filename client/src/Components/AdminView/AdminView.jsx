@@ -2,6 +2,7 @@ import React from 'react'
 import GameWebSocket from '../GameWebSocket/GameWebSocket'
 
 export default function AdminView(props) {
+  
 
   if (!props.gameData) {
     setTimeout(function () {
@@ -19,7 +20,11 @@ export default function AdminView(props) {
       "loading game..."
     </>)
         
-      } else {
+  ``} else {
+    
+    let list = props.gameData.sort(function(a,b){
+      return  b.initiative - a.initiative || b.id - a.id
+      })
 
         return (<>
           <GameWebSocket
@@ -30,7 +35,7 @@ export default function AdminView(props) {
           />
           admin view
           <h2>{props.match.params.username}'s game!</h2>
-        {props.gameData.filter(status => status.is_admin === false).map(user => 
+        {list.filter(status => status.is_admin === false).map(user => 
           <p key={user.username}>{user.id} -=-=-=- {user.username} : {user.initiative} ---------- {user.game_id}</p>
           )}
         </>)
