@@ -15,7 +15,17 @@ export const postGame = async (gameData) => {
   return res.data
 }
 
-export const destroyTask = async (id) => {
-  const res = await api.delete(`game/${id}`)
+export const destroyGame = async (code) => {
+  const res = await api.delete(`game/${code}`)
   return res
+}
+
+export const updateGame = async (code, userData) => {
+  const res = await api.put(`game/${code}`, { users: userData} )
+  return res.data
+}
+
+export const postUser = async (userData) => {
+  const res = await api.post('/users/', {user: userData})
+  return res.data
 }

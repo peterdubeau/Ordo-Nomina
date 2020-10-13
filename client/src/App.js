@@ -1,58 +1,46 @@
-import React, { Component } from 'react';
-import { ActionCableConsumer } from 'react-actioncable-provider';
+import React from 'react';
 import { Route } from 'react-router-dom'
-import { BrowserRouter as Router } from 'react-router-dom' 
+import CreateRoom from './Components/CreateRoom/CreateRoom'
+import JoinRoom from './Components/JoinRoom/JoinRoom'
+import Main from './Components/Main/Main'
 import './App.css';
-import DisplayPlayer from './Components/DisplayPlayers/DisplayPlayers'
 
-class App extends Component {
-  state = {
-    games: [],
-    users: []
+
+export default function App (props) {
+ 
+  const generateCode = () => {
+    let code = ''
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    const charLength = characters.length
+    for (let i = 0; i < charLength; i++) {
+      code += characters.charAt(Math.floor(Math.random() * charLength))
+    }
+    return code.slice(0, 5)
   }
+  
+  
 
-  componentDidMount = () => {
-    fetch('http://localhost:3000/games/')
-      .then(res => res.json())
-      .then(gamesArr => this.setState({
-        games: gamesArr
-      }))
-    fetch('http://localhost:3000/users/')
-      .then(res => res.json())
-      .then(usersArr => this.setState({
-        users: usersArr
-      }))
-  }
+  let roomCode = generateCode()
+  console.log(props.cableApp)
+  
+  return (
 
-  handleReceivedGame = response => {
-    console.log(response)
-    this.setState({
-      games: [...this.state.games, response],
-      users: [...this.state.users, response]
-    })
-  }
-
-  render() {
-    console.log(this.state.games)
-    console.log(this.state.users)
-    return (
       <div className="App">
-        <ActionCableConsumer
-          channel={{ channel: 'GamesChannel' }}
-          onReceived={this.handleReceivedGame}
-        />
-        <ActionCableConsumer
-          channel={{ channel: 'UsersChannel' }}
-          onReceived={this.handleReceivedGame}
-        />
-        <Router>
-          <Route path ='/users'>
-            <DisplayPlayer users={this.state.users} />
-          </Route>
-        </Router>
+        <Route path='/' exact>
+          <CreateRoom code={roomCode}/>
+        </Route>
+
+        <Route path='/join-room'>
+         <JoinRoom />
+        </Route>
+      
+        <Route>
+          <Main cableApp={props.cableApp}/>
+        </Route>
+
+        
       </div>
     );
   }
-}
 
-export default App;
+
