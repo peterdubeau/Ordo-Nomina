@@ -5,5 +5,5 @@ require_relative 'application'
 Rails.application.initialize!
 
 
-config.action_cable.allowed_request_origins = [/http:\/\/*/, /https:\/\/*/]
+# config.action_cable.allowed_request_origins = [/http:\/\/*/, /https:\/\/*/]
 
