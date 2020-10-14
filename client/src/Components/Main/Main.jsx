@@ -32,8 +32,33 @@ class Main extends Component {
       })
   }
 
+  handleUpClick = (index) => {
+    if (index !== 0) {
+      this.setState(prevState => {
+        let list = [...prevState.currentGame.users];
+        let temp = list[index - 1];
+        list[index - 1] = list[index];
+        list[index] = temp;
+        this.updateAppStateGame({ list, type: 'array' })
+      })
+    }
+  }
+
+  makeArray = () => {
+    let players = []
+
+    this.state.currentGame.users.forEach(user => {
+      if (user.is_admin === false) {
+        players.push(user.username)
+      } else {
+        console.log(`admin is ${user.username}`)
+      }
+    })
+    console.log(players)
+}
+
+ 
   updateAppStateGame = async (newGame) => {
-    // console.log(newGame)
     if (newGame.type === "new_user") {
       await newGame
       console.log("new_user")
@@ -41,8 +66,8 @@ class Main extends Component {
         currentGame: {
           game: newGame.game,
           users: [...this.state.currentGame.users, newGame.user]
-        } 
-      }) 
+        }
+      })
     } else if (newGame.type === "update_user") {
       console.log("update_user")
       let user = this.state.currentGame.users.findIndex(user => user.id === newGame.user.id)
@@ -60,15 +85,23 @@ class Main extends Component {
       this.setState({
         currentGame: { users: userUpdate }
       })
-    // } else if (newGame.type === "sort_players") {
-    //   let playerList = [...this.state.currentGame.users]
-    //   let sortedList = playerList.sort((a, b) => (a.initiative - b.initiative)) 
-    //   console.log(sortedList)
-    //   // updateGame(this.state.currentGame.game.code, sortedList)
-    //   this.setState({
-    //     currentGame: { users: sortedList }
-    //   }) 
-
+      // } else if (newGame.type === "sort_players") {
+      //   let playerList = [...this.state.currentGame.users]
+      //   let sortedList = playerList.sort((a, b) => (a.initiative - b.initiative)) 
+      //   console.log(sortedList)
+      //   // updateGame(this.state.currentGame.game.code, sortedList)
+      //   this.setState({
+      //     currentGame: { users: sortedList }
+      //   }) 
+    } else if (newGame.type === 'array') {
+      console.log(newGame)
+        this.makeArray(newGame)
+        let playerList = [...this.state.currentGame.users]
+        // updateGame(this.state.currentGame.game.code, playerList)
+        this.setState({
+          currentGame: { users: playerList }
+        }) 
+      console.log(this.state.currentGame.users)
     } else {
       console.log("woopsie")
     }
@@ -111,6 +144,7 @@ class Main extends Component {
           return this.state.currentGame ?
             (<AdminView
               {...props}
+              arrange={this.handleUpClick}
               cableApp={this.props.cableApp}
               updateApp={this.updateAppStateGame}
               getGameData={this.getGameData}

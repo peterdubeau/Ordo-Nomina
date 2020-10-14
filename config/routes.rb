@@ -8,5 +8,7 @@ Rails.application.routes.draw do
   delete '/game/:code', to: 'games#destroy'
   get '/game/:code/sort', to: 'users#sort'
   put '/game/:code/Bsort', to: 'games#backend_sort'
+  get '/game/:code/start', to: 'games#start_combat'
+  
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

@@ -54,13 +54,28 @@ class GamesController < ApplicationController
     @game.destroy
   end
 
+  def start_combat
+    @game = Game.find_by code: (params[:code])
+    users = @game.users.all
+
+    names = users.each_with_object({}) do |user, hash|
+      hash[user.username] = user.initiative
+    end
+    # ini = users.each_with_object({}) do |ini, hash|
+    #   hash[ini.initiative] = ini.username
+    # end
+    
+    GamesChannel.broadcast_to(@game, {game: @game.code, users: names, type: "list"})
+    render json: names
+
+  end
+
   #SORT /game/:code/Bsort
   def backend_sort
 
     users = @game.users.all.sort_by(&:initiative).reverse
     users = users.sort
     @users = users
-
 
     render json: @users
 

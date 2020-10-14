@@ -20,11 +20,11 @@ export default function AdminView(props) {
       "loading game..."
     </>)
         
-  ``} else {
-    
-    let list = props.gameData.sort(function(a,b){
-      return  b.initiative - a.initiative || b.id - a.id
-      })
+  } else {
+  
+    // let list = props.gameData.sort(function(a,b){
+    //   return  b.initiative - a.initiative
+    //   })
 
         return (<>
           <GameWebSocket
@@ -35,9 +35,10 @@ export default function AdminView(props) {
           />
           admin view
           <h2>{props.match.params.username}'s game!</h2>
-        {list.filter(status => status.is_admin === false).map(user => 
-          <p key={user.username}>{user.id} -=-=-=- {user.username} : {user.initiative} ---------- {user.game_id}</p>
+        {props.gameData.filter(status => status.is_admin === false).map((user, i) => 
+          <p key={user.username}>{user.id} -=-=-=- {user.username} : {user.initiative} ---------- {user.game_id} <button onClick={() => props.arrange(i)}> move up </button> </p>
           )}
+          <button onClick={()=>console.log(props.gameData)}>see list</button>
         </>)
       }
 
