@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: [:show, :show_by_code, :update, :destroy]
+  before_action :set_game, only: [:show, :show_by_code, :update, :destroy, :sort, :backend_sort]
 
   # GET /games
   def index
@@ -43,7 +43,7 @@ class GamesController < ApplicationController
   # PATCH/PUT /games/1
   def update
     if @game.update(game_params)
-      render json: @game
+      render json: @game.users.sort_by(&:initiative).reverse
     else
       render json: @game.errors, status: :unprocessable_entity
     end
@@ -52,6 +52,35 @@ class GamesController < ApplicationController
   # DELETE /games/1
   def destroy
     @game.destroy
+  end
+
+  def start_combat
+    @game = Game.find_by code: (params[:code])
+    users = @game.users.all
+
+    names = users.each_with_object({}) do |user, hash|
+      hash[user.username] = user.initiative
+    end
+    # ini = users.each_with_object({}) do |ini, hash|
+    #   hash[ini.initiative] = ini.username
+    # end
+    
+    GamesChannel.broadcast_to(@game, {game: @game.code, users: names, type: "list"})
+    render json: names
+
+  end
+
+  #SORT /game/:code/Bsort
+  def backend_sort
+
+    users = @game.users.all.sort_by(&:initiative).reverse
+    users = users.sort
+    @users = users
+
+    render json: @users
+
+    GamesChannel.broadcast_to(@game, {game: @game.code, users: @users, type: "sort_players"})
+
   end
 
   private
