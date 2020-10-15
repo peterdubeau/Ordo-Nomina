@@ -42,11 +42,17 @@ class GamesController < ApplicationController
 
   # PATCH/PUT /games/1
   def update
-    if @game.update(game_params)
-      render json: @game.users.sort_by(&:initiative).reverse
-    else
-      render json: @game.errors, status: :unprocessable_entity
-    end
+    # @game = Game.find_by code: (params[:code])
+    byebug
+    @game.update(game_params)
+
+    # if @game.update(game_params)
+    #   render json: @game
+    #   # .users.sort_by(&:initiative).reverse
+    # else
+    #   render json: @game.errors, status: :unprocessable_entity
+    # end
+
   end
 
   # DELETE /games/1
@@ -91,6 +97,6 @@ class GamesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def game_params
-      params.require(:game).permit(:code, :string)
+      params.require(:game).permit(:code)
     end
-end
+  end

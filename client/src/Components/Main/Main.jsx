@@ -44,17 +44,17 @@ class Main extends Component {
     }
   }
 
-  makeArray = () => {
+  makeArray = (data) => {
     let players = []
-
-    this.state.currentGame.users.forEach(user => {
+    console.log(data)
+    data.forEach(user => {
       if (user.is_admin === false) {
         players.push(user.username)
       } else {
         console.log(`admin is ${user.username}`)
       }
     })
-    console.log(players)
+    return players
 }
 
  
@@ -94,8 +94,8 @@ class Main extends Component {
       //     currentGame: { users: sortedList }
       //   }) 
     } else if (newGame.type === 'array') {
-      console.log(newGame)
-        this.makeArray(newGame)
+        let test = this.makeArray(newGame.list)
+        console.log(test)
         let playerList = [...this.state.currentGame.users]
         // updateGame(this.state.currentGame.game.code, playerList)
         this.setState({
