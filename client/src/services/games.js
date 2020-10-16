@@ -30,6 +30,6 @@ export const postUser = async (userData) => {
   return res.data
 }
 
-export const sendCombatants = async (code, gameData) => {
-  const rest = await api.put(`/games/${code}`, {combatants: gameData})
+export const sendCombatants = async (code, combatants) => {
+  const rest = await api.put(`/games/${code}`, { code, combatants })
 }
