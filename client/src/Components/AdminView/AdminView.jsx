@@ -3,7 +3,6 @@ import GameWebSocket from '../GameWebSocket/GameWebSocket'
 
 export default function AdminView(props) {
   
-
   if (!props.gameData) {
     setTimeout(function () {
       window.location.reload(1);

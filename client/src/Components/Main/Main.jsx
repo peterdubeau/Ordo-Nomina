@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Redirect, withRouter } from 'react-router-dom'
-import { updateGame } from '../../services/games'
+import { sendCombatants } from '../../services/games'
 import PlayerView from '../PlayerView/PlayerView'
 import AdminView from '../AdminView/AdminView'
 
@@ -95,18 +95,17 @@ class Main extends Component {
       //   }) 
     } else if (newGame.type === 'array') {
         let test = this.makeArray(newGame.list)
-        console.log(test)
+        sendCombatants(this.state.currentGame.game.code, test)
         let playerList = [...this.state.currentGame.users]
         // updateGame(this.state.currentGame.game.code, playerList)
         this.setState({
           currentGame: { users: playerList }
         }) 
-      console.log(this.state.currentGame.users)
+      
     } else {
       console.log("woopsie")
     }
   }
-
 
   generateCode = () => {
     let code = ''
