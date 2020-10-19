@@ -72,7 +72,7 @@ class GamesController < ApplicationController
     # end
     
     GamesChannel.broadcast_to(@game, {game: @game.code, users: users, type: "list"})
-    render json: names
+    render json: @game
 
   end
 
