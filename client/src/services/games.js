@@ -29,3 +29,7 @@ export const postUser = async (userData) => {
   const res = await api.post('/users/', {user: userData})
   return res.data
 }
+
+export const sendCombatants = async (code, combatants) => {
+  const rest = await api.put(`/games/${code}`, { code, combatants })
+}

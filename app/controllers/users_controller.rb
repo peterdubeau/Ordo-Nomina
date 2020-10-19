@@ -28,7 +28,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     @game = Game.find(user_params['game_id'])
     if @user.save
-      GamesChannel.broadcast_to(@game, {game: @game.code, user: @user, type: "new_user"})
+      GamesChannel.broadcast_to(@game, {game: @game, user: @user, type: "new_user"})
     end
     render json: @user
   end

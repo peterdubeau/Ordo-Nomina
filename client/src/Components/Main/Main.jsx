@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Redirect, withRouter } from 'react-router-dom'
-import { updateGame } from '../../services/games'
+import { sendCombatants } from '../../services/games'
 import PlayerView from '../PlayerView/PlayerView'
 import AdminView from '../AdminView/AdminView'
 
@@ -35,26 +35,25 @@ class Main extends Component {
   handleUpClick = (index) => {
     if (index !== 0) {
       this.setState(prevState => {
-        let list = [...prevState.currentGame.users];
+        let list = [...prevState.currentGame.users]
         let temp = list[index - 1];
         list[index - 1] = list[index];
         list[index] = temp;
-        this.updateAppStateGame({ list, type: 'array' })
+        this.updateAppStateGame({ list , type: 'array'})
       })
     }
   }
 
-  makeArray = () => {
+  makeArray = (data) => {
     let players = []
-
-    this.state.currentGame.users.forEach(user => {
+    data.forEach(user => {
       if (user.is_admin === false) {
         players.push(user.username)
       } else {
         console.log(`admin is ${user.username}`)
       }
     })
-    console.log(players)
+    return players
 }
 
  
@@ -66,8 +65,9 @@ class Main extends Component {
         currentGame: {
           game: newGame.game,
           users: [...this.state.currentGame.users, newGame.user]
-        }
-      })
+        } 
+      }) 
+      console.log(newGame)
     } else if (newGame.type === "update_user") {
       console.log("update_user")
       let user = this.state.currentGame.users.findIndex(user => user.id === newGame.user.id)
@@ -80,7 +80,6 @@ class Main extends Component {
       console.log("delete_user")
       let user = this.state.currentGame.users.findIndex(user => user.id === newGame.user.id)
       let userUpdate = [...this.state.currentGame.users]
-      console.log(user)
       userUpdate.splice(userUpdate[user], 1)
       this.setState({
         currentGame: { users: userUpdate }
@@ -94,19 +93,21 @@ class Main extends Component {
       //     currentGame: { users: sortedList }
       //   }) 
     } else if (newGame.type === 'array') {
-      console.log(newGame)
-        this.makeArray(newGame)
-        let playerList = [...this.state.currentGame.users]
-        // updateGame(this.state.currentGame.game.code, playerList)
-        this.setState({
-          currentGame: { users: playerList }
-        }) 
-      console.log(this.state.currentGame.users)
+      let combatants = this.makeArray(newGame.list)
+      let users = this.state.currentGame.users
+      // let playerList = [...this.state.currentGame.users]
+      sendCombatants(
+        this.state.currentGame.game.code,
+        combatants
+        )
+        this.setState({ users: users }) 
+        
+        console.log(this.state.currentGame.game.code)
+        console.log(this.state.currentGame.game.id)
     } else {
       console.log("woopsie")
     }
   }
-
 
   generateCode = () => {
     let code = ''
