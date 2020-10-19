@@ -50,6 +50,7 @@ class Main extends Component {
 
   makeArray = (data) => {
     let players = []
+    console.log(data)
     data.forEach(user => {
       if (user.is_admin === false) {
         players.push(user.username)
@@ -97,15 +98,25 @@ class Main extends Component {
       //     currentGame: { users: sortedList }
       //   }) 
     } else if (newGame.type === 'array') {
-      let combatants = this.makeArray(newGame.list)
-      let users = this.state.currentGame.users
-      // let playerList = [...this.state.currentGame.users]
-      sendCombatants(
-        this.state.currentGame.game.code,
-        combatants
-        )
-        this.setState({ users: users }) 
+      // let combatants = this.makeArray(newGame.list)
+      // let users = this.state.currentGame.users
+      // // let playerList = [...this.state.currentGame.users]
+      // sendCombatants(
+      //   this.state.currentGame.game.code,
+      //   combatants
+      //   )
+      //   this.setState({ users: users }) 
+    } else if (newGame.type === "list") {
+      // let users = newGame.users
+      // console.log(users)
+      // let combatants = this.makeArray(users)
+      // console.log(combatants)
+      // sendCombatants(
+      //   this.state.currentGame.game.code,
+      //   combatants
+      //   )
     } else {
+      console.log(newGame.type)
       console.log("woopsie")
     }
   }

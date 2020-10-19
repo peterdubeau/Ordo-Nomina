@@ -4,6 +4,19 @@ import GameWebSocket from '../GameWebSocket/GameWebSocket'
 
 export default function AdminView(props) {
 
+
+  let makeArray = (data) => {
+    let players = []
+    console.log(data)
+    data.forEach(user => {
+      if (user.is_admin === false) {
+        players.push(user.username)
+      } else {
+        console.log(`admin is ${user.username}`)
+      }
+    })
+    return players
+}
   
   if (!props.gameData) {
     setTimeout(function () {
@@ -24,7 +37,7 @@ export default function AdminView(props) {
   } else {
   
     let list = props.gameData
-
+    let users = makeArray(list)
         return (<>
           <GameWebSocket
           cableApp={props.cableApp}
@@ -37,7 +50,7 @@ export default function AdminView(props) {
         {props.gameData.filter(status => status.is_admin === false).map((user, i) => 
           <p key={user.username}>{user.id} -=-=-=- {user.username} : {user.initiative} ---------- {user.game_id} <button onClick={() => props.arrange(i)}> move up </button> </p>
           )}
-          <button onClick={() => sendList(props.match.params.code, list )}>Send List</button>
+          <button onClick={sendCombatants(props.match.params.code, users )}>Send List</button>
         </>)
       }
 
