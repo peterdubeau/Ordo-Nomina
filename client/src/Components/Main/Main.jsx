@@ -35,11 +35,15 @@ class Main extends Component {
   handleUpClick = (index) => {
     if (index !== 0) {
       this.setState(prevState => {
-        let list = [...prevState.currentGame.users]
+        let list = [...prevState.currentGame.users.filter(user => user.is_admin === false)]
         let temp = list[index - 1];
         list[index - 1] = list[index];
         list[index] = temp;
-        this.updateAppStateGame({ list , type: 'array'})
+        this.setState({
+          currentGame: {
+            users: list
+          }
+        })
       })
     }
   }
@@ -101,9 +105,6 @@ class Main extends Component {
         combatants
         )
         this.setState({ users: users }) 
-        
-        console.log(this.state.currentGame.game.code)
-        console.log(this.state.currentGame.game.id)
     } else {
       console.log("woopsie")
     }
