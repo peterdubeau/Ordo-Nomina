@@ -67,6 +67,7 @@ class Main extends Component {
           users: [...this.state.currentGame.users, newGame.user]
         } 
       }) 
+      console.log(newGame)
     } else if (newGame.type === "update_user") {
       console.log("update_user")
       let user = this.state.currentGame.users.findIndex(user => user.id === newGame.user.id)
@@ -93,13 +94,16 @@ class Main extends Component {
       //   }) 
     } else if (newGame.type === 'array') {
       let combatants = this.makeArray(newGame.list)
+      let users = this.state.currentGame.users
       // let playerList = [...this.state.currentGame.users]
       sendCombatants(
         this.state.currentGame.game.code,
         combatants
-      )
-      // this.setState({ users: playerList }) 
-      
+        )
+        this.setState({ users: users }) 
+        
+        console.log(this.state.currentGame.game.code)
+        console.log(this.state.currentGame.game.id)
     } else {
       console.log("woopsie")
     }
