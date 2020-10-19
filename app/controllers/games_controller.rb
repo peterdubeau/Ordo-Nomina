@@ -71,7 +71,7 @@ class GamesController < ApplicationController
     #   hash[ini.initiative] = ini.username
     # end
     
-    GamesChannel.broadcast_to(@game, {game: @game.code, users: names, type: "list"})
+    GamesChannel.broadcast_to(@game, {game: @game.code, users: users, type: "list"})
     render json: names
 
   end
