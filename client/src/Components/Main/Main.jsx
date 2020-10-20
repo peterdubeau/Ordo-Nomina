@@ -53,7 +53,7 @@ class Main extends Component {
     console.log(data)
     data.forEach(user => {
       if (user.is_admin === false) {
-        players.push(user.username)
+        players.push(`${user.username} - ${user.initiative}`)
       } else {
         console.log(`admin is ${user.username}`)
       }
