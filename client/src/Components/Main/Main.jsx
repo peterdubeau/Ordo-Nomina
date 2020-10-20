@@ -35,20 +35,25 @@ class Main extends Component {
   handleUpClick = (index) => {
     if (index !== 0) {
       this.setState(prevState => {
-        let list = [...prevState.currentGame.users]
+        let list = [...prevState.currentGame.users.filter(user => user.is_admin === false)]
         let temp = list[index - 1];
         list[index - 1] = list[index];
         list[index] = temp;
-        this.updateAppStateGame({ list , type: 'array'})
+        this.setState({
+          currentGame: {
+            users: list
+          }
+        })
       })
     }
   }
 
   makeArray = (data) => {
     let players = []
+    console.log(data)
     data.forEach(user => {
       if (user.is_admin === false) {
-        players.push(user.username)
+        players.push(`${user.username} - ${user.initiative}`)
       } else {
         console.log(`admin is ${user.username}`)
       }
@@ -92,19 +97,25 @@ class Main extends Component {
       //   this.setState({
       //     currentGame: { users: sortedList }
       //   }) 
-    } else if (newGame.type === 'array') {
+    } else if (newGame.type === 'combatants') {
+      console.log(newGame.list)
       let combatants = this.makeArray(newGame.list)
       let users = this.state.currentGame.users
+      
+      console.log(combatants)
       // let playerList = [...this.state.currentGame.users]
       sendCombatants(
-        this.state.currentGame.game.code,
+        newGame.code,
         combatants
         )
         this.setState({ users: users }) 
-        
-        console.log(this.state.currentGame.game.code)
-        console.log(this.state.currentGame.game.id)
+    } else if (newGame.type === "list") {
+      console.log('list')
+      // let users = newGame.users
+      // let combatants = this.makeArray(users)
+      // // this.updateAppStateGame({ combatants , type: 'array'})
     } else {
+      console.log(newGame.type)
       console.log("woopsie")
     }
   }
@@ -145,6 +156,7 @@ class Main extends Component {
           return this.state.currentGame ?
             (<AdminView
               {...props}
+              userList={this.makeArray}
               arrange={this.handleUpClick}
               cableApp={this.props.cableApp}
               updateApp={this.updateAppStateGame}

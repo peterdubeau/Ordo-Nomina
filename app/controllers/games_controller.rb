@@ -60,19 +60,24 @@ class GamesController < ApplicationController
     @game.destroy
   end
 
+
+  # PUT /game/:code/start
   def start_combat
     @game = Game.find_by code: (params[:code])
     users = @game.users.all
-
+    
+    if  @game.update(game_params)
     names = users.each_with_object({}) do |user, hash|
       hash[user.username] = user.initiative
     end
     # ini = users.each_with_object({}) do |ini, hash|
     #   hash[ini.initiative] = ini.username
     # end
-    
-    GamesChannel.broadcast_to(@game, {game: @game.code, users: names, type: "list"})
-    render json: names
+    GamesChannel.broadcast_to(@game, {game: @game.code, users: users})
+    render json: @game.combatants
+    else
+      render json: @game.errors, status: :unprocessable_entity
+    end
 
   end
 
