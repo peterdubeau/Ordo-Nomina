@@ -121,39 +121,13 @@ class Main extends Component {
       console.log("woopsie")
     }
   }
-
-  generateCode = () => {
-    let code = ''
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-    const charLength = characters.length
-    for (let i = 0; i < charLength; i++) {
-      code += characters.charAt(Math.floor(Math.random() * charLength))
-    }
-    return code.slice(0, 5)
-  }
-
+  
   render() {
-    
-    const roomCode = this.generateCode()
 
     return (
       <div className="App">
-        <Route exact path='/game/:code/user/:username' render={(props) => {
-          return this.state.currentGame ?
-            (<PlayerLobby
-              {...props}
-              cableApp={this.props.cableApp}
-              updateApp={this.updateAppStateGame}
-              getGameData={this.getGameData}
-              gameData={this.state.currentGame.users}
-              currentUser={this.state.currentUser}
-            />
-            ) : (
-              <Redirect to='/' />
-            )
-        }}>
-        </Route>
-        
+
+
         <Route exact path='/game/:code/DM/:username' render={(props) => {
           return this.state.currentGame ?
             (<AdminLobby
@@ -172,6 +146,10 @@ class Main extends Component {
         }}>
         </Route>
         
+
+
+
+
         <Route exact path='/combat/:code/DM/:username' render={(props) => {
           return this.state.currentGame ?
             (<AdminCombat 
@@ -186,7 +164,44 @@ class Main extends Component {
               <Redirect to='/' />
             )
         }}>
-          
+        </Route>
+
+
+
+
+        <Route exact path='/game/:code/user/:username' render={(props) => {
+          return this.state.currentGame ?
+            (<PlayerLobby
+              {...props}
+              cableApp={this.props.cableApp}
+              updateApp={this.updateAppStateGame}
+              getGameData={this.getGameData}
+              gameData={this.state.currentGame.users}
+              currentUser={this.state.currentUser}
+            />
+            ) : (
+              <Redirect to='/' />
+            )
+        }}>
+        </Route>
+        
+
+
+
+        <Route exact path='/combat/:code/player/:username' render={(props) => {
+          return this.state.currentGame ?
+            (<PlayerCombat 
+              {...props}
+              cableApp={this.props.cableApp}
+              updateApp={this.updateAppStateGame}
+              getGameData={this.getGameData}
+              gameData={this.state.currentGame}
+            />
+              
+            ) : (
+              <Redirect to='/' />
+            )
+        }}>
         </Route>
         
 
@@ -195,4 +210,4 @@ class Main extends Component {
   }
 }
 
-export default withRouter(Main);
+export default Main;
