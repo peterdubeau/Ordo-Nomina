@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Route, Redirect, withRouter } from 'react-router-dom'
 import { sendCombatants } from '../../services/games'
-import PlayerView from '../PlayerView/PlayerView'
-import AdminView from '../AdminView/AdminView'
+import PlayerLobby from '../PlayerLobby/PlayerLobby'
+import AdminLobby from '../AdminLobby/AdminLobby'
 
 
 class Main extends Component {
@@ -138,7 +138,7 @@ class Main extends Component {
       <div className="App">
         <Route exact path='/game/:code/user/:username' render={(props) => {
           return this.state.currentGame ?
-            (<PlayerView
+            (<PlayerLobby
               {...props}
               cableApp={this.props.cableApp}
               updateApp={this.updateAppStateGame}
@@ -154,7 +154,7 @@ class Main extends Component {
         
         <Route exact path='/game/:code/DM/:username' render={(props) => {
           return this.state.currentGame ?
-            (<AdminView
+            (<AdminLobby
               {...props}
               userList={this.makeArray}
               arrange={this.handleUpClick}

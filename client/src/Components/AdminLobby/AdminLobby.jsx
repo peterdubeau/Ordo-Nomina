@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import { sendCombatants, getGames, postUser } from '../../services/games'
 import GameWebSocket from '../GameWebSocket/GameWebSocket'
 
-export default function AdminView(props) {
+export default function AdminLobby(props) {
 
   const [formData, setFormData] = useState({
     id: "",
