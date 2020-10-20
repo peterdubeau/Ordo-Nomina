@@ -3,7 +3,8 @@ import { Route, Redirect, withRouter } from 'react-router-dom'
 import { sendCombatants } from '../../services/games'
 import PlayerLobby from '../PlayerLobby/PlayerLobby'
 import AdminLobby from '../AdminLobby/AdminLobby'
-
+import PlayerCombat from '../PlayerCombat/PlayerCombat'
+import AdminCombat from '../AdminCombat/AdminCombat'
 
 class Main extends Component {
   constructor(props) {
@@ -12,8 +13,8 @@ class Main extends Component {
       currentUser: null,
       currentGame: {
         game: {},
-        users: []
-        
+        users: [],
+        combatants: ''
       }
     }
   }
@@ -26,7 +27,8 @@ class Main extends Component {
           currentUser: true,
           currentGame: {
             game: results,
-            users: results.users
+            users: results.users,
+            combatants: results.combatants
           }
         })
       })
@@ -101,14 +103,14 @@ class Main extends Component {
       console.log(newGame.list)
       let combatants = this.makeArray(newGame.list)
       let users = this.state.currentGame.users
-      
-      console.log(combatants)
       // let playerList = [...this.state.currentGame.users]
       sendCombatants(
         newGame.code,
         combatants
         )
-        this.setState({ users: users }) 
+      this.setState({
+        users: users
+      }) 
     } else if (newGame.type === "list") {
       console.log('list')
       // let users = newGame.users
@@ -169,6 +171,24 @@ class Main extends Component {
             )
         }}>
         </Route>
+        
+        <Route exact path='/combat/:code/DM/:username' render={(props) => {
+          return this.state.currentGame ?
+            (<AdminCombat 
+              {...props}
+              cableApp={this.props.cableApp}
+              updateApp={this.updateAppStateGame}
+              getGameData={this.getGameData}
+              gameData={this.state.currentGame}
+            />
+              
+            ) : (
+              <Redirect to='/' />
+            )
+        }}>
+          
+        </Route>
+        
 
       </div>
     );

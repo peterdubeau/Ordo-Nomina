@@ -1,9 +1,11 @@
-import React, {useState} from 'react'
-import { sendCombatants, getGames, postUser } from '../../services/games'
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { getGames, postUser } from '../../services/games'
 import GameWebSocket from '../GameWebSocket/GameWebSocket'
 
 export default function AdminLobby(props) {
 
+  console.log(props)
   const [formData, setFormData] = useState({
     id: "",
     username: "",
@@ -61,8 +63,9 @@ export default function AdminLobby(props) {
         {props.gameData.filter(status => status.is_admin === false).map((user, i) =>
           <p key={user.username}>{user.id} -=-=-=- {user.username} : {user.initiative} ---------- {user.game_id} <button onClick={() => props.arrange(i)}> move up </button> </p>
         )}
-        <button onClick={() => props.updateApp({ list, code: code, type: 'combatants' })}>Send List</button>
-          
+        <Link>
+          <button onClick={() => props.updateApp({ list, code: code, type: 'combatants' })}>Start Combat</button>
+        </Link>  
         <label >
           <input
             name="username"
