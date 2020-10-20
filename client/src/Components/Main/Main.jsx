@@ -50,7 +50,7 @@ class Main extends Component {
 
   makeArray = (data) => {
     let players = []
-
+    console.log(data)
     data.forEach(user => {
       if (user.is_admin === false) {
         players.push(user.username)
@@ -97,16 +97,20 @@ class Main extends Component {
       //   this.setState({
       //     currentGame: { users: sortedList }
       //   }) 
-    } else if (newGame.type === 'array') {
+    } else if (newGame.type === 'combatants') {
+      console.log(newGame.list)
       let combatants = this.makeArray(newGame.list)
       let users = this.state.currentGame.users
+      
+      console.log(combatants)
       // let playerList = [...this.state.currentGame.users]
       sendCombatants(
-        this.state.currentGame.game.code,
+        newGame.code,
         combatants
         )
         this.setState({ users: users }) 
     } else if (newGame.type === "list") {
+      console.log('list')
       // let users = newGame.users
       // let combatants = this.makeArray(users)
       // // this.updateAppStateGame({ combatants , type: 'array'})

@@ -38,11 +38,11 @@ export default function AdminView(props) {
   
     let code = props.match.params.code
     let list = props.gameData
-    let combatants = makeArray(list)
+    // let combatants = makeArray(list)
 
     
 
-    console.log(combatants)
+    console.log(list)
         return (<>
           <GameWebSocket
           cableApp={props.cableApp}
@@ -55,7 +55,8 @@ export default function AdminView(props) {
         {props.gameData.filter(status => status.is_admin === false).map((user, i) => 
           <p key={user.username}>{user.id} -=-=-=- {user.username} : {user.initiative} ---------- {user.game_id} <button onClick={() => props.arrange(i)}> move up </button> </p>
           )}
-          <button onClick={() => sendCombatants(code, combatants)}>Send List</button>
+          <button onClick={() => props.updateApp({ list, code: code, type: 'combatants' })}>Send List</button>
+          
         </>)
       }
 
