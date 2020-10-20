@@ -5,6 +5,8 @@ export default function AdminCombat(props) {
 
   let dude = props.gameData.game.combatants
   
+  console.log(props.gameData.game.combatants)
+
   return (<>
       <GameWebSocket
           cableApp={props.cableApp}

@@ -89,7 +89,7 @@ class GamesController < ApplicationController
     list= @game
     # new_list = hashify(list)
 
-    render json: list
+    render json: list.combatants
   end
   
 

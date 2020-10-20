@@ -49,6 +49,16 @@ class Main extends Component {
       })
     }
   }
+  
+  handleSort = () => {
+    let list = this.state.currentGame.users.sort(function (a, b) {
+        return b.initiative - a.initiative
+    })
+    this.setState({
+      users: list
+    })
+  }
+
 
   makeArray = (data) => {
     let players = []
@@ -86,11 +96,16 @@ class Main extends Component {
     } else if (newGame.type === "delete_user") {
       console.log("delete_user")
       let user = this.state.currentGame.users.findIndex(user => user.id === newGame.user.id)
-      let userUpdate = [...this.state.currentGame.users]
-      userUpdate.splice(userUpdate[user], 1)
+      console.log(newGame.user)
+      let users = [...this.state.currentGame.users]
+      users.splice(user, 1)
       this.setState({
-        currentGame: { users: userUpdate }
+        currentGame: {
+          users: users,
+          game: newGame.game
+        }
       })
+      console.log(this.state.currentGame.users)
       // } else if (newGame.type === "sort_players") {
       //   let playerList = [...this.state.currentGame.users]
       //   let sortedList = playerList.sort((a, b) => (a.initiative - b.initiative)) 
@@ -121,7 +136,7 @@ class Main extends Component {
       console.log("woopsie")
     }
   }
-  
+
   render() {
 
     return (
@@ -133,6 +148,7 @@ class Main extends Component {
             (<AdminLobby
               {...props}
               userList={this.makeArray}
+              sort={this.handleSort}
               arrange={this.handleUpClick}
               cableApp={this.props.cableApp}
               updateApp={this.updateAppStateGame}

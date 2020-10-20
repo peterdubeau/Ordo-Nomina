@@ -50,6 +50,7 @@ export default function AdminLobby(props) {
   
       let code = props.match.params.code
       let list = props.gameData
+      let id = props.gameData.filter(status => status.is_admin === true).map(user => user.game_id)
 
       return (<>
         <GameWebSocket
@@ -60,8 +61,13 @@ export default function AdminLobby(props) {
         />
           admin view
         <h2>{props.match.params.username}'s game!</h2>
+        <h3>Game id: {id}</h3>
         {props.gameData.filter(status => status.is_admin === false).map((user, i) =>
-          <p key={user.username}>{user.id} -=-=-=- {user.username} : {user.initiative} ---------- {user.game_id} <button onClick={() => props.arrange(i)}> move up </button> </p>
+          <p key={user.username}>
+              {user.id} -=-=-=- {user.username} : {user.initiative} 
+              <button onClick={() => props.arrange(i)}> move up </button> 
+              <button >Remove user</button>
+            </p>
         )}
         <Link>
           <button onClick={() => props.updateApp({ list, code: code, type: 'combatants' })}>Start Combat</button>
@@ -83,6 +89,7 @@ export default function AdminLobby(props) {
           />
         </label>
         <button onClick={handleSubmit}>Add Enemy</button>
+        <button onClick={() => props.sort()}>Quick sort descending</button>
       </>)
     }
 
