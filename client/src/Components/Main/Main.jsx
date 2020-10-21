@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Route, Redirect, withRouter } from 'react-router-dom'
 import { sendCombatants } from '../../services/games'
-import PlayerView from '../PlayerView/PlayerView'
-import AdminView from '../AdminView/AdminView'
-
+import PlayerLobby from '../PlayerLobby/PlayerLobby'
+import AdminLobby from '../AdminLobby/AdminLobby'
+import PlayerCombat from '../PlayerCombat/PlayerCombat'
+import AdminCombat from '../AdminCombat/AdminCombat'
 
 class Main extends Component {
   constructor(props) {
@@ -12,8 +13,8 @@ class Main extends Component {
       currentUser: null,
       currentGame: {
         game: {},
-        users: []
-        
+        users: [],
+        combatants: ''
       }
     }
   }
@@ -26,7 +27,8 @@ class Main extends Component {
           currentUser: true,
           currentGame: {
             game: results,
-            users: results.users
+            users: results.users,
+            combatants: results.combatants
           }
         })
       })
@@ -47,6 +49,16 @@ class Main extends Component {
       })
     }
   }
+  
+  handleSort = () => {
+    let list = this.state.currentGame.users.sort(function (a, b) {
+        return b.initiative - a.initiative
+    })
+    this.setState({
+      users: list
+    })
+  }
+
 
   makeArray = (data) => {
     let players = []
@@ -84,11 +96,16 @@ class Main extends Component {
     } else if (newGame.type === "delete_user") {
       console.log("delete_user")
       let user = this.state.currentGame.users.findIndex(user => user.id === newGame.user.id)
-      let userUpdate = [...this.state.currentGame.users]
-      userUpdate.splice(userUpdate[user], 1)
+      console.log(newGame.user)
+      let users = [...this.state.currentGame.users]
+      users.splice(user, 1)
       this.setState({
-        currentGame: { users: userUpdate }
+        currentGame: {
+          users: users,
+          game: newGame.game
+        }
       })
+      console.log(this.state.currentGame.users)
       // } else if (newGame.type === "sort_players") {
       //   let playerList = [...this.state.currentGame.users]
       //   let sortedList = playerList.sort((a, b) => (a.initiative - b.initiative)) 
@@ -101,14 +118,14 @@ class Main extends Component {
       console.log(newGame.list)
       let combatants = this.makeArray(newGame.list)
       let users = this.state.currentGame.users
-      
-      console.log(combatants)
       // let playerList = [...this.state.currentGame.users]
       sendCombatants(
         newGame.code,
         combatants
         )
-        this.setState({ users: users }) 
+      this.setState({
+        users: users
+      }) 
     } else if (newGame.type === "list") {
       console.log('list')
       // let users = newGame.users
@@ -120,25 +137,57 @@ class Main extends Component {
     }
   }
 
-  generateCode = () => {
-    let code = ''
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-    const charLength = characters.length
-    for (let i = 0; i < charLength; i++) {
-      code += characters.charAt(Math.floor(Math.random() * charLength))
-    }
-    return code.slice(0, 5)
-  }
-
   render() {
-    
-    const roomCode = this.generateCode()
 
     return (
       <div className="App">
+
+
+        <Route exact path='/game/:code/DM/:username' render={(props) => {
+          return this.state.currentGame ?
+            (<AdminLobby
+              {...props}
+              userList={this.makeArray}
+              sort={this.handleSort}
+              arrange={this.handleUpClick}
+              cableApp={this.props.cableApp}
+              updateApp={this.updateAppStateGame}
+              getGameData={this.getGameData}
+              gameData={this.state.currentGame.users}
+              currentUser={this.state.currentUser}
+            />
+            ) : (
+              <Redirect to='/' />
+            )
+        }}>
+        </Route>
+        
+
+
+
+
+        <Route exact path='/combat/:code/DM/:username' render={(props) => {
+          return this.state.currentGame ?
+            (<AdminCombat 
+              {...props}
+              cableApp={this.props.cableApp}
+              updateApp={this.updateAppStateGame}
+              getGameData={this.getGameData}
+              gameData={this.state.currentGame}
+            />
+              
+            ) : (
+              <Redirect to='/' />
+            )
+        }}>
+        </Route>
+
+
+
+
         <Route exact path='/game/:code/user/:username' render={(props) => {
           return this.state.currentGame ?
-            (<PlayerView
+            (<PlayerLobby
               {...props}
               cableApp={this.props.cableApp}
               updateApp={this.updateAppStateGame}
@@ -152,27 +201,29 @@ class Main extends Component {
         }}>
         </Route>
         
-        <Route exact path='/game/:code/DM/:username' render={(props) => {
+
+
+
+        <Route exact path='/combat/:code/player/:username' render={(props) => {
           return this.state.currentGame ?
-            (<AdminView
+            (<PlayerCombat 
               {...props}
-              userList={this.makeArray}
-              arrange={this.handleUpClick}
               cableApp={this.props.cableApp}
               updateApp={this.updateAppStateGame}
               getGameData={this.getGameData}
-              gameData={this.state.currentGame.users}
-              currentUser={this.state.currentUser}
+              gameData={this.state.currentGame}
             />
+              
             ) : (
               <Redirect to='/' />
             )
         }}>
         </Route>
+        
 
       </div>
     );
   }
 }
 
-export default withRouter(Main);
+export default Main;

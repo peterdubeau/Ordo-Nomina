@@ -1,9 +1,11 @@
-import React, {useState} from 'react'
-import { sendCombatants, getGames, postUser } from '../../services/games'
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { getGames, postUser, deleteUser } from '../../services/games'
 import GameWebSocket from '../GameWebSocket/GameWebSocket'
 
-export default function AdminView(props) {
+export default function AdminLobby(props) {
 
+  console.log(props)
   const [formData, setFormData] = useState({
     id: "",
     username: "",
@@ -48,6 +50,8 @@ export default function AdminView(props) {
   
       let code = props.match.params.code
       let list = props.gameData
+      let id = props.gameData.filter(status => status.is_admin === true).map(user => user.game_id)
+
 
       return (<>
         <GameWebSocket
@@ -58,11 +62,17 @@ export default function AdminView(props) {
         />
           admin view
         <h2>{props.match.params.username}'s game!</h2>
+        <h3>Game id: {id}</h3>
         {props.gameData.filter(status => status.is_admin === false).map((user, i) =>
-          <p key={user.username}>{user.id} -=-=-=- {user.username} : {user.initiative} ---------- {user.game_id} <button onClick={() => props.arrange(i)}> move up </button> </p>
+          <p key={user.id}>
+              {user.id} -=-=-=- {user.username} : {user.initiative} 
+              <button onClick={() => props.arrange(i)}> move up </button> 
+              <button onClick={() => deleteUser(user.id)}>Remove user</button>
+            </p>
         )}
-        <button onClick={() => props.updateApp({ list, code: code, type: 'combatants' })}>Send List</button>
-          
+        <Link>
+          <button onClick={() => props.updateApp({ list, code: code, type: 'combatants' })}>Start Combat</button>
+        </Link>  
         <label >
           <input
             name="username"
@@ -80,6 +90,7 @@ export default function AdminView(props) {
           />
         </label>
         <button onClick={handleSubmit}>Add Enemy</button>
+        <button onClick={() => props.sort()}>Quick sort descending</button>
       </>)
     }
 

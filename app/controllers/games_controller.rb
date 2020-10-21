@@ -70,9 +70,7 @@ class GamesController < ApplicationController
     names = users.each_with_object({}) do |user, hash|
       hash[user.username] = user.initiative
     end
-    # ini = users.each_with_object({}) do |ini, hash|
-    #   hash[ini.initiative] = ini.username
-    # end
+
     GamesChannel.broadcast_to(@game, {game: @game.code, users: users})
     render json: @game.combatants
     else
@@ -80,6 +78,21 @@ class GamesController < ApplicationController
     end
 
   end
+
+  # GET /combat/:code
+  def hashify(hash)
+    # hash.split(',')
+  end
+
+  def combat_view
+    @game = Game.find_by code: (params[:code])
+    list= @game
+    # new_list = hashify(list)
+
+    render json: list.combatants
+  end
+  
+
 
   #SORT /game/:code/Bsort
   def backend_sort

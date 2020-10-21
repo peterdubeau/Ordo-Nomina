@@ -1,7 +1,7 @@
 import React from 'react'
 import GameWebSocket from '../GameWebSocket/GameWebSocket'
 
-export default function ShowGame(props) {
+export default function PlayerLobby(props) {
 
   let host = props.gameData.filter(host => host.is_admin === true)
   const hostDetails = host.map(hostName => hostName.username)
