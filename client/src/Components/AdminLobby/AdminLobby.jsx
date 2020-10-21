@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { getGames, postUser } from '../../services/games'
+import { getGames, postUser, deleteUser } from '../../services/games'
 import GameWebSocket from '../GameWebSocket/GameWebSocket'
 
 export default function AdminLobby(props) {
@@ -52,6 +52,7 @@ export default function AdminLobby(props) {
       let list = props.gameData
       let id = props.gameData.filter(status => status.is_admin === true).map(user => user.game_id)
 
+
       return (<>
         <GameWebSocket
           cableApp={props.cableApp}
@@ -63,10 +64,10 @@ export default function AdminLobby(props) {
         <h2>{props.match.params.username}'s game!</h2>
         <h3>Game id: {id}</h3>
         {props.gameData.filter(status => status.is_admin === false).map((user, i) =>
-          <p key={user.username}>
+          <p key={user.id}>
               {user.id} -=-=-=- {user.username} : {user.initiative} 
               <button onClick={() => props.arrange(i)}> move up </button> 
-              <button >Remove user</button>
+              <button onClick={() => deleteUser(user.id)}>Remove user</button>
             </p>
         )}
         <Link>
