@@ -4,10 +4,9 @@ import GameWebSocket from '../GameWebSocket/GameWebSocket'
 export default function AdminCombat(props) {
 
   let dude = props.gameData.game.combatants
-  let list = new Object(dude)
-
-
   
+  console.log(props.gameData.game.combatants)
+
   return (<>
       <GameWebSocket
           cableApp={props.cableApp}
@@ -16,8 +15,8 @@ export default function AdminCombat(props) {
           code={props.match.params.code}
         />
     <div>
-      {props.gameData.game.combatants}
-      {/* {props.gameData.game.combatants.map(combatant => <p>{combatant}</p>)} */}
+    {dude}
+      {/* {dude.map(combatant => <p>{combatant}</p>)} */}
     </div>
   </>)
 }

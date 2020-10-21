@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import { Link, Route } from 'react-router-dom'
-import Main from '../Main/Main'
+import { Link } from 'react-router-dom'
 import { postGame, getGames, postUser} from '../../services/games'
 
 
