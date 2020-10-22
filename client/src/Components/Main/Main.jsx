@@ -62,17 +62,27 @@ class Main extends Component {
 
   makeArray = (data) => {
     let players = []
-    console.log(data)
     data.forEach(user => {
       if (user.is_admin === false) {
-        players.push(`${user.username} - ${user.initiative}`)
+        players.push(user.id)
       } else {
-        console.log(`admin is ${user.username}`)
+        // console.log(`admin is ${user.username}`)
       }
     })
     return players
 }
 
+  
+  takeTurn = (arr) => {
+    arr.pop()
+  this.setState({
+    currentGame: {
+      combatants: arr,
+      users: this.state.currentGame.users,
+      game: this.state.currentGame.game
+    }
+  })
+}
  
   updateAppStateGame = async (newGame) => {
     if (newGame.type === "new_user") {
@@ -114,17 +124,22 @@ class Main extends Component {
       //   this.setState({
       //     currentGame: { users: sortedList }
       //   }) 
-    } else if (newGame.type === 'combatants') {
-      console.log(newGame.list)
-      let combatants = this.makeArray(newGame.list)
-      let users = this.state.currentGame.users
+    } else if (newGame.type === 'game_start') {
+      console.log(newGame.type)
+      // let combatants = this.makeArray(newGame.users)
+      // console.log(newGame.combatants)
+      // let users = this.state.currentGame.users
       // let playerList = [...this.state.currentGame.users]
-      sendCombatants(
-        newGame.code,
-        combatants
-        )
+      // sendCombatants(
+      //   newGame.code,
+      //   combatants
+      //   )
       this.setState({
-        users: users
+        currentGame: {
+          game: newGame,
+          users: newGame.users,
+          combatants: newGame.combatants
+        }
       }) 
     } else if (newGame.type === "list") {
       console.log('list')
@@ -138,7 +153,7 @@ class Main extends Component {
   }
 
   render() {
-
+    console.log(this.state)
     return (
       <div className="App">
 
@@ -170,6 +185,7 @@ class Main extends Component {
           return this.state.currentGame ?
             (<AdminCombat 
               {...props}
+              turn={this.takeTurn}
               cableApp={this.props.cableApp}
               updateApp={this.updateAppStateGame}
               getGameData={this.getGameData}
