@@ -29,21 +29,20 @@ class GamesController < ApplicationController
   # POST /games
   def create
     @game = Game.new(game_params)
-    
+
     if @game.save
       render json: @game, includes: :combatants, status: :created
     else
       render json: @game.errors, status: :unprocessable_entity
     end
 
-    ActionCable.server.broadcast 'games_channel', @game
-
+    ActionCable.server.broadcast "games_channel", @game
   end
 
   # PATCH/PUT /games/1
   def update
     # @game = Game.find_by code: (params[:code])
-  
+
     # @game.update(game_params)
 
     if @game.update(game_params)
@@ -52,7 +51,6 @@ class GamesController < ApplicationController
     else
       render json: @game.errors, status: :unprocessable_entity
     end
-
   end
 
   # DELETE /games/1
@@ -60,24 +58,23 @@ class GamesController < ApplicationController
     @game.destroy
   end
 
-
   # PUT /game/:code/start
   def start_combat
     @game = Game.find_by code: (params[:code])
-    users = @game.users.all
-    combatants = @game.combatants
-    
-    if  @game.update(game_params)
-    # names = users.each_with_object({}) do |user, hash|
-    #   hash[user.username] = user.initiative
-    # end
 
-    GamesChannel.broadcast_to(@game, {game: @game.code, users: users, combatants: combatants, type: "game_start"})
-    render json: combatants
+    if @game.update(game_params)
+      users = @game.users.all
+      combatants = @game.combatants
+
+      names = users.each_with_object({}) do |user, hash|
+        hash[user.id] = user.username
+      end
+
+      GamesChannel.broadcast_to(@game, { game: @game.code, users: users, combatants: combatants, type: "game_start" })
+      render json: names
     else
       render json: @game.errors, status: :unprocessable_entity
     end
-
   end
 
   # GET /combat/:code
@@ -87,35 +84,32 @@ class GamesController < ApplicationController
 
   def combat_view
     @game = Game.find_by code: (params[:code])
-    list= @game
+    list = @game
     # new_list = hashify(list)
 
     render json: list.combatants
   end
-  
-
 
   #SORT /game/:code/Bsort
   def backend_sort
-
     users = @game.users.all.sort_by(&:initiative).reverse
     users = users.sort
     @users = users
 
     render json: @users
 
-    GamesChannel.broadcast_to(@game, {game: @game.code, users: @users, type: "sort_players"})
-
+    GamesChannel.broadcast_to(@game, { game: @game.code, users: @users, type: "sort_players" })
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_game
-      @game = Game.find_by code: (params[:code])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def game_params
-      params.require(:game).permit(:code, :combatants => [])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_game
+    @game = Game.find_by code: (params[:code])
   end
+
+  # Only allow a trusted parameter "white list" through.
+  def game_params
+    params.require(:game).permit(:code, :combatants => [])
+  end
+end
