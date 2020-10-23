@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: [:show, :show_by_code, :update, :destroy, :sort, :backend_sort]
+  before_action :set_game, only: [:show, :show_by_code, :update, :destroy, :sort, :backend_sort, :take_turn]
 
   # GET /games
   def index
@@ -101,8 +101,14 @@ class GamesController < ApplicationController
     GamesChannel.broadcast_to(@game, { game: @game.code, users: @users, type: "sort_players" })
   end
 
-  private
+  def take_turn
+    
+    GamesChannel.broadcast_to(@game, {game: @game.code, combatants: @game.combatants, type: "take_turn"})
+    render json: @game
 
+  end
+
+  private
   # Use callbacks to share common setup or constraints between actions.
   def set_game
     @game = Game.find_by code: (params[:code])

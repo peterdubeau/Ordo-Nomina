@@ -74,7 +74,8 @@ class Main extends Component {
 
   
   takeTurn = (arr) => {
-    arr.pop()
+    arr.push(arr.shift())
+    console.log(arr)
   this.setState({
     currentGame: {
       combatants: arr,
@@ -116,14 +117,9 @@ class Main extends Component {
         }
       })
       console.log(this.state.currentGame.users)
-      // } else if (newGame.type === "sort_players") {
-      //   let playerList = [...this.state.currentGame.users]
-      //   let sortedList = playerList.sort((a, b) => (a.initiative - b.initiative)) 
-      //   console.log(sortedList)
-      //   // updateGame(this.state.currentGame.game.code, sortedList)
-      //   this.setState({
-      //     currentGame: { users: sortedList }
-      //   }) 
+    } else if (newGame.type === "take_turn") {
+      
+
     } else if (newGame.type === 'game_start') {
       console.log(newGame.type)
       // let combatants = this.makeArray(newGame.users)
@@ -153,7 +149,7 @@ class Main extends Component {
   }
 
   render() {
-    console.log(this.state)
+    // console.log(this.state)
     return (
       <div className="App">
 

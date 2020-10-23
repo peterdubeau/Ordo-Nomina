@@ -10,11 +10,12 @@ export default function AdminCombat(props) {
     return map;
   }, {});
 
+  console.log(props.gameData)
   // [1, 4, 200].reduce((accumulator, number) => accumulator + number, 0)
   
-  let orderedUsers = game.combatants?.map(id => userMap[id].username);
+  // let orderedUsers = game.combatants?.map(id => userMap[id].username);
 
-  
+
   return (<>
     <GameWebSocket
       cableApp={props.cableApp}
@@ -23,8 +24,8 @@ export default function AdminCombat(props) {
       code={props.match.params.code}
     />
     <div>
-      {orderedUsers}
-      <button onClick={() => props.turn(orderedUsers)}> TOP DUDE OFF</button>
+      {game.combatants?.map(id => <p key={userMap[id].id}>{userMap[id].username}: {userMap[id].id}</p>)}
+      <button onClick={() => props.turn(game.combatants)}> TOP DUDE OFF</button>
     </div>
   </>)
 }
