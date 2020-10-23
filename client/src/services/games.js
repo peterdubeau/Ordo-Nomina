@@ -38,3 +38,8 @@ export const sendCombatants = async (code, combatants) => {
   const res = await api.put(`/game/${code}/start`, { code, combatants })
   return res.data 
 }
+
+export const takeTurn = async (code) => {
+  const res = await api.get(`/game/${code}/turn`)
+  return res
+}

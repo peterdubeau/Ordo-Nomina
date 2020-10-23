@@ -118,18 +118,13 @@ class Main extends Component {
       })
       console.log(this.state.currentGame.users)
     } else if (newGame.type === "take_turn") {
-      
-
+      const { game } = this.state.currentGame
+      const userMap = game.users.reduce((map, user) => {
+        map[user.id] = user;
+        return map;
+      }, {});
+      this.takeTurn(game.combatants)
     } else if (newGame.type === 'game_start') {
-      console.log(newGame.type)
-      // let combatants = this.makeArray(newGame.users)
-      // console.log(newGame.combatants)
-      // let users = this.state.currentGame.users
-      // let playerList = [...this.state.currentGame.users]
-      // sendCombatants(
-      //   newGame.code,
-      //   combatants
-      //   )
       this.setState({
         currentGame: {
           game: newGame,
@@ -149,7 +144,7 @@ class Main extends Component {
   }
 
   render() {
-    // console.log(this.state)
+    console.log(this.state.currentGame.game.code)
     return (
       <div className="App">
 
@@ -181,6 +176,7 @@ class Main extends Component {
           return this.state.currentGame ?
             (<AdminCombat 
               {...props}
+              code={this.state.currentGame.game.code}
               turn={this.takeTurn}
               cableApp={this.props.cableApp}
               updateApp={this.updateAppStateGame}

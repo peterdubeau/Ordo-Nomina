@@ -1,19 +1,16 @@
 import React from 'react'
 import GameWebSocket from '../GameWebSocket/GameWebSocket'
+import { takeTurn } from '../../services/games'
 
 export default function AdminCombat(props) {
   
-  
+  console.log(props.code)
   const { game } = props.gameData
   const userMap = game.users?.reduce((map, user) => {
     map[user.id] = user;
     return map;
   }, {});
 
-  console.log(props.gameData)
-  // [1, 4, 200].reduce((accumulator, number) => accumulator + number, 0)
-  
-  // let orderedUsers = game.combatants?.map(id => userMap[id].username);
 
 
   return (<>
@@ -25,7 +22,7 @@ export default function AdminCombat(props) {
     />
     <div>
       {game.combatants?.map(id => <p key={userMap[id].id}>{userMap[id].username}: {userMap[id].id}</p>)}
-      <button onClick={() => props.turn(game.combatants)}> TOP DUDE OFF</button>
+      <button onClick={() => takeTurn(props.code)}> TOP DUDE OFF</button>
     </div>
   </>)
 }
