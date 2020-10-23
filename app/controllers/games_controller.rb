@@ -103,8 +103,12 @@ class GamesController < ApplicationController
 
   def take_turn
     
-    GamesChannel.broadcast_to(@game, {game: @game.code, combatants: @game.combatants, users: @game.users, type: "take_turn"})
-    render json: @game.combatants
+    if @game.update(game_params)
+      
+      @users = @game.users.all
+      GamesChannel.broadcast_to(@game, { code: @game.code, combatants: @game.combatants, users: @users, type: "take_turn"})
+      render json: @game, include: :users
+    end
 
   end
 

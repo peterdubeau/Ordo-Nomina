@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   put '/game/:code/Bsort', to: 'games#backend_sort'
   put '/game/:code/start', to: 'games#start_combat'
   get '/combat/:code/', to: 'games#combat_view'
-  get 'game/:code/turn', to: 'games#take_turn'
+  patch 'game/:code/turn', to: 'games#take_turn'
   
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

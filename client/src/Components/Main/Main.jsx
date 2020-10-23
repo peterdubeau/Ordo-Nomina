@@ -73,17 +73,17 @@ class Main extends Component {
 }
 
   
-  takeTurn = (arr) => {
-    arr.push(arr.shift())
-    console.log(arr)
-  this.setState({
-    currentGame: {
-      combatants: arr,
-      users: this.state.currentGame.users,
-      game: this.state.currentGame.game
-    }
-  })
-}
+//   takeTurn = (arr) => {
+//     arr.push(arr.shift())
+//     // console.log(arr)
+//   this.setState({
+//     currentGame: {
+//       combatants: arr,
+//       users: this.state.currentGame.users,
+//       game: this.state.currentGame.game
+//     }
+//   })
+// }
  
   updateAppStateGame = async (newGame) => {
     if (newGame.type === "new_user") {
@@ -117,13 +117,22 @@ class Main extends Component {
         }
       })
       console.log(this.state.currentGame.users)
+    
+    
+    
     } else if (newGame.type === "take_turn") {
-      const { game } = this.state.currentGame
-      const userMap = game.users.reduce((map, user) => {
-        map[user.id] = user;
-        return map;
-      }, {});
-      this.takeTurn(game.combatants)
+
+      this.setState({
+        currentGame: {
+          game: newGame,
+          users: newGame.users,
+          combatants: newGame.combatants
+        }
+      }) 
+
+      console.log(this.state.currentGame)
+
+
     } else if (newGame.type === 'game_start') {
       this.setState({
         currentGame: {
@@ -132,6 +141,7 @@ class Main extends Component {
           combatants: newGame.combatants
         }
       }) 
+
     } else if (newGame.type === "list") {
       console.log('list')
       // let users = newGame.users
@@ -144,7 +154,7 @@ class Main extends Component {
   }
 
   render() {
-    console.log(this.state.currentGame.game.code)
+    // console.log(this.state.currentGame.game.code)
     return (
       <div className="App">
 
@@ -169,9 +179,6 @@ class Main extends Component {
         </Route>
         
 
-
-
-
         <Route exact path='/combat/:code/DM/:username' render={(props) => {
           return this.state.currentGame ?
             (<AdminCombat 
@@ -181,6 +188,7 @@ class Main extends Component {
               cableApp={this.props.cableApp}
               updateApp={this.updateAppStateGame}
               getGameData={this.getGameData}
+              users={this.state.currentGame.users}
               gameData={this.state.currentGame}
             />
               
@@ -216,6 +224,8 @@ class Main extends Component {
           return this.state.currentGame ?
             (<PlayerCombat 
               {...props}
+              code={this.state.currentGame.game.code}
+              turn={this.takeTurn}
               cableApp={this.props.cableApp}
               updateApp={this.updateAppStateGame}
               getGameData={this.getGameData}

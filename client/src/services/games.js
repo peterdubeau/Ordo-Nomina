@@ -39,7 +39,7 @@ export const sendCombatants = async (code, combatants) => {
   return res.data 
 }
 
-export const takeTurn = async (code) => {
-  const res = await api.get(`/game/${code}/turn`)
-  return res
+export const takeTurn = async (code, gameData) => {
+  const res = await api.patch(`/game/${code}/turn`, { code, gameData })
+  return res.data
 }
