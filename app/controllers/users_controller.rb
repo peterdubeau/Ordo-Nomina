@@ -13,22 +13,12 @@ class UsersController < ApplicationController
     render json: @user
   end
 
-  # POST /users
-  # def create
-  #   @user = User.new(user_params)
-
-  #   if @user.save
-  #     render json: @user, status: :created, location: @user
-  #   else
-  #     render json: @user.errors, status: :unprocessable_entity
-  #   end
-  # end
 
   def create 
     @user = User.new(user_params)
     @game = Game.find(user_params['game_id'])
     if @user.save
-      GamesChannel.broadcast_to(@game, {game: @game.code, user: @user, type: "new_user"})
+      GamesChannel.broadcast_to(@game, {game: @game, user: @user, type: "new_user"})
     end
     render json: @user
   end
@@ -51,9 +41,11 @@ class UsersController < ApplicationController
 
   # DELETE /users/1
   def destroy
-    @game = Game.find(user_params['game_id'])
+    game_id = @user.game_id
+    @game = Game.find(game_id)
     if @user.destroy
-      GamesChannel.broadcast_to(@game, {game: @game.code, user: @user, type: "delete_user" })
+      render json: @user
+      GamesChannel.broadcast_to(@game, {game: @game, user: @user, type: "delete_user" })
     else
       ender json: @user.errors, status: :unprocessable_entity
     end
