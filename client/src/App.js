@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom'
 import CreateRoom from './Components/CreateRoom/CreateRoom'
 import JoinRoom from './Components/JoinRoom/JoinRoom'
 import Main from './Components/Main/Main'
+import Home from './Components/Home/Home'
 import './App.css';
 
 
@@ -25,8 +26,13 @@ export default function App (props) {
   
   return (
 
-      <div className="App">
-        <Route path='/' exact>
+    <div className="App">
+      
+      <Route path='/' exact>
+        <Home />
+      </Route>
+
+        <Route path='/create-room' exact>
           <CreateRoom code={roomCode}/>
         </Route>
 
