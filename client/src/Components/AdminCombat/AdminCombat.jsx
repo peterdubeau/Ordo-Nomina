@@ -6,15 +6,13 @@ export default function AdminCombat(props) {
 
   function handleTakeTurn(arr) {
     arr.combatants.push(arr.combatants.shift())
-    takeTurn(props.code, arr)
+    takeTurn(game.code, arr)
     }
   const { game } = props.gameData
   const userMap = game.users?.reduce((map, user) => {
     map[user.id] = user;
     return map;
   }, {});
-  
-  // const orderedList = game.combatants?.map(id => userMap[id].username)
 
   return (<>
     <GameWebSocket
@@ -26,8 +24,7 @@ export default function AdminCombat(props) {
     <div>
       {/* {orderedList} */}
       {game.combatants?.map(id => <p key={userMap[id].id}>{userMap[id].username} : {userMap[id].initiative} </p>)}
-      <button onClick={() => takeTurn(props.code, game)}> TOP DUDE OFF</button>
-      <button onClick={() => handleTakeTurn(game)}>Order First</button>
+      <button onClick={() => handleTakeTurn(game)}>Next Turn</button>
     </div>
   </>)
 }

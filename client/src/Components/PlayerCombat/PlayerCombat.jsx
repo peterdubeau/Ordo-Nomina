@@ -21,7 +21,7 @@ export default function playerCombat(props) {
       code={props.match.params.code}
     />
     <div>
-      {game.combatants?.map(id => <p key={userMap[id].id}>{userMap[id].username}: {userMap[id].id}</p>)}
+      {game.combatants?.map(id => <p key={userMap[id].id}>{userMap[id].username}: {userMap[id].initiative}</p>)}
     </div>
   </>)
 }

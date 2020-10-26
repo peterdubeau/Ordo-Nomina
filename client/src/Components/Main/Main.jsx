@@ -10,7 +10,7 @@ class Main extends Component {
   constructor(props) {
     super()
     this.state = {
-      currentUser: null,
+      inCombat: false,
       currentGame: {
         game: {},
         users: [],
@@ -24,7 +24,7 @@ class Main extends Component {
       .then(response => response.json())
       .then(results => {
         this.setState({
-          currentUser: true,
+          inCombat: false,
           currentGame: {
             game: results,
             users: results.users,
@@ -122,7 +122,9 @@ class Main extends Component {
       console.log(this.state.currentGame.game)
 
     } else if (newGame.type === 'game_start') {
+
       this.setState({
+        inCombat: true,
         currentGame: {
           game: newGame,
           users: newGame.users,
@@ -142,7 +144,6 @@ class Main extends Component {
   }
 
   render() {
-    // console.log(this.state.currentGame.game.code)
     return (
       <div className="App">
 
@@ -193,10 +194,11 @@ class Main extends Component {
           return this.state.currentGame ?
             (<PlayerLobby
               {...props}
+              startGame={this.state.inCombat}
               cableApp={this.props.cableApp}
               updateApp={this.updateAppStateGame}
               getGameData={this.getGameData}
-              gameData={this.state.currentGame.users}
+              gameData={this.state.currentGame}
               currentUser={this.state.currentUser}
             />
             ) : (

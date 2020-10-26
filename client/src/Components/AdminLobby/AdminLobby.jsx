@@ -69,7 +69,7 @@ export default function AdminLobby(props) {
               {user.game_id}
             </p>
         )}
-        <Link>
+        <Link to={`/combat/${code}/DM/${props.match.params.username}`}>
           <button onClick={() => sendCombatants(code, combatants)}>Start Combat</button>
         </Link>  
         <label >
