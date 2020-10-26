@@ -1,16 +1,19 @@
 import React from 'react'
 import GameWebSocket from '../GameWebSocket/GameWebSocket'
+import {Redirect} from 'react-router-dom'
 
 export default function PlayerLobby(props) {
 
-  let host = props.gameData.filter(host => host.is_admin === true)
+  let host = props.gameData.users.filter(host => host.is_admin === true)
   const hostDetails = host.map(hostName => hostName.username)
   
-  let list = props.gameData.sort(function(a,b){
+  let list = props.gameData.users.sort(function(a,b){
     return b.initiative - a.initiative
     })
-
-
+    
+  if (props.startGame) {
+    return <Redirect to={`/combat/${props.match.params.code}/player/${props.match.params.username}`} />
+  }
         return (<>
           <GameWebSocket
           cableApp={props.cableApp}
@@ -24,6 +27,7 @@ export default function PlayerLobby(props) {
           <p key={user.username}>{user.id} -=-=-=- {user.username} : {user.initiative}</p>
           )}
         </>)
+  
       }
 
 
