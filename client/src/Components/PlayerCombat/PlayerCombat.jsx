@@ -1,10 +1,10 @@
 import React from 'react'
 import GameWebSocket from '../GameWebSocket/GameWebSocket'
-import { takeTurn } from '../../services/games'
+// import { takeTurn } from '../../services/games'
 
 export default function playerCombat(props) {
   
-  console.log(props.code)
+  
   const { game } = props.gameData
   const userMap = game.users?.reduce((map, user) => {
     map[user.id] = user;
@@ -12,7 +12,7 @@ export default function playerCombat(props) {
   }, {});
 
 
-
+  console.log(game.combatants)
   return (<>
     <GameWebSocket
       cableApp={props.cableApp}

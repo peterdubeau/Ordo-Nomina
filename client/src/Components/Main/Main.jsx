@@ -72,18 +72,6 @@ class Main extends Component {
     return players
 }
 
-  
-//   takeTurn = (arr) => {
-//     arr.push(arr.shift())
-//     // console.log(arr)
-//   this.setState({
-//     currentGame: {
-//       combatants: arr,
-//       users: this.state.currentGame.users,
-//       game: this.state.currentGame.game
-//     }
-//   })
-// }
  
   updateAppStateGame = async (newGame) => {
     if (newGame.type === "new_user") {
@@ -122,16 +110,16 @@ class Main extends Component {
     
     } else if (newGame.type === "take_turn") {
 
+      console.log(newGame)
       this.setState({
         currentGame: {
           game: newGame,
-          users: newGame.users,
-          combatants: newGame.combatants
+          combatants: newGame.combatants,
+          users: newGame.users
         }
-      }) 
+      })
 
-      console.log(this.state.currentGame)
-
+      console.log(this.state.currentGame.game)
 
     } else if (newGame.type === 'game_start') {
       this.setState({
@@ -224,8 +212,6 @@ class Main extends Component {
           return this.state.currentGame ?
             (<PlayerCombat 
               {...props}
-              code={this.state.currentGame.game.code}
-              turn={this.takeTurn}
               cableApp={this.props.cableApp}
               updateApp={this.updateAppStateGame}
               getGameData={this.getGameData}

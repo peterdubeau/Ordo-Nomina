@@ -40,6 +40,7 @@ export const sendCombatants = async (code, combatants) => {
 }
 
 export const takeTurn = async (code, gameData) => {
-  const res = await api.patch(`/game/${code}/turn`, { code, gameData })
+  const res = await api.put(`/game/${code}/turn`, { code, combatants: gameData.combatants })
+  
   return res.data
 }
