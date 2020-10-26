@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 import { Route, Redirect, withRouter } from 'react-router-dom'
-import { updateGame } from '../../services/games'
-import PlayerView from '../PlayerView/PlayerView'
-import AdminView from '../AdminView/AdminView'
-
+import { sendCombatants } from '../../services/games'
+import PlayerLobby from '../PlayerLobby/PlayerLobby'
+import AdminLobby from '../AdminLobby/AdminLobby'
+import PlayerCombat from '../PlayerCombat/PlayerCombat'
+import AdminCombat from '../AdminCombat/AdminCombat'
 
 class Main extends Component {
   constructor(props) {
     super()
     this.state = {
-      currentUser: null,
+      inCombat: false,
       currentGame: {
         game: {},
-        users: []
-        
+        users: [],
+        combatants: ''
       }
     }
   }
@@ -23,17 +24,56 @@ class Main extends Component {
       .then(response => response.json())
       .then(results => {
         this.setState({
-          currentUser: true,
+          inCombat: false,
           currentGame: {
             game: results,
-            users: results.users
+            users: results.users,
+            combatants: results.combatants
           }
         })
       })
   }
 
+  handleUpClick = (index) => {
+    if (index !== 0) {
+      this.setState(prevState => {
+        let list = [...prevState.currentGame.users.filter(user => user.is_admin === false)]
+        let temp = list[index - 1];
+        list[index - 1] = list[index];
+        list[index] = temp;
+        this.setState({
+          currentGame: {
+            users: list
+          }
+        })
+      })
+    }
+  }
+  
+  handleSort = () => {
+    let list = this.state.currentGame.users.sort(function (a, b) {
+        return b.initiative - a.initiative
+    })
+    this.setState({
+      users: list
+    })
+  }
+
+
+  makeArray = (data) => {
+    let players = []
+    data.forEach(user => {
+      if (user.is_admin === false) {
+        players.push(user.id)
+      } else {
+        // console.log(`admin is ${user.username}`)
+      }
+    })
+    return players
+}
+
+ 
   updateAppStateGame = async (newGame) => {
-    // console.log(newGame)
     if (newGame.type === "new_user") {
       await newGame
       console.log("new_user")
@@ -43,6 +83,7 @@ class Main extends Component {
           users: [...this.state.currentGame.users, newGame.user]
         } 
       }) 
+      console.log(newGame)
     } else if (newGame.type === "update_user") {
       console.log("update_user")
       let user = this.state.currentGame.users.findIndex(user => user.id === newGame.user.id)
@@ -54,47 +95,66 @@ class Main extends Component {
     } else if (newGame.type === "delete_user") {
       console.log("delete_user")
       let user = this.state.currentGame.users.findIndex(user => user.id === newGame.user.id)
-      let userUpdate = [...this.state.currentGame.users]
-      console.log(user)
-      userUpdate.splice(userUpdate[user], 1)
+      console.log(newGame.user)
+      let users = [...this.state.currentGame.users]
+      users.splice(user, 1)
       this.setState({
-        currentGame: { users: userUpdate }
+        currentGame: {
+          users: users,
+          game: newGame.game
+        }
       })
-    // } else if (newGame.type === "sort_players") {
-    //   let playerList = [...this.state.currentGame.users]
-    //   let sortedList = playerList.sort((a, b) => (a.initiative - b.initiative)) 
-    //   console.log(sortedList)
-    //   // updateGame(this.state.currentGame.game.code, sortedList)
-    //   this.setState({
-    //     currentGame: { users: sortedList }
-    //   }) 
+      console.log(this.state.currentGame.users)
+    
+    
+    
+    } else if (newGame.type === "take_turn") {
 
+      console.log(newGame)
+      this.setState({
+        currentGame: {
+          game: newGame,
+          combatants: newGame.combatants,
+          users: newGame.users
+        }
+      })
+
+      console.log(this.state.currentGame.game)
+
+    } else if (newGame.type === 'game_start') {
+
+      this.setState({
+        inCombat: true,
+        currentGame: {
+          game: newGame,
+          users: newGame.users,
+          combatants: newGame.combatants
+        }
+      }) 
+
+    } else if (newGame.type === "list") {
+      console.log('list')
+      // let users = newGame.users
+      // let combatants = this.makeArray(users)
+      // // this.updateAppStateGame({ combatants , type: 'array'})
     } else {
+      console.log(newGame.type)
       console.log("woopsie")
     }
   }
 
-
-  generateCode = () => {
-    let code = ''
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-    const charLength = characters.length
-    for (let i = 0; i < charLength; i++) {
-      code += characters.charAt(Math.floor(Math.random() * charLength))
-    }
-    return code.slice(0, 5)
-  }
-
   render() {
-    
-    const roomCode = this.generateCode()
-
     return (
       <div className="App">
-        <Route exact path='/game/:code/user/:username' render={(props) => {
+
+
+        <Route exact path='/game/:code/DM/:username' render={(props) => {
           return this.state.currentGame ?
-            (<PlayerView
+            (<AdminLobby
               {...props}
+              userList={this.makeArray}
+              sort={this.handleSort}
+              arrange={this.handleUpClick}
               cableApp={this.props.cableApp}
               updateApp={this.updateAppStateGame}
               getGameData={this.getGameData}
@@ -107,14 +167,38 @@ class Main extends Component {
         }}>
         </Route>
         
-        <Route exact path='/game/:code/DM/:username' render={(props) => {
+
+        <Route exact path='/combat/:code/DM/:username' render={(props) => {
           return this.state.currentGame ?
-            (<AdminView
+            (<AdminCombat 
               {...props}
+              code={this.state.currentGame.game.code}
+              turn={this.takeTurn}
               cableApp={this.props.cableApp}
               updateApp={this.updateAppStateGame}
               getGameData={this.getGameData}
-              gameData={this.state.currentGame.users}
+              users={this.state.currentGame.users}
+              gameData={this.state.currentGame}
+            />
+              
+            ) : (
+              <Redirect to='/' />
+            )
+        }}>
+        </Route>
+
+
+
+
+        <Route exact path='/game/:code/user/:username' render={(props) => {
+          return this.state.currentGame ?
+            (<PlayerLobby
+              {...props}
+              startGame={this.state.inCombat}
+              cableApp={this.props.cableApp}
+              updateApp={this.updateAppStateGame}
+              getGameData={this.getGameData}
+              gameData={this.state.currentGame}
               currentUser={this.state.currentUser}
             />
             ) : (
@@ -122,10 +206,30 @@ class Main extends Component {
             )
         }}>
         </Route>
+        
+
+
+
+        <Route exact path='/combat/:code/player/:username' render={(props) => {
+          return this.state.currentGame ?
+            (<PlayerCombat 
+              {...props}
+              cableApp={this.props.cableApp}
+              updateApp={this.updateAppStateGame}
+              getGameData={this.getGameData}
+              gameData={this.state.currentGame}
+            />
+              
+            ) : (
+              <Redirect to='/' />
+            )
+        }}>
+        </Route>
+        
 
       </div>
     );
   }
 }
 
-export default withRouter(Main);
+export default Main;

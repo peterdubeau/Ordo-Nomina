@@ -29,3 +29,19 @@ export const postUser = async (userData) => {
   const res = await api.post('/users/', {user: userData})
   return res.data
 }
+
+export const deleteUser = async (id) => {
+  const res = await api.delete(`/users/${id}`)
+}
+
+export const sendCombatants = async (code, combatants) => {
+  const res = await api.put(`/game/${code}/start`, { code, combatants })
+  return res.data 
+}
+
+export const takeTurn = async (code, gameData) => {
+  console.log(code)
+  const res = await api.put(`/game/${code}/turn`, { code, combatants: gameData.combatants })
+  
+  return res.data
+}
