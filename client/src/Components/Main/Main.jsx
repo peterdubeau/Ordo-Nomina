@@ -72,17 +72,6 @@ class Main extends Component {
     return players
 }
 
-  
-  takeTurn = (arr) => {
-    arr.pop()
-  this.setState({
-    currentGame: {
-      combatants: arr,
-      users: this.state.currentGame.users,
-      game: this.state.currentGame.game
-    }
-  })
-}
  
   updateAppStateGame = async (newGame) => {
     if (newGame.type === "new_user") {
@@ -116,24 +105,23 @@ class Main extends Component {
         }
       })
       console.log(this.state.currentGame.users)
-      // } else if (newGame.type === "sort_players") {
-      //   let playerList = [...this.state.currentGame.users]
-      //   let sortedList = playerList.sort((a, b) => (a.initiative - b.initiative)) 
-      //   console.log(sortedList)
-      //   // updateGame(this.state.currentGame.game.code, sortedList)
-      //   this.setState({
-      //     currentGame: { users: sortedList }
-      //   }) 
+    
+    
+    
+    } else if (newGame.type === "take_turn") {
+
+      console.log(newGame)
+      this.setState({
+        currentGame: {
+          game: newGame,
+          combatants: newGame.combatants,
+          users: newGame.users
+        }
+      })
+
+      console.log(this.state.currentGame.game)
+
     } else if (newGame.type === 'game_start') {
-      console.log(newGame.type)
-      // let combatants = this.makeArray(newGame.users)
-      // console.log(newGame.combatants)
-      // let users = this.state.currentGame.users
-      // let playerList = [...this.state.currentGame.users]
-      // sendCombatants(
-      //   newGame.code,
-      //   combatants
-      //   )
       this.setState({
         currentGame: {
           game: newGame,
@@ -141,6 +129,7 @@ class Main extends Component {
           combatants: newGame.combatants
         }
       }) 
+
     } else if (newGame.type === "list") {
       console.log('list')
       // let users = newGame.users
@@ -153,7 +142,7 @@ class Main extends Component {
   }
 
   render() {
-    console.log(this.state)
+    // console.log(this.state.currentGame.game.code)
     return (
       <div className="App">
 
@@ -178,17 +167,16 @@ class Main extends Component {
         </Route>
         
 
-
-
-
         <Route exact path='/combat/:code/DM/:username' render={(props) => {
           return this.state.currentGame ?
             (<AdminCombat 
               {...props}
+              code={this.state.currentGame.game.code}
               turn={this.takeTurn}
               cableApp={this.props.cableApp}
               updateApp={this.updateAppStateGame}
               getGameData={this.getGameData}
+              users={this.state.currentGame.users}
               gameData={this.state.currentGame}
             />
               

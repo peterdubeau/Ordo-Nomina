@@ -1,20 +1,21 @@
 import React from 'react'
 import GameWebSocket from '../GameWebSocket/GameWebSocket'
+import { takeTurn } from '../../services/games'
 
 export default function AdminCombat(props) {
-  
-  
+
+  function handleTakeTurn(arr) {
+    arr.combatants.push(arr.combatants.shift())
+    takeTurn(props.code, arr)
+    }
   const { game } = props.gameData
   const userMap = game.users?.reduce((map, user) => {
     map[user.id] = user;
     return map;
   }, {});
-
-  // [1, 4, 200].reduce((accumulator, number) => accumulator + number, 0)
   
-  let orderedUsers = game.combatants?.map(id => userMap[id].username);
+  // const orderedList = game.combatants?.map(id => userMap[id].username)
 
-  
   return (<>
     <GameWebSocket
       cableApp={props.cableApp}
@@ -23,8 +24,10 @@ export default function AdminCombat(props) {
       code={props.match.params.code}
     />
     <div>
-      {orderedUsers}
-      <button onClick={() => props.turn(orderedUsers)}> TOP DUDE OFF</button>
+      {/* {orderedList} */}
+      {game.combatants?.map(id => <p key={userMap[id].id}>{userMap[id].username} : {userMap[id].initiative} </p>)}
+      <button onClick={() => takeTurn(props.code, game)}> TOP DUDE OFF</button>
+      <button onClick={() => handleTakeTurn(game)}>Order First</button>
     </div>
   </>)
 }
