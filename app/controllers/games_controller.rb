@@ -70,7 +70,7 @@ class GamesController < ApplicationController
         hash[user.id] = user.username
       end
 
-      GamesChannel.broadcast_to(@game, { game: @game.code, users: users, combatants: combatants, type: "game_start" })
+      GamesChannel.broadcast_to(@game, { code: @game.code, users: users, combatants: combatants, type: "game_start" })
       render json: names
     else
       render json: @game.errors, status: :unprocessable_entity
