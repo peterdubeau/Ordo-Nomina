@@ -37,7 +37,7 @@ Rails.application.configure do
   # config.action_cable.allowed_request_origins = [ 'http://example.com', /http:\/\/example.*/ ]
   config.web_socket_server_url = 'wss://live-initiative-tracker.herokuapp.com/cable'
 
-  config.action_cable.allowed_request_origins = [ 'https://yielding-punishment.surge.sh', 'http://yielding-punishment.surge.sh']
+  config.action_cable.allowed_request_origins = [ 'http://yielding-punishment.surge.sh']
   config.action_cable.allowed_request_origins = [ 'https://live-initiative-tracker.herokuapp.com', 'http://live-initiative-tracker.herokuapp.com']
   
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
