@@ -1,0 +1,12 @@
+label{
+  display: flex;
+  flex-direction: column;
+}
+input {
+  padding: 10px;
+}
+
+.user-options{
+  font-size: 20px;
+  margin: 10px;
+}

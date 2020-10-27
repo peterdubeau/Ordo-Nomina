@@ -1,6 +1,7 @@
 import React from 'react'
 import GameWebSocket from '../GameWebSocket/GameWebSocket'
 import { takeTurn } from '../../services/games'
+import '../PlayerCombat/PlayerCombat.css'
 
 export default function AdminCombat(props) {
 
@@ -25,7 +26,7 @@ export default function AdminCombat(props) {
     />
     <div>
       {/* {orderedList} */}
-      {game.combatants?.map(id => <p key={userMap[id].id}>{userMap[id].username} : {userMap[id].initiative} </p>)}
+      {game.combatants?.map(id => <p className="user-details" key={userMap[id].id}>{userMap[id].username} : {userMap[id].initiative} </p>)}
       <button onClick={() => handleTakeTurn(game)}>Next Turn</button>
     </div>
   </>)
