@@ -1,6 +1,6 @@
 import React from 'react'
 import GameWebSocket from '../GameWebSocket/GameWebSocket'
-// import { takeTurn } from '../../services/games'
+import './PlayerCombat.css' 
 
 export default function playerCombat(props) {
   
@@ -21,7 +21,7 @@ export default function playerCombat(props) {
       code={props.match.params.code}
     />
     <div>
-      {game.combatants?.map(id => <p key={userMap[id].id}>{userMap[id].username}: {userMap[id].initiative}</p>)}
+      {game.combatants?.map(id => <p className="user-details"key={userMap[id].id}>{userMap[id].username}: {userMap[id].initiative}</p>)}
     </div>
   </>)
 }

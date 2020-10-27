@@ -33,19 +33,19 @@ export default function JoinRoom() {
       <div>
         <form>
         <label >
+          <input 
+              name="code"
+              type="text"
+              value={formData.code}
+              onChange={handleChange}
+              placeholder = "Game Code"
+          />
             <input 
                 name="username"
                 type="text"
                 value={formData.username}
                 onChange={handleChange}
-                placeholder = "Username"
-            />
-            <input 
-                name="code"
-                type="text"
-                value={formData.code}
-                onChange={handleChange}
-                placeholder = "Game Code"
+                placeholder = "Character Name"
             />
             <input 
                 name="initiative"

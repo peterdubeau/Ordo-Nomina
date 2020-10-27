@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { getGames, postUser, deleteUser, sendCombatants } from '../../services/games'
 import GameWebSocket from '../GameWebSocket/GameWebSocket'
+import './AdminLobby.css'
 
 export default function AdminLobby(props) {
   const [formData, setFormData] = useState({
@@ -63,22 +64,18 @@ export default function AdminLobby(props) {
         <h2>{props.match.params.username}'s game!</h2>
         {props.gameData.filter(status => status.is_admin === false).map((user, i) =>
           <p key={user.id}>
-              {user.id} -=-=-=- {user.username} : {user.initiative} 
-              <button onClick={() => props.arrange(i)}> move up </button> 
-              <button onClick={() => deleteUser(user.id)}>Remove user</button>
-              {user.game_id}
+              {user.username} : {user.initiative} 
+              <button className ="user-options" id="move-up"onClick={() => props.arrange(i)}>Move Up</button> 
+              <button className ="user-options" id="delete"onClick={() => deleteUser(user.id)}>Remove user</button>
             </p>
         )}
-        <Link to={`/combat/${code}/DM/${props.match.params.username}`}>
-          <button onClick={() => sendCombatants(code, combatants)}>Start Combat</button>
-        </Link>  
         <label >
           <input
             name="username"
             type="text"
             value={formData.username}
             onChange={handleChange}
-            placeholder="Username"
+            placeholder="Enemy Name"
           />
           <input
             name="initiative"
@@ -88,8 +85,12 @@ export default function AdminLobby(props) {
             placeholder="initiative"
           />
         </label>
-        <button onClick={handleSubmit}>Add Enemy</button>
-        <button onClick={() => props.sort()}>Quick sort descending</button>
+        <button className = "user-options" onClick={handleSubmit}>Add Enemy</button>
+        <button className = "user-options" onClick={() => props.sort()}>Quick sort descending</button>
+
+        <Link to={`/combat/${code}/DM/${props.match.params.username}`}>
+          <button onClick={() => sendCombatants(code, combatants)}>Start Combat</button>
+        </Link>  
       </>)
     }
 

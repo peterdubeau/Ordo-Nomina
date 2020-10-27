@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { postGame, getGames, postUser} from '../../services/games'
+import { postGame, getGames, postUser } from '../../services/games'
+import './CreateRoom.css'
 
 
 function CreateRoom(props) {
