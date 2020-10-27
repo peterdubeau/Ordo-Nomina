@@ -9,7 +9,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 let CableApp = {}
 
 // CableApp.cable = actionCable.createConsumer('ws://localhost:3000/cable')
-CableApp.cable = actionCable.createConsumer('ws://live-initiative-tracker.herokuapp.com/cable')
+CableApp.cable = actionCable.createConsumer('wss://live-initiative-tracker.herokuapp.com/cable')
 
 
 
