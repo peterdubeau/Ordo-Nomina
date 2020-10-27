@@ -1,10 +1,12 @@
-form {
-  margin:15px;
+label{
   display: flex;
   flex-direction: column;
 }
+input {
+  padding: 10px;
+}
 
-input{
+.user-options{
   font-size: 20px;
-  padding: 20px
+  margin: 10px;
 }
