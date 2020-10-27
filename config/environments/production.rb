@@ -84,7 +84,7 @@ Rails.application.configure do
 
   config.web_socket_server_url = "wss://live-initiative-tracker.herokuapp.com/cable"
 
-  config.action_cable.allowed_request_origins = ['https://live-initiative-tracker.herokuapp.com', 'http://live-initiative-tracker.herokuapp.com']
+  config.action_cable.allowed_request_origins = ['https://http://yielding-punishment.surge.sh/', 'http://yielding-punishment.surge.sh/']
 
   # Inserts middleware to perform automatic connection switching.
   # The `database_selector` hash is used to pass options to the DatabaseSelector
