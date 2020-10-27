@@ -60,8 +60,8 @@ export default function AdminLobby(props) {
           getGameData={props.getGameData}
           code={props.match.params.code}
         />
-          admin view
         <h2>{props.match.params.username}'s game!</h2>
+        <h3>Room Code: {code}</h3>
         {props.gameData.filter(status => status.is_admin === false).map((user, i) =>
           <p key={user.id}>
               {user.username} : {user.initiative} 

@@ -25,7 +25,7 @@ export default function AdminCombat(props) {
       code={props.match.params.code}
     />
     <div>
-      {/* {orderedList} */}
+      Room Code: {game.code}
       {game.combatants?.map(id => <p className="user-details" key={userMap[id].id}>{userMap[id].username} : {userMap[id].initiative} </p>)}
       <button onClick={() => handleTakeTurn(game)}>Next Turn</button>
     </div>
