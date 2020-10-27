@@ -20,7 +20,7 @@ class Main extends Component {
   }
 
   getGameData = (id) => {
-    fetch(`http://localhost:3000/game/${id}/users`)
+    fetch(`https://live-initiative-tracker.herokuapp.com/game/${id}/users`)
       .then(response => response.json())
       .then(results => {
         this.setState({
