@@ -5,11 +5,14 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import actionCable from 'actioncable'
 import { BrowserRouter as Router } from 'react-router-dom'
+import api from './services/api-helper'
 
 let CableApp = {}
 
-CableApp.cable = actionCable.createConsumer('ws://localhost:3000/cable')
+const baseUrl = process.env.NODE_ENV === 'production' ? 'https://live-initiative-tracker.herokuapp.com/' : 'localhost:3000' 
 
+CableApp.cable = actionCable.createConsumer(`ws:${baseUrl}/cable`)
+console.log(baseUrl)
 ReactDOM.render(
   <Router>
     <App cableApp={CableApp}/>
