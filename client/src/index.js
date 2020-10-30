@@ -8,8 +8,9 @@ import { BrowserRouter as Router } from 'react-router-dom'
 
 let CableApp = {}
 
-// CableApp.cable = actionCable.createConsumer('ws://localhost:3000/cable')
-CableApp.cable = actionCable.createConsumer('wss://live-initiative-tracker.herokuapp.com/cable')
+const baseUrl = process.env.NODE_ENV === 'production' ? 'live-initiative-tracker.herokuapp.com' : 'localhost:3000' 
+
+CableApp.cable = actionCable.createConsumer(`ws://${baseUrl}/cable`)
 
 
 
@@ -20,7 +21,6 @@ ReactDOM.render(
 
   document.getElementById('root')
 );
-
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
