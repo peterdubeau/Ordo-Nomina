@@ -9,9 +9,16 @@ import { BrowserRouter as Router } from 'react-router-dom'
 
 let CableApp = {}
 
-const baseUrl = process.env.NODE_ENV === 'production' ? 'live-initiative-tracker.herokuapp.com/' : 'localhost:3000' 
+const protocol = process.env.NODE_ENV === 'production' ? "wss:" : "ws:";
+const host = window.location.host;
+const port = window.location.port;
+window.location.host
 
-CableApp.cable = actionCable.createConsumer(`ws:${baseUrl}/cable`)
+const baseUrl = process.env.NODE_ENV === 'production'
+  ? "wss://live-initiative-tracker.herokuapp.com"
+  : "ws://localhost:3000";
+
+CableApp.cable = actionCable.createConsumer(`${baseUrl}/cable`)
 console.log(baseUrl)
 ReactDOM.render(
   <Router>
