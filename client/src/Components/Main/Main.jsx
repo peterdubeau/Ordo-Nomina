@@ -25,7 +25,6 @@ class Main extends Component {
     const baseUrl = process.env.NODE_ENV === 'production'
       ? "https://live-initiative-tracker.herokuapp.com"
       : "http://localhost:3000";
-
     fetch(`${baseUrl}/game/${id}/users`)
       .then(response => response.json())
       .then(results => {
