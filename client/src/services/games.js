@@ -40,7 +40,6 @@ export const sendCombatants = async (code, combatants) => {
 }
 
 export const takeTurn = async (code, gameData) => {
-  console.log(code)
   const res = await api.put(`/game/${code}/turn`, { code, combatants: gameData.combatants })
   
   return res.data
