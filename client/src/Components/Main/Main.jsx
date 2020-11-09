@@ -23,8 +23,8 @@ class Main extends Component {
 
   getGameData = (id) => {
     const baseUrl = process.env.NODE_ENV === 'production'
-      ? `https://${process.env.REACT_APP_API_DEVELOPMENT}`
-      : `http://${process.env.REACT_APP_API_TEST}`;
+      ? `https://live-initiative-tracker.herokuapp.com/`
+      : `http://localhost:3000`;
     fetch(`${baseUrl}/game/${id}/users`)
       .then(response => response.json())
       .then(results => {
