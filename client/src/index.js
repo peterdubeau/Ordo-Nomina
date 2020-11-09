@@ -11,7 +11,7 @@ let CableApp = {}
 
 const baseUrl = process.env.NODE_ENV === 'production'
   ? `wss://${ process.env.REACT_APP_API_DEPLOYMENT }`
-  : `ws://${ process.env.REACT_APP_API_TEST }`;
+  : `ws://localhost:3000;`
 
 CableApp.cable = actionCable.createConsumer(`${baseUrl}/cable`)
 console.log(baseUrl)
