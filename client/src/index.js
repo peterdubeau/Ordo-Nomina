@@ -14,7 +14,7 @@ const baseUrl = process.env.NODE_ENV === 'production'
   : `ws://localhost:3000;`
 
 CableApp.cable = actionCable.createConsumer(`${baseUrl}/cable`)
-console.log(baseUrl)
+
 ReactDOM.render(
   <Router>
     <App cableApp={CableApp}/>
