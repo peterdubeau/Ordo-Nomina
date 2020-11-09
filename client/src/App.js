@@ -22,7 +22,6 @@ export default function App (props) {
   
 
   let roomCode = generateCode()
-  console.log(props.cableApp)
   
   return (
 

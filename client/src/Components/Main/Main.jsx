@@ -71,7 +71,6 @@ class Main extends Component {
       if (user.is_admin === false) {
         players.push(user.id)
       } else {
-        // console.log(`admin is ${user.username}`)
       }
     })
     return players
@@ -81,16 +80,13 @@ class Main extends Component {
   updateAppStateGame = async (newGame) => {
     if (newGame.type === "new_user") {
       await newGame
-      console.log("new_user")
       this.setState({
         currentGame: {
           game: newGame.game,
           users: [...this.state.currentGame.users, newGame.user]
         }
       })
-      console.log(newGame)
     } else if (newGame.type === "update_user") {
-      console.log("update_user")
       let user = this.state.currentGame.users.findIndex(user => user.id === newGame.user.id)
       let userUpdate = [...this.state.currentGame.users]
       userUpdate[user] = { ...userUpdate[user], initiative: newGame.user.initiative, username: newGame.user.username }
@@ -98,9 +94,9 @@ class Main extends Component {
         currentGame: { users: userUpdate }
       })
     } else if (newGame.type === "delete_user") {
-      console.log("delete_user")
+    
       let user = this.state.currentGame.users.findIndex(user => user.id === newGame.user.id)
-      console.log(newGame.user)
+     
       let users = [...this.state.currentGame.users]
       users.splice(user, 1)
       this.setState({
@@ -109,13 +105,8 @@ class Main extends Component {
           game: newGame.game
         }
       })
-      console.log(this.state.currentGame.users)
-
-
 
     } else if (newGame.type === "take_turn") {
-
-      console.log(newGame)
       this.setState({
         currentGame: {
           game: newGame,
@@ -123,8 +114,6 @@ class Main extends Component {
           users: newGame.users
         }
       })
-
-      console.log(this.state.currentGame.game)
 
     } else if (newGame.type === 'game_start') {
 
@@ -138,13 +127,9 @@ class Main extends Component {
       })
 
     } else if (newGame.type === "list") {
-      console.log('list')
-      // let users = newGame.users
-      // let combatants = this.makeArray(users)
-      // // this.updateAppStateGame({ combatants , type: 'array'})
+
     } else {
-      console.log(newGame.type)
-      console.log("woopsie")
+
     }
   }
 

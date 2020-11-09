@@ -14,7 +14,7 @@ const baseUrl = process.env.NODE_ENV === 'production'
   : `ws://${ process.env.REACT_APP_API_TEST }`;
 
 CableApp.cable = actionCable.createConsumer(`${baseUrl}/cable`)
-console.log(baseUrl)
+
 ReactDOM.render(
   <Router>
     <App cableApp={CableApp}/>
