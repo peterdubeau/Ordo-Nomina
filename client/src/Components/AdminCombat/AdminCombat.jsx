@@ -5,8 +5,6 @@ import '../PlayerCombat/PlayerCombat.css'
 
 export default function AdminCombat(props) {
 
-  console.log(props.gameData)
-
   function handleTakeTurn(arr) {
     arr.combatants.push(arr.combatants.shift())
     takeTurn(game.code, arr)

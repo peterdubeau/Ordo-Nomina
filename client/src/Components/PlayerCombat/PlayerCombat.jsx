@@ -12,7 +12,6 @@ export default function playerCombat(props) {
   }, {});
 
 
-  console.log(game.combatants)
   return (<>
     <GameWebSocket
       cableApp={props.cableApp}
