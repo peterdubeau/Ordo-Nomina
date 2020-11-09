@@ -10,7 +10,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 let CableApp = {}
 
 const baseUrl = process.env.NODE_ENV === 'production'
-  ? `wss://live-initiative-tracker.herokuapp.com`
+  ? `wss://${ process.env.REACT_APP_API_DEPLOYMENT }`
   : `ws://localhost:3000;`
 
 CableApp.cable = actionCable.createConsumer(`${baseUrl}/cable`)
