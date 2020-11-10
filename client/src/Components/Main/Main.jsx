@@ -28,7 +28,6 @@ class Main extends Component {
       .then(response => response.json())
       .then(results => {
         this.setState({
-          inCombat: false,
           currentGame: {
             game: results,
             users: results.users,
@@ -115,7 +114,6 @@ class Main extends Component {
       })
 
     } else if (newGame.type === 'game_start') {
-
       this.setState({
         inCombat: true,
         currentGame: {
@@ -125,8 +123,16 @@ class Main extends Component {
         }
       })
 
-    } else if (newGame.type === "list") {
-
+    } else if (newGame.type === "delete_game") {
+      console.log(newGame)
+      this.setState({
+        inCombat: false,
+        currentGame: {
+          game: newGame,
+          users: newGame.users,
+          combatants: newGame.combatants
+        }
+        })
     } else {
 
     }
@@ -185,12 +191,12 @@ class Main extends Component {
           return this.state.currentGame ?
             (<PlayerLobby
               {...props}
-              startGame={this.state.inCombat}
               cableApp={this.props.cableApp}
               updateApp={this.updateAppStateGame}
               getGameData={this.getGameData}
               gameData={this.state.currentGame}
               currentUser={this.state.currentUser}
+              startGame={this.state.inCombat}
             />
             ) : (
               <Redirect to='/' />
@@ -209,6 +215,7 @@ class Main extends Component {
               updateApp={this.updateAppStateGame}
               getGameData={this.getGameData}
               gameData={this.state.currentGame}
+              end={this.state.inCombat}
             />
 
             ) : (

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Redirect } from 'react-router-dom'
 import GameWebSocket from '../GameWebSocket/GameWebSocket'
 import './PlayerCombat.css' 
 
@@ -11,7 +12,9 @@ export default function playerCombat(props) {
     return map;
   }, {});
 
-
+  if (props.end === false) {
+    return <Redirect to={`/`} />
+  }
   return (<>
     <GameWebSocket
       cableApp={props.cableApp}

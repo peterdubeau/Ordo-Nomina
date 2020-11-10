@@ -9,8 +9,8 @@ export default function PlayerLobby(props) {
   
   let list = props.gameData.users.sort(function(a,b){
     return b.initiative - a.initiative
-    })
-    
+  })
+  
   if (props.startGame) {
     return <Redirect to={`/combat/${props.match.params.code}/player/${props.match.params.username}`} />
   }
