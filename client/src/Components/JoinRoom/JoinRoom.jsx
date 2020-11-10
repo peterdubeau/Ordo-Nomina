@@ -20,7 +20,7 @@ export default function JoinRoom() {
 
   const handleSubmit = async () => {
     const findId = await getGames()
-    let roomId = findId.filter(id => id.code === formData.code)[0].id
+    let roomId = findId.filter(id => id.code === formData.code.toUpperCase())[0].id
     await postUser({
       username: formData.username,
       game_id: roomId,
@@ -36,7 +36,7 @@ export default function JoinRoom() {
           <input 
               name="code"
               type="text"
-              value={formData.code}
+              value={formData.code.toUpperCase()}
               onChange={handleChange}
               placeholder = "Game Code"
           />
@@ -55,7 +55,7 @@ export default function JoinRoom() {
                 placeholder = "initiative"
             />
     </label>
-        <Link to={`/game/${formData.code}/user/${formData.username}`}>
+        <Link to={`/game/${formData.code.toUpperCase()}/user/${formData.username}`}>
           <button onClick={handleSubmit}>Enter Room</button>
         </Link>
         </form>
