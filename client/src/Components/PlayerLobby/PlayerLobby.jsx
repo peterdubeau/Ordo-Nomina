@@ -24,7 +24,7 @@ export default function PlayerLobby(props) {
           user view
         <h2>{hostDetails}'s game</h2>
         {list.filter(status => status.is_admin === false).map(user => 
-          <p key={user.username}>{user.id} -=-=-=- {user.username} : {user.initiative}</p>
+          <p key={user.username}>{user.username} : {user.initiative}</p>
           )}
         </>)
   

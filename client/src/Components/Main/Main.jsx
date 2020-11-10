@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Redirect, withRouter } from 'react-router-dom'
-import { sendCombatants } from '../../services/games'
+import { Route, Redirect } from 'react-router-dom'
 import PlayerLobby from '../PlayerLobby/PlayerLobby'
 import AdminLobby from '../AdminLobby/AdminLobby'
 import PlayerCombat from '../PlayerCombat/PlayerCombat'
@@ -23,8 +22,8 @@ class Main extends Component {
 
   getGameData = (id) => {
     const baseUrl = process.env.NODE_ENV === 'production'
-      ? `https://${process.env.REACT_APP_API_DEVELOPMENT}`
-      : `http://${process.env.REACT_APP_API_TEST}`;
+      ? `https://${ process.env.REACT_APP_API_DEPLOYMENT }`
+      : `http://localhost:3000`;
     fetch(`${baseUrl}/game/${id}/users`)
       .then(response => response.json())
       .then(results => {

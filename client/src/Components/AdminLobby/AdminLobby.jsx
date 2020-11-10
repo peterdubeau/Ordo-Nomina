@@ -50,8 +50,6 @@ export default function AdminLobby(props) {
       let code = props.match.params.code
       let list = props.gameData
       let combatants = props.userList(list)
-      let id = props.gameData.filter(status => status.is_admin === true).map(user => user.game_id)
-
 
       return (<>
         <GameWebSocket
