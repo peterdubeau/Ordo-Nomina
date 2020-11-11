@@ -124,7 +124,7 @@ class Main extends Component {
       })
 
     } else if (newGame.type === "delete_game") {
-      console.log(newGame)
+      
       this.setState({
         inCombat: false,
         currentGame: {
