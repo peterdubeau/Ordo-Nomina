@@ -1,6 +1,7 @@
 import React from 'react'
 import { Redirect } from 'react-router-dom'
 import GameWebSocket from '../GameWebSocket/GameWebSocket'
+import Ding from '../../sounds/Ding-sound-effect.mp3'
 import './PlayerCombat.css' 
 
 export default function playerCombat(props) {
@@ -14,10 +15,14 @@ export default function playerCombat(props) {
 
   let onDeck = props.gameData.users.filter(id => id.id === props.gameData.combatants[1])
   let onDeckName = onDeck[0]?.username
-  console.log(onDeckName === props.match.params.username)
- 
+
+  function onDeckAlert() {
+    const audio = new Audio(Ding)
+    audio.play()
+  }
+
   if (onDeckName === props.match.params.username) {
-    
+    onDeckAlert()
   }
 
   if (props.gameData.combatants === undefined) {
