@@ -12,7 +12,7 @@ export default function playerCombat(props) {
     return map;
   }, {});
 
-  if (props.end === false) {
+  if (props.gameData.combatants === undefined) {
     return <Redirect to={`/`} />
   }
   return (<>
