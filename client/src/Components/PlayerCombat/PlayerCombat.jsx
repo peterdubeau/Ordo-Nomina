@@ -12,6 +12,14 @@ export default function playerCombat(props) {
     return map;
   }, {});
 
+  let onDeck = props.gameData.users.filter(id => id.id === props.gameData.combatants[1])
+  let onDeckName = onDeck[0]?.username
+  console.log(onDeckName === props.match.params.username)
+ 
+  if (onDeckName === props.match.params.username) {
+    
+  }
+
   if (props.gameData.combatants === undefined) {
     return <Redirect to={`/`} />
   }
