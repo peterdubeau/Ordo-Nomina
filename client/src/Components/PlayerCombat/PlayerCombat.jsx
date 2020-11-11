@@ -28,6 +28,7 @@ export default function playerCombat(props) {
   if (props.gameData.combatants === undefined) {
     return <Redirect to={`/`} />
   }
+
   return (<>
     <GameWebSocket
       cableApp={props.cableApp}

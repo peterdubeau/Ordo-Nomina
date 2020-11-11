@@ -133,6 +133,7 @@ class Main extends Component {
           combatants: newGame.combatants
         }
         })
+
     } else {
 
     }
