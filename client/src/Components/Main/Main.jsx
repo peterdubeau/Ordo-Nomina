@@ -20,21 +20,21 @@ class Main extends Component {
 
 
 
-  getGameData = (id) => {
+  getGameData = async (id) => {
     const baseUrl = process.env.NODE_ENV === 'production'
-      ? `https://${ process.env.REACT_APP_API_DEPLOYMENT }`
+      ? `https://${process.env.REACT_APP_API_DEPLOYMENT}`
       : `http://localhost:3000`;
-    fetch(`${baseUrl}/game/${id}/users`)
-      .then(response => response.json())
-      .then(results => {
-        this.setState({
-          currentGame: {
-            game: results,
-            users: results.users,
-            combatants: results.combatants
-          }
+      fetch(`${baseUrl}/game/${id}/users`)
+        .then(response => response.json())
+        .then(results => {
+          this.setState({
+            currentGame: {
+              game: results,
+              users: results.users,
+              combatants: results.combatants
+            }
+          })
         })
-      })
   }
 
   handleUpClick = (index) => {
@@ -124,16 +124,7 @@ class Main extends Component {
       })
 
     } else if (newGame.type === "delete_game") {
-      
-      this.setState({
-        inCombat: false,
-        currentGame: {
-          game: newGame,
-          users: newGame.users,
-          combatants: newGame.combatants
-        }
-        })
-
+        this.setState({ inCombat: false })
     } else {
 
     }

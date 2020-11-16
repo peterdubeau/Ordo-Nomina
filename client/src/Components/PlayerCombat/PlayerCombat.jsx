@@ -6,7 +6,6 @@ import './PlayerCombat.css'
 
 export default function playerCombat(props) {
   
-  
   const { game } = props.gameData
   const userMap = game.users?.reduce((map, user) => {
     map[user.id] = user;
@@ -23,6 +22,11 @@ export default function playerCombat(props) {
 
   if (onDeckName === props.match.params.username) {
     onDeckAlert()
+  }
+
+  if (props.end === false) {
+    alert("The DM has ended combat")
+    return <Redirect to='/' />
   }
 
   if (props.gameData.combatants === undefined) {
