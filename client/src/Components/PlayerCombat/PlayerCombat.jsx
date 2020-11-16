@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom'
 import GameWebSocket from '../GameWebSocket/GameWebSocket'
 import Ding from '../../sounds/Ding-sound-effect.mp3'
 import { removeCombatants } from '../../services/games'
+import { Flipped, Flipper } from 'react-flip-toolkit'
 import './PlayerCombat.css' 
 
 export default function playerCombat(props) {
@@ -46,15 +47,19 @@ export default function playerCombat(props) {
       getGameData={props.getGameData}
       code={props.match.params.code}
     />
-    <div>
-      {game.combatants?.map(id => <p className="user-details" key={userMap[id].id}>
+    <Flipper flipKey={props.gameData} spring={'wobble'}>
+        {game.combatants?.map(id =>
+            <Flipped key={userMap[id].id + `flipped guy`} flipId={userMap[id].id}>
+          <p className="user-details" key={userMap[id].id}>
         
-        {userMap[id].username}: {userMap[id].initiative} {(userMap[id].username === props.match.params.username ? 
-        
-        <button onClick={() => removeCombatant(userMap[id].id)}>Leave Game</button>
-        :
-        '')}
-      </p>)}
-    </div>
+          {userMap[id].username}: {userMap[id].initiative} {(userMap[id].username === props.match.params.username ? 
+                <button onClick={() => removeCombatant(userMap[id].id)}>Leave Game</button>
+                :
+                '')}
+      
+            </p>
+          </Flipped >
+        )}
+    </Flipper>
   </>)
 }
