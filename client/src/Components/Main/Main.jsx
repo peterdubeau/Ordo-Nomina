@@ -108,6 +108,7 @@ class Main extends Component {
       this.setState({
         currentGame: {
           game: newGame,
+          code: newGame.code,
           combatants: newGame.combatants,
           users: newGame.users
         }

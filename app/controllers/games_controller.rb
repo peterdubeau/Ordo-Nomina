@@ -107,7 +107,7 @@ class GamesController < ApplicationController
     @game = Game.find_by code: (params[:code])
     if @game.update(game_params)
       render json: @fighters
-      GamesChannel.broadcast_to(@game, {game: @game.code, users: @game.users, combatants: @game.combatants, type: "remove_guy" })
+      GamesChannel.broadcast_to(@game, {code: @game.code, users: @game.users, combatants: @game.combatants, type: "remove_guy" })
     end
   end
 
