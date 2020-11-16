@@ -9,7 +9,7 @@ class Main extends Component {
   constructor(props) {
     super()
     this.state = {
-      inCombat: false,
+      inCombat: '',
       currentGame: {
         game: {},
         users: [],
@@ -125,8 +125,15 @@ class Main extends Component {
 
     } else if (newGame.type === "delete_game") {
         this.setState({ inCombat: false })
-    } else {
-
+    } else if (newGame.type === "remove_guy"){
+      this.setState({
+        inCombat: true,
+        currentGame: {
+          game: newGame,
+          users: newGame.users,
+          combatants: newGame.combatants
+        }
+      })
     }
   }
 
