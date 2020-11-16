@@ -6,8 +6,6 @@ import '../PlayerCombat/PlayerCombat.css'
 
 export default function AdminCombat(props) {
 
-console.log(props.match.params.code)
-
   function handleTakeTurn(arr) {
     arr.combatants.push(arr.combatants.shift())
     takeTurn(game.code, arr)
@@ -22,7 +20,7 @@ console.log(props.match.params.code)
     game.combatants.splice(game.combatants?.indexOf(id), 1)
     removeCombatants(props.match.params.code, game.combatants)
   }
-
+console.log(game)
   return (<>
     <GameWebSocket
       cableApp={props.cableApp}
@@ -35,7 +33,7 @@ console.log(props.match.params.code)
       {game.combatants?.map(id => <p className="user-details" key={userMap[id].id}>
 
         {userMap[id].username} : {userMap[id].initiative}
-        <button onClick={() => removeCombatant(userMap[id].id)}>ded</button>
+        <button onClick={() => removeCombatant(userMap[id].id)}>Remove</button>
       
       </p>)}
       <button onClick={() => handleTakeTurn(game)}>Next Turn</button>
