@@ -103,6 +103,15 @@ class GamesController < ApplicationController
     GamesChannel.broadcast_to(@game, { game: @game.code, users: @users, type: "sort_players" })
   end
 
+  def remove_character
+    @game = Game.find_by code: (params[:code])
+    if @game.update(game_params)
+      render json: @fighters
+      GamesChannel.broadcast_to(@game, {game: @game.code, users: @game.users, combatants: @game.combatants, type: "remove_guy" })
+    end
+  end
+
+
   def take_turn
     
     if @game.update(game_params)
