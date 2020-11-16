@@ -13,7 +13,6 @@ export default function playerCombat(props) {
     return map;
   }, {});
 
-  console.log(props.match.params.username)
   let onDeck = props.gameData.users.filter(id => id.id === props.gameData.combatants[1])
   let onDeckName = onDeck[0]?.username
 
