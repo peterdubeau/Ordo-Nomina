@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { Flipped, Flipper } from 'react-flip-toolkit'
 import { getGames, postUser, deleteUser, sendCombatants } from '../../services/games'
 import GameWebSocket from '../GameWebSocket/GameWebSocket'
 import './AdminLobby.css'
@@ -60,13 +61,17 @@ export default function AdminLobby(props) {
         />
         <h2>{props.match.params.username}'s game!</h2>
         <h3>Room Code: {code}</h3>
-        {props.gameData.filter(status => status.is_admin === false).map((user, i) =>
-          <p key={user.id}>
-              {user.username} : {user.initiative} 
-              <button className ="user-options" id="move-up"onClick={() => props.arrange(i)}>Move Up</button> 
-              <button className ="user-options" id="delete"onClick={() => deleteUser(user.id)}>Remove user</button>
-            </p>
+        <Flipper key={"flipper-thing"} flipKey={props.gameData} spring={'wobble'}>
+          {props.gameData.filter(status => status.is_admin === false).map((user, i) =>
+            <Flipped key={user.id + " flip key"} flipId={user.id}>
+              <p key={user.id}>
+                {user.username} : {user.initiative} 
+                <button className ="user-options" id="move-up"onClick={() => props.arrange(i)}>Move Up</button> 
+                <button className ="user-options" id="delete"onClick={() => deleteUser(user.id)}>Remove user</button>
+              </p>
+           </Flipped>
         )}
+        </Flipper>
         <label >
           <input
             name="username"

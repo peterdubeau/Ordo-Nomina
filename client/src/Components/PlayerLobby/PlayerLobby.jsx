@@ -33,7 +33,7 @@ export default function PlayerLobby(props) {
 
             {user.username} : {user.initiative} {(user.username === props.match.params.username ?
               <Link to={'/join-room'}>
-                <button onClick={() => deleteUser(userId)}>GO</button>
+                <button onClick={() => deleteUser(userId)}>Leave Combat</button>
               </Link>
               :
               "" )}

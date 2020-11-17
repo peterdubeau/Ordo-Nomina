@@ -39,6 +39,11 @@ export const sendCombatants = async (code, combatants) => {
   return res.data 
 }
 
+export const removeCombatants = async (code, combatants) =>{
+  const res = await api.put(`/game/${code}/kill`, {code, combatants})
+  return res.data 
+}
+
 export const takeTurn = async (code, gameData) => {
   const res = await api.put(`/game/${code}/turn`, { code, combatants: gameData.combatants })
   return res.data
