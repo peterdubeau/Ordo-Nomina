@@ -25,8 +25,6 @@ export default function AdminLobby(props) {
     })
   }
 
-  console.log(props.gameData)
-
     const handleChange = (e) => {
       e.persist()
       setFormData(formData => ({ ...formData, [e.target.name]: e.target.value }))

@@ -19,7 +19,6 @@ class Main extends Component {
   }
 
 
-
   getGameData = async (id) => {
     const baseUrl = process.env.NODE_ENV === 'production'
       ? `https://${process.env.REACT_APP_API_DEPLOYMENT}`
@@ -100,6 +99,7 @@ class Main extends Component {
       this.setState({
         currentGame: {
           users: users,
+          code: newGame.code,
           game: newGame.game
         }
       })
@@ -119,6 +119,7 @@ class Main extends Component {
         inCombat: true,
         currentGame: {
           game: newGame,
+          code: newGame.code,
           users: newGame.users,
           combatants: newGame.combatants
         }
@@ -131,6 +132,7 @@ class Main extends Component {
         inCombat: true,
         currentGame: {
           game: newGame,
+          code: newGame.code,
           users: newGame.users,
           combatants: newGame.combatants
         }
@@ -139,7 +141,6 @@ class Main extends Component {
   }
 
   render() {
-
 
     return (
       <div className="App">
@@ -169,7 +170,7 @@ class Main extends Component {
           return this.state.currentGame ?
             (<AdminCombat
               {...props}
-              code={this.state.currentGame.game.code}
+              code={this.state.currentGame.code}
               turn={this.takeTurn}
               cableApp={this.props.cableApp}
               updateApp={this.updateAppStateGame}
