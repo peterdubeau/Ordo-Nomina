@@ -17,15 +17,16 @@ input {
   flex-direction: column;
 }
 
-.user-details-lobby{
+.user-details{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
 }
 
 .user-list{
   display: flex;
+  flex-direction: column;
 }
 
 .user-options{
