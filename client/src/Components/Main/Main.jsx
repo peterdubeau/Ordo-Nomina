@@ -126,7 +126,14 @@ class Main extends Component {
       })
 
     } else if (newGame.type === "delete_game") {
-        this.setState({ inCombat: false })
+      this.setState({
+        inCombat: false,
+        currentGame: {
+          game: {},
+          users: [],
+          combatants: ''
+        }
+      })
     } else if (newGame.type === "remove_guy"){
       this.setState({
         inCombat: true,
