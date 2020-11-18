@@ -68,7 +68,8 @@ export default function AdminLobby(props) {
               <p key={user.id}>
                 <button className ="user-options" id="delete" onClick={() => deleteUser(user.id)}>X</button>
                 {user.username} : {user.initiative} 
-                <button className ="user-options" id="move-up" onClick={() => props.arrange(i)}>↑</button> 
+                <button className="user-options" id="move-up" onClick={() => props.arrange(i)}>↑</button> 
+                <button className="user-options" id="move-down" onClick={() => props.arrangeDown(i)}>↓</button>
               </p>
            </Flipped>
             )}

@@ -52,6 +52,23 @@ class Main extends Component {
     }
   }
 
+  handleDownClick = (index) => {
+    if (index !== this.state.currentGame.users.length - 1) {
+      this.setState(prevState => {
+        let list = [...prevState.currentGame.users.filter(user => user.is_admin === false)]
+        let temp = list[index + 1];
+        list[index + 1] = list[index];
+        list[index] = temp;
+        this.setState({
+          currentGame: {
+            users: list
+          }
+        })
+      })
+    }
+  }
+  
+        
   handleSort = () => {
     let list = this.state.currentGame.users.sort(function (a, b) {
       return b.initiative - a.initiative
@@ -160,6 +177,7 @@ class Main extends Component {
               userList={this.makeArray}
               sort={this.handleSort}
               arrange={this.handleUpClick}
+              arrangeDown={this.handleDownClick}
               cableApp={this.props.cableApp}
               updateApp={this.updateAppStateGame}
               getGameData={this.getGameData}
