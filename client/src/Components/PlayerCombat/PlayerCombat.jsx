@@ -53,10 +53,10 @@ export default function playerCombat(props) {
             <Flipped key={userMap[id].id + `flipped guy`} flipId={userMap[id].id}>
           <p className="user-details" key={userMap[id].id}>
         
-          {userMap[id].username}: {userMap[id].initiative} {(userMap[id].username === props.match.params.username ? 
-                <button onClick={() => removeCombatant(userMap[id].id)}>Leave Game</button>
+          {(userMap[id].username === props.match.params.username ? 
+                <button id='delete' onClick={() => removeCombatant(userMap[id].id)}>X</button>
                 :
-                '')}
+                '')} {userMap[id].username}: {userMap[id].initiative} 
       
             </p>
           </Flipped >

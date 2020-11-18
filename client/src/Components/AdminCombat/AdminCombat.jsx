@@ -3,14 +3,15 @@ import { Link } from 'react-router-dom'
 import GameWebSocket from '../GameWebSocket/GameWebSocket'
 import { Flipped, Flipper } from 'react-flip-toolkit'
 import { takeTurn, destroyGame, removeCombatants } from '../../services/games'
-import '../PlayerCombat/PlayerCombat.css'
+import '../AdminCombat/AdminCombat.css'
 
 export default function AdminCombat(props) {
 
   function handleTakeTurn(arr) {
     arr.combatants.push(arr.combatants.shift())
     takeTurn(game.code, arr)
-    }
+  }
+  
   const { game } = props.gameData
   const userMap = game.users?.reduce((map, user) => {
     map[user.id] = user;
@@ -29,17 +30,20 @@ export default function AdminCombat(props) {
       code={props.match.params.code}
     />
     <Flipper key={"flipper-thing"} flipKey={props.gameData} spring={'wobble'}>
-      Room Code: {game.code}
-      
+      <div className='room-header'>
+        Room Code: {game.code}
+        <button onClick={() => handleTakeTurn(game)}>Next Turn</button>
+      </div>
+      <div className='user-list'>
       {game.combatants?.map(id =>
         <Flipped key={userMap[id].id + `flipped guy`} flipId={userMap[id].id}>
           <p className="user-details" key={userMap[id].id}>
-            {userMap[id].username} : {userMap[id].initiative}
-            <button onClick={() => removeCombatant(userMap[id].id)}>Remove</button>
+            <button id='delete' onClick={() => removeCombatant(userMap[id].id)}>X</button>
+            <span>{userMap[id].username}</span> : <span>{userMap[id].initiative}</span>
           
           </p>
         </Flipped>)}
-        <button onClick={() => handleTakeTurn(game)}>Next Turn</button>
+      </div>
       <Link to={'/'}>
           <button onClick={() => destroyGame(game.code)}>End Combat</button>
       </Link>  

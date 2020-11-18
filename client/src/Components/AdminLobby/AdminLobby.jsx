@@ -62,15 +62,18 @@ export default function AdminLobby(props) {
         <h2>{props.match.params.username}'s game!</h2>
         <h3>Room Code: {code}</h3>
         <Flipper key={"flipper-thing"} flipKey={props.gameData} spring={'wobble'}>
+          <div className='user-details-lobby'>
           {props.gameData.filter(status => status.is_admin === false).map((user, i) =>
             <Flipped key={user.id + " flip key"} flipId={user.id}>
               <p key={user.id}>
+                <button className ="user-options" id="delete" onClick={() => deleteUser(user.id)}>X</button>
                 {user.username} : {user.initiative} 
-                <button className ="user-options" id="move-up"onClick={() => props.arrange(i)}>Move Up</button> 
-                <button className ="user-options" id="delete"onClick={() => deleteUser(user.id)}>Remove user</button>
+                <button className="user-options" id="move-up" onClick={() => props.arrange(i)}>↑</button> 
+                <button className="user-options" id="move-down" onClick={() => props.arrangeDown(i)}>↓</button>
               </p>
            </Flipped>
-        )}
+            )}
+          </div>
         </Flipper>
         <label >
           <input

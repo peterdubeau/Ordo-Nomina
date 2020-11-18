@@ -23,7 +23,7 @@ class Main extends Component {
     const baseUrl = process.env.NODE_ENV === 'production'
       ? `https://${process.env.REACT_APP_API_DEPLOYMENT}`
       : `http://localhost:3000`;
-      fetch(`${baseUrl}/game/${id}/users`)
+      await fetch(`${baseUrl}/game/${id}/users`)
         .then(response => response.json())
         .then(results => {
           this.setState({
@@ -52,6 +52,23 @@ class Main extends Component {
     }
   }
 
+  handleDownClick = (index) => {
+    if (index !== this.state.currentGame.users.length - 1) {
+      this.setState(prevState => {
+        let list = [...prevState.currentGame.users.filter(user => user.is_admin === false)]
+        let temp = list[index + 1];
+        list[index + 1] = list[index];
+        list[index] = temp;
+        this.setState({
+          currentGame: {
+            users: list
+          }
+        })
+      })
+    }
+  }
+  
+        
   handleSort = () => {
     let list = this.state.currentGame.users.sort(function (a, b) {
       return b.initiative - a.initiative
@@ -126,7 +143,14 @@ class Main extends Component {
       })
 
     } else if (newGame.type === "delete_game") {
-        this.setState({ inCombat: false })
+      this.setState({
+        inCombat: false,
+        currentGame: {
+          game: {},
+          users: [],
+          combatants: ''
+        }
+      })
     } else if (newGame.type === "remove_guy"){
       this.setState({
         inCombat: true,
@@ -153,6 +177,7 @@ class Main extends Component {
               userList={this.makeArray}
               sort={this.handleSort}
               arrange={this.handleUpClick}
+              arrangeDown={this.handleDownClick}
               cableApp={this.props.cableApp}
               updateApp={this.updateAppStateGame}
               getGameData={this.getGameData}

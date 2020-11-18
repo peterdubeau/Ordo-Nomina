@@ -1,15 +1,4 @@
-.App {
-  text-align: center;
-}
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-span{
-  color: green
-}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
