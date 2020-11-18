@@ -55,9 +55,8 @@ class GamesController < ApplicationController
 
   # DELETE /games/1
   def destroy
-    @game.destroy
-
     GamesChannel.broadcast_to(@game, { type: "delete_game" } )
+    @game.destroy
   end
 
   # PUT /game/:code/start
