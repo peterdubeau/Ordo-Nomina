@@ -1,3 +1,9 @@
 .user-details{
   font-size: 30px;
 }
+
+#delete{
+  color: white;
+  background-color: red;
+  border-radius: 100%
+}

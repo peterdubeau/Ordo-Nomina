@@ -2,6 +2,7 @@ import React  from 'react'
 import GameWebSocket from '../GameWebSocket/GameWebSocket'
 import { deleteUser } from '../../services/games'
 import { Redirect, Link } from 'react-router-dom'
+import '../PlayerCombat/PlayerCombat.css'
 
 export default function PlayerLobby(props) {
 
@@ -36,12 +37,12 @@ export default function PlayerLobby(props) {
         {list.filter(status => status.is_admin === false).map(user => 
           <p key={user.username}>
 
-            {user.username} : {user.initiative} {(user.username === props.match.params.username ?
+            {(user.username === props.match.params.username ?
               <Link to={'/join-room'}>
-                <button onClick={() => deleteUser(userId)}>Leave Combat</button>
+                <button id='delete' onClick={() => deleteUser(userId)}>X</button>
               </Link>
               :
-              "" )}
+              "" )} {user.username} : {user.initiative} 
           
           </p>
           )}
