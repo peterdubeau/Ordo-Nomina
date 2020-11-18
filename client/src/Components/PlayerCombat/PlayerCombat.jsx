@@ -7,39 +7,40 @@ import { Flipped, Flipper } from 'react-flip-toolkit'
 import './PlayerCombat.css' 
 
 export default function playerCombat(props) {
-  
   const { game } = props.gameData
   const userMap = game.users?.reduce((map, user) => {
     map[user.id] = user;
     return map;
   }, {});
 
+  
   let onDeck = props.gameData.users.filter(id => id.id === props.gameData.combatants[1])
   let onDeckName = onDeck[0]?.username
-
+  
   function onDeckAlert() {
     const audio = new Audio(Ding)
     audio.play()
   }
-
+  
   if (onDeckName === props.match.params.username) {
     onDeckAlert()
   }
-
+  
   if (props.end === false) {
     alert("The DM has ended combat")
     return <Redirect to='/' />
   }
-
+  
   if (props.gameData?.combatants === undefined) {
-    return <Redirect to={`/`} />
+    return <Redirect to='/' />
   }
-
+  
   function removeCombatant(id) {
     game.combatants.splice(game.combatants?.indexOf(id), 1)
     removeCombatants(props.match.params.code, game.combatants)
   }
-
+  
+  
   return (<>
     <GameWebSocket
       cableApp={props.cableApp}

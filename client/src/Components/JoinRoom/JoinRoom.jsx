@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { getGames, postUser } from '../../services/games'
+import { getGames, postUser, readGame } from '../../services/games'
 
 export default function JoinRoom() {
   
@@ -20,10 +20,11 @@ export default function JoinRoom() {
 
   const handleSubmit = async () => {
     const findId = await getGames()
-    let roomId = findId.filter(id => id.code === formData.code.toUpperCase())[0].id
+    let roomId = await readGame(formData.code.toUpperCase())
+    
     await postUser({
       username: formData.username,
-      game_id: roomId,
+      game_id: roomId.id,
       initiative: formData.initiative,
       is_admin: false
     })
