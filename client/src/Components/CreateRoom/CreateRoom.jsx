@@ -37,12 +37,8 @@ function CreateRoom(props) {
   }
 
   if (error) {
-    return "<ErrorPage error={error}/>"
+    return "Something Went Wrong"
   }
-
-  // if (isLoading) {
-  //   return "Loading..."
-  // }
 
   return (<div className="create-user">
     <form>
