@@ -4,14 +4,15 @@ import './Home.css'
 
 export default function Home() {
   return (
-    <div>
+    <div className="home">
       <h1>Live Tracker to be Named Later</h1>
-      <Link to="/create-room">
-        <button>Create Combat</button>
-      </Link>
-      <Link to='join-room'>
-        <button>Join Combat</button>
-      </Link>
+      
+      <button className='create-join'>
+        <Link className='link-style' to="/create-room"> Create Combat</Link>
+      </button>
+      <button className='create-join'>
+        <Link className='link-style' to="/create-room">Join Combat</Link>
+      </button>
       
     </div>
   )

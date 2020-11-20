@@ -75,8 +75,9 @@ export default function AdminLobby(props) {
             )}
           </div>
         </Flipper>
-        <label >
+        <label className='combatant-container'>
           <input
+            className='combatant-info'
             name="username"
             type="text"
             value={formData.username}
@@ -84,6 +85,7 @@ export default function AdminLobby(props) {
             placeholder="Enemy Name"
           />
           <input
+            className='combatant-info'
             name="initiative"
             type="text"
             value={formData.initiative}
@@ -91,12 +93,14 @@ export default function AdminLobby(props) {
             placeholder="initiative"
           />
         </label>
-        <button className = "user-options" onClick={handleSubmit}>Add Enemy</button>
-        <button className = "user-options" onClick={() => props.sort()}>Quick sort descending</button>
+        <div className='lobby-buttons'>
+          <button className = "user-options" onClick={handleSubmit}>Add Enemy</button>
+          <button className = "user-options" onClick={() => props.sort()}>Quick sort descending</button>
 
-        <Link to={`/combat/${code}/DM/${props.match.params.username}`}>
-          <button onClick={() => sendCombatants(code, combatants)}>Start Combat</button>
-        </Link>  
+          <Link to={`/combat/${code}/DM/${props.match.params.username}`}>
+            <button onClick={() => sendCombatants(code, combatants)}>Start Combat</button>
+          </Link>
+        </div>
       </>)
     }
 
