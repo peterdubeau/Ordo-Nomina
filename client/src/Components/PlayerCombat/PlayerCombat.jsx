@@ -19,7 +19,7 @@ export default function playerCombat(props) {
   
   function onDeckAlert() {
     const audio = new Audio(Ding)
-    audio.play()
+    // audio.play()
   }
   
   if (onDeckName === props.match.params.username) {
