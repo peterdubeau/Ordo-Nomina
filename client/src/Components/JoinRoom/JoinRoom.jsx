@@ -19,9 +19,7 @@ export default function JoinRoom() {
   }
 
   const handleSubmit = async () => {
-    const findId = await getGames()
     let roomId = await readGame(formData.code.toUpperCase())
-    
     await postUser({
       username: formData.username,
       game_id: roomId.id,

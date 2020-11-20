@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Flipped, Flipper } from 'react-flip-toolkit'
-import { getGames, postUser, deleteUser, sendCombatants } from '../../services/games'
+import { readGame, postUser, deleteUser, sendCombatants } from '../../services/games'
 import GameWebSocket from '../GameWebSocket/GameWebSocket'
 import './AdminLobby.css'
 
@@ -15,19 +15,25 @@ export default function AdminLobby(props) {
   })
 
   const handleSubmit = async () => {
-    const findId = await getGames()
-    let roomId = findId.filter(id => id.code === props.match.params.code)[0].id
+    let roomId = await readGame(props.match.params.code)
     await postUser({
       username: formData.username,
-      game_id: roomId,
+      game_id: roomId.id,
       initiative: formData.initiative,
+      is_admin: false
+    })
+    setFormData({
+      id: "",
+      username: "",
+      initiative: "",
+      code: roomId.id,
       is_admin: false
     })
   }
 
     const handleChange = (e) => {
-      e.persist()
       setFormData(formData => ({ ...formData, [e.target.name]: e.target.value }))
+      e.persist()
     }
   
     if (!props.gameData) {
@@ -91,8 +97,8 @@ export default function AdminLobby(props) {
             placeholder="initiative"
           />
         </label>
-        <button className = "user-options" onClick={handleSubmit}>Add Enemy</button>
-        <button className = "user-options" onClick={() => props.sort()}>Quick sort descending</button>
+        <button className="user-options" onClick={handleSubmit}>Add Enemy</button>
+        <button className="user-options" onClick={() => props.sort()}>Quick sort descending</button>
 
         <Link to={`/combat/${code}/DM/${props.match.params.username}`}>
           <button onClick={() => sendCombatants(code, combatants)}>Start Combat</button>
