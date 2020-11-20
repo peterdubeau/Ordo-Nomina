@@ -23,7 +23,7 @@ class Main extends Component {
     const baseUrl = process.env.NODE_ENV === 'production'
       ? `https://${process.env.REACT_APP_API_DEPLOYMENT}`
       : `http://localhost:3000`;
-      await fetch(`${baseUrl}/game/${id}/users`)
+    await fetch(`${baseUrl}/game/${id}/users`)
         .then(response => response.json())
         .then(results => {
           this.setState({

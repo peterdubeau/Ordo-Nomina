@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { getGames, postUser, readGame } from '../../services/games'
+import { postUser, readGame } from '../../services/games'
 
 export default function JoinRoom() {
   

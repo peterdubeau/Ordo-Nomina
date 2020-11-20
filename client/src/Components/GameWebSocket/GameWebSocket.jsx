@@ -3,8 +3,7 @@ import React, { Component } from 'react'
 
 export default class GameWebSocket extends Component {
   componentDidMount() {
-    this.props.getGameData(this.props.code
-      )
+    this.props.getGameData(this.props.code)
       
       this.props.cableApp.game =
       this.props.cableApp.cable.subscriptions.create({
