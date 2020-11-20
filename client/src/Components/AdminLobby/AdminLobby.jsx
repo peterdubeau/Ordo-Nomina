@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { Flipped, Flipper } from 'react-flip-toolkit'
 import { readGame, postUser, deleteUser, sendCombatants } from '../../services/games'
 import GameWebSocket from '../GameWebSocket/GameWebSocket'
 import './AdminLobby.css'
 
 export default function AdminLobby(props) {
+  
+  const history = useHistory();
+  
   const [formData, setFormData] = useState({
     id: "",
     username: "",
@@ -13,25 +16,29 @@ export default function AdminLobby(props) {
     code: '',
     is_admin: false
   })
-
+  
   const handleSubmit = async () => {
-    let roomId = await readGame(props.match.params.code)
-    await postUser({
-      username: formData.username,
-      game_id: roomId.id,
-      initiative: formData.initiative,
-      is_admin: false
-    })
-    setFormData({
-      id: "",
-      username: "",
-      initiative: "",
-      code: roomId.id,
-      is_admin: false
-    })
+    try {
+      let roomId = await readGame(props.match.params.code)
+      await postUser({
+        username: formData.username,
+        game_id: roomId.id,
+        initiative: formData.initiative,
+        is_admin: false
+      })
+      setFormData({
+        id: "",
+        username: "",
+        initiative: "",
+        code: roomId.id,
+        is_admin: false
+      })
+    } catch (error) {
+        console.log(error)
+    }
   }
-
-    const handleChange = (e) => {
+  
+  const handleChange = (e) => {
       setFormData(formData => ({ ...formData, [e.target.name]: e.target.value }))
       e.persist()
     }
@@ -57,6 +64,11 @@ export default function AdminLobby(props) {
       let code = props.match.params.code
       let list = props.gameData
       let combatants = props.userList(list)
+
+      function startCombat() {
+        sendCombatants(code, combatants)
+        history.push(`/combat/${code}/DM/${props.match.params.username}`)
+      }
 
       return (<>
         <GameWebSocket
@@ -99,10 +111,7 @@ export default function AdminLobby(props) {
         </label>
         <button className="user-options" onClick={handleSubmit}>Add Enemy</button>
         <button className="user-options" onClick={() => props.sort()}>Quick sort descending</button>
-
-        <Link to={`/combat/${code}/DM/${props.match.params.username}`}>
-          <button onClick={() => sendCombatants(code, combatants)}>Start Combat</button>
-        </Link>  
+        <button onClick={startCombat}>Start Combat</button> 
       </>)
     }
 
