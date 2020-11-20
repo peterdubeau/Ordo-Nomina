@@ -16,8 +16,7 @@ function CreateRoom(props) {
 
   const handleSubmit = async () => {
     await postGame({ code: props.code })
-  
-    const findId = await getGames()
+
     let roomId = await readGame(props.code)
     await postUser({
       username: formData.username,
@@ -28,9 +27,10 @@ function CreateRoom(props) {
   }
 
   return (<div className="create-user">
-    <form>
-    <label >
-      <input 
+    <form className='host-name'>
+    <label>
+        <input 
+          className='username-input'
           name="username"
           type="text"
           value={formData.username}

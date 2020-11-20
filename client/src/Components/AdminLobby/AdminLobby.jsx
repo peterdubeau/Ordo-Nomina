@@ -53,6 +53,7 @@ export default function AdminLobby(props) {
       let combatants = props.userList(list)
 
       return (<>
+      <div className='admin-lobby-container'>
         <GameWebSocket
           cableApp={props.cableApp}
           updateApp={props.updateApp}
@@ -62,12 +63,12 @@ export default function AdminLobby(props) {
         <h2>{props.match.params.username}'s game!</h2>
         <h3>Room Code: {code}</h3>
         <Flipper key={"flipper-thing"} flipKey={props.gameData} spring={'wobble'}>
-          <div className='user-details-lobby'>
+          <div className='user-details-container'>
           {props.gameData.filter(status => status.is_admin === false).map((user, i) =>
             <Flipped key={user.id + " flip key"} flipId={user.id}>
-              <p key={user.id}>
+              <p className='user-details' key={user.id}>
                 <button className ="user-options" id="delete" onClick={() => deleteUser(user.id)}>X</button>
-                {user.username} : {user.initiative} 
+                <p>{user.username} : {user.initiative} </p>
                 <button className="user-options" id="move-up" onClick={() => props.arrange(i)}>↑</button> 
                 <button className="user-options" id="move-down" onClick={() => props.arrangeDown(i)}>↓</button>
               </p>
@@ -100,7 +101,8 @@ export default function AdminLobby(props) {
           <Link to={`/combat/${code}/DM/${props.match.params.username}`}>
             <button onClick={() => sendCombatants(code, combatants)}>Start Combat</button>
           </Link>
-        </div>
+          </div>
+      </div>
       </>)
     }
 

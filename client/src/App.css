@@ -1,8 +1,14 @@
-body{
-  background-color: lightgrey;
-}
-
 a{
   text-decoration: none;
   color: black;
+}
+
+
+body{
+  background-color: #8D99AE;
+  color: #2B2D42;
+}
+
+button{
+  font-size: 30px;
 }
