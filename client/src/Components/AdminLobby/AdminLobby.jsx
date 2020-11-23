@@ -69,8 +69,10 @@ export default function AdminLobby(props) {
               <p className='user-details' key={user.id}>
                 <button className ="user-options" id="delete" onClick={() => deleteUser(user.id)}>X</button>
                 <p>{user.username} : {user.initiative} </p>
-                <button className="user-options" id="move-up" onClick={() => props.arrange(i)}>↑</button> 
-                <button className="user-options" id="move-down" onClick={() => props.arrangeDown(i)}>↓</button>
+                <div className='up-down'>
+                  <button className="user-options" id="move-up" onClick={() => props.arrange(i)}>↑</button> 
+                  <button className="user-options" id="move-down" onClick={() => props.arrangeDown(i)}>↓</button>
+                </div>
               </p>
            </Flipped>
             )}
@@ -101,7 +103,7 @@ export default function AdminLobby(props) {
           <Link to={`/combat/${code}/DM/${props.match.params.username}`}>
             <button onClick={() => sendCombatants(code, combatants)}>Start Combat</button>
           </Link>
-          </div>
+        </div>
       </div>
       </>)
     }

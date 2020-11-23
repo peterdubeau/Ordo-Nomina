@@ -4,6 +4,17 @@
   align-items: center;
 }
 
+.combatant-container{
+  display: flex;
+  flex-direction: column;
+  margin: 20px auto;
+}
+
+.combatant-info{
+  margin: 10px auto;
+  font-size: 20px;
+}
+
 .lobby-buttons{
   display: flex;
   flex-direction: column;
@@ -27,6 +38,10 @@
 .user-options{
   display: flex;
   align-self: center;
+}
+
+.up-down{
+  display:flex;
 }
 
 

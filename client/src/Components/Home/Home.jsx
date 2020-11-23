@@ -11,7 +11,7 @@ export default function Home() {
         <Link className='link-style' to="/create-room"> Create Combat</Link>
       </button>
       <button className='create-join'>
-        <Link className='link-style' to="/create-room">Join Combat</Link>
+        <Link className='link-style' to="/join-room">Join Combat</Link>
       </button>
       
     </div>
