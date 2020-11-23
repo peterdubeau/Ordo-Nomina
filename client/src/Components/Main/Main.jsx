@@ -43,11 +43,12 @@ class Main extends Component {
         let temp = list[index - 1];
         list[index - 1] = list[index];
         list[index] = temp;
-        this.setState({
+        return {
           currentGame: {
-            users: list
+              ...this.state.currentGame,
+              users: list
           }
-        })
+        }
       })
     }
   }
@@ -59,11 +60,12 @@ class Main extends Component {
         let temp = list[index + 1];
         list[index + 1] = list[index];
         list[index] = temp;
-        this.setState({
+        return {
           currentGame: {
+            ...this.state.currentGame,
             users: list
           }
-        })
+        }
       })
     }
   }
@@ -165,7 +167,7 @@ class Main extends Component {
   }
 
   render() {
-
+   
     return (
       <div className="App">
 
