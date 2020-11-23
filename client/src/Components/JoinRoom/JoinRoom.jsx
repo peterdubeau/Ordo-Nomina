@@ -30,9 +30,10 @@ export default function JoinRoom() {
       })
     }
 
-  function handleEnterRoom(){
+  function handleEnterRoom(e){
     handleSubmit()
     history.push(`/game/${formData.code.toUpperCase()}/user/${formData.username}`)
+    e.preventDefault()
   }
   
     return (
