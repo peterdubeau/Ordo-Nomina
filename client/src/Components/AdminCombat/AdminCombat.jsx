@@ -29,6 +29,7 @@ export default function AdminCombat(props) {
     if (window.confirm("Are you sure you want to end combat?")) {
       destroyGame(game.code)
       history.push('/')
+      window.location.reload()
     }
   }
 
