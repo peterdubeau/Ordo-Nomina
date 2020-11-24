@@ -60,20 +60,20 @@ export default function AdminLobby(props) {
           getGameData={props.getGameData}
           code={props.match.params.code}
         />
-        <h2>{props.match.params.username}'s game!</h2>
         <h3>Room Code: {code}</h3>
+        <h2>{props.match.params.username}'s game!</h2>
         <Flipper key={"flipper-thing"} flipKey={props.gameData} spring={'wobble'}>
           <div className='user-details-container'>
           {props.gameData.filter(status => status.is_admin === false).map((user, i) =>
             <Flipped key={user.id + " flip key"} flipId={user.id}>
-              <p className='user-details' key={user.id}>
+              <div className='user-details' key={user.id}>
                 <button className ="user-options" id="delete" onClick={() => deleteUser(user.id)}>X</button>
                 <p>{user.username} : {user.initiative} </p>
                 <div className='up-down'>
                   <button className="user-options" id="move-up" onClick={() => props.arrange(i)}>↑</button> 
                   <button className="user-options" id="move-down" onClick={() => props.arrangeDown(i)}>↓</button>
                 </div>
-              </p>
+              </div>
            </Flipped>
             )}
           </div>

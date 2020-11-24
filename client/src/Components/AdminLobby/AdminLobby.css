@@ -21,6 +21,11 @@
   align-items: center;
 }
 
+#move-up, #move-down{
+  border-radius: 10px;
+  margin: auto 5px;
+}
+
 .user-details-container{
   display: flex;
   flex-direction: column;
@@ -29,11 +34,14 @@
 
 .user-details{
   display: flex;
-  justify-content: space-between;
-  border: 3px solid #EDF2F4;
+  justify-content: space-around;   
+  border: 8px solid rgb(190, 153, 73);
+  border-style: groove;
   border-radius: 10px;
   padding: 10px;
+  margin: 10px;
 }
+
 
 .user-options{
   display: flex;
@@ -46,6 +54,9 @@
 
 
 #delete{
+  position: relative;
+  right: 15%;
+  bottom: 40px;
   border-radius: 100%;
   font-size:15px;
   background-color: red;

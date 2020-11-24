@@ -5,10 +5,17 @@ a{
 
 
 body{
-  background-color: #8D99AE;
-  color: #2B2D42;
+  background-image: url('https://res.cloudinary.com/dyrvlnond/image/upload/v1606226753/Tracker/PHB_background_w48odp.jpg');
+  color: rgb(77	23	18	);
 }
 
 button{
+  background-color: rgb(214	224	190);
   font-size: 30px;
+}
+
+@media only screen and (max-width: 600px) {
+  body {
+    font-size: 15px;
+  }
 }
