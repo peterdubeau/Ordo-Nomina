@@ -55,7 +55,7 @@ export default function AdminCombat(props) {
           </p>
         </Flipped>)}
       </div>
-          <button onClick={endCombat}>End Combat</button> 
+      <button onClick={endCombat}>End Combat</button> 
     </Flipper>
   </>)
 }

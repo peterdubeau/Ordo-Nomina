@@ -23,6 +23,8 @@
 
 .add-start-order{
   margin: 15px auto;
+  border-radius: 10px;
+  box-shadow: 5px 5px;
 }
 
 .admin-lobby-container{
