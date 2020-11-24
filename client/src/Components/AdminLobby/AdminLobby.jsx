@@ -93,15 +93,15 @@ export default function AdminLobby(props) {
             type="text"
             value={formData.initiative}
             onChange={handleChange}
-            placeholder="initiative"
+            placeholder="Initiative"
           />
         </label>
         <div className='lobby-buttons'>
-          <button className = "user-options" onClick={handleSubmit}>Add Enemy</button>
-          <button className = "user-options" onClick={() => props.sort()}>Quick sort descending</button>
+          <button className = "add-start-order" onClick={handleSubmit}>Add Enemy</button>
+          <button className = "add-start-order" onClick={() => props.sort()}>Quick sort descending</button>
 
           <Link to={`/combat/${code}/DM/${props.match.params.username}`}>
-            <button onClick={() => sendCombatants(code, combatants)}>Start Combat</button>
+            <button  className='add-start-order' onClick={() => sendCombatants(code, combatants)}>Start Combat</button>
           </Link>
         </div>
       </div>
