@@ -19,7 +19,7 @@ export default function playerCombat(props) {
   
   function onDeckAlert() {
     const audio = new Audio(Ding)
-    audio.play()
+    // audio.play()
   }
   
   if (onDeckName === props.match.params.username) {
@@ -35,9 +35,10 @@ export default function playerCombat(props) {
     return <Redirect to='/' />
   }
   
-  function removeCombatant(id) {
+  function removeCombatant(id, e) {
     game.combatants.splice(game.combatants?.indexOf(id), 1)
     removeCombatants(props.match.params.code, game.combatants)
+    e.preventDefault()
   }
   
   

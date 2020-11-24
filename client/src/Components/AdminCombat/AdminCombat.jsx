@@ -1,11 +1,13 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import GameWebSocket from '../GameWebSocket/GameWebSocket'
 import { Flipped, Flipper } from 'react-flip-toolkit'
 import { takeTurn, destroyGame, removeCombatants } from '../../services/games'
 import '../AdminCombat/AdminCombat.css'
 
 export default function AdminCombat(props) {
+
+  const history = useHistory()
 
   function handleTakeTurn(arr) {
     arr.combatants.push(arr.combatants.shift())
@@ -22,6 +24,15 @@ export default function AdminCombat(props) {
     game.combatants.splice(game.combatants?.indexOf(id), 1)
     removeCombatants(props.match.params.code, game.combatants)
   }
+
+  function endCombat() {
+    if (window.confirm("Are you sure you want to end combat?")) {
+      destroyGame(game.code)
+      history.push('/')
+      window.location.reload()
+    }
+  }
+
   return (<>
     <GameWebSocket
       cableApp={props.cableApp}
@@ -44,9 +55,7 @@ export default function AdminCombat(props) {
           </p>
         </Flipped>)}
       </div>
-      <Link to={'/'}>
-          <button onClick={() => destroyGame(game.code)}>End Combat</button>
-      </Link>  
+          <button onClick={endCombat}>End Combat</button> 
     </Flipper>
   </>)
 }

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { getGames, postUser, readGame } from '../../services/games'
+import { useHistory } from 'react-router-dom'
+import { postUser, readGame } from '../../services/games'
 
 export default function JoinRoom() {
   
@@ -11,23 +11,29 @@ export default function JoinRoom() {
     code: '',
     is_admin: false
   })
-
-
+  
+  
   const handleChange = (e) => {
     e.persist()
     setFormData(formData => ({...formData, [e.target.name]: e.target.value}))
   }
 
+  const history = useHistory()
+
   const handleSubmit = async () => {
-    const findId = await getGames()
     let roomId = await readGame(formData.code.toUpperCase())
-    
-    await postUser({
-      username: formData.username,
-      game_id: roomId.id,
-      initiative: formData.initiative,
-      is_admin: false
-    })
+        await postUser({
+          username: formData.username,
+          game_id: roomId.id,
+          initiative: formData.initiative,
+          is_admin: false
+      })
+    }
+
+  function handleEnterRoom(e){
+    handleSubmit()
+    history.push(`/game/${formData.code.toUpperCase()}/user/${formData.username}`)
+    e.preventDefault()
   }
   
     return (
@@ -56,9 +62,7 @@ export default function JoinRoom() {
                 placeholder = "initiative"
             />
     </label>
-        <Link to={`/game/${formData.code.toUpperCase()}/user/${formData.username}`}>
-          <button onClick={handleSubmit}>Enter Room</button>
-        </Link>
+          <button onClick={handleEnterRoom}>Enter Room</button>
         </form>
       </div>
     )
