@@ -15,7 +15,7 @@ export default function AdminCombat(props) {
   }
   
   const { game } = props.gameData
-  const userMap = game.users?.reduce((map, user) => {
+  const userMap = game?.users?.reduce((map, user) => {
     map[user.id] = user;
     return map;
   }, {});

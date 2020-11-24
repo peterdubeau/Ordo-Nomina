@@ -71,30 +71,34 @@ export default function AdminLobby(props) {
       }
 
       return (<>
+      <div className='admin-lobby-container'>
         <GameWebSocket
           cableApp={props.cableApp}
           updateApp={props.updateApp}
           getGameData={props.getGameData}
           code={props.match.params.code}
         />
-        <h2>{props.match.params.username}'s game!</h2>
         <h3>Room Code: {code}</h3>
+        <h2>{props.match.params.username}'s game!</h2>
         <Flipper key={"flipper-thing"} flipKey={props.gameData} spring={'wobble'}>
-          <div className='user-details-lobby'>
+          <div className='user-details-container'>
           {props.gameData.filter(status => status.is_admin === false).map((user, i) =>
             <Flipped key={user.id + " flip key"} flipId={user.id}>
-              <p key={user.id}>
+              <div className='user-details' key={user.id}>
                 <button className ="user-options" id="delete" onClick={() => deleteUser(user.id)}>X</button>
-                {user.username} : {user.initiative} 
-                <button className="user-options" id="move-up" onClick={() => props.arrange(i)}>↑</button> 
-                <button className="user-options" id="move-down" onClick={() => props.arrangeDown(i)}>↓</button>
-              </p>
+                <p>{user.username} : {user.initiative} </p>
+                <div className='up-down'>
+                  <button className="user-options" id="move-up" onClick={() => props.arrange(i)}>↑</button> 
+                  <button className="user-options" id="move-down" onClick={() => props.arrangeDown(i)}>↓</button>
+                </div>
+              </div>
            </Flipped>
             )}
           </div>
         </Flipper>
-        <label >
+        <label className='combatant-container'>
           <input
+            className='combatant-info'
             name="username"
             type="text"
             value={formData.username}
@@ -102,16 +106,21 @@ export default function AdminLobby(props) {
             placeholder="Enemy Name"
           />
           <input
+            className='combatant-info'
             name="initiative"
             type="text"
             value={formData.initiative}
             onChange={handleChange}
-            placeholder="initiative"
+            placeholder="Initiative"
           />
         </label>
-        <button className="user-options" onClick={handleSubmit}>Add Enemy</button>
-        <button className="user-options" onClick={() => props.sort()}>Quick sort descending</button>
-        <button onClick={startCombat}>Start Combat</button> 
+        <div className='lobby-buttons'>
+          <button className = "add-start-order" onClick={handleSubmit}>Add Enemy</button>
+          <button className = "add-start-order" onClick={() => props.sort()}>Quick sort descending</button>
+          <button  className= "add-start-order" onClick={startCombat}>Start Combat</button>
+        </div>
+      </div>
+
       </>)
     }
 
