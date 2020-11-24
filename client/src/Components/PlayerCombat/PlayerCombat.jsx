@@ -50,8 +50,8 @@ export default function playerCombat(props) {
       code={props.match.params.code}
     />
     <Flipper flipKey={props.gameData} spring={'wobble'}>
+      <div className='user-list'>
         {game.combatants?.map(id =>
-          <div className='user-list'>
             <Flipped key={userMap[id].id + `flipped guy`} flipId={userMap[id].id}>
           <p className="user-details" key={userMap[id].id}>
           {(userMap[id].username === props.match.params.username ? 
@@ -61,8 +61,8 @@ export default function playerCombat(props) {
       
             </p>
           </Flipped >
-        </div>
         )}
+        </div>
     </Flipper>
   </>)
 }

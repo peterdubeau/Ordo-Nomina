@@ -1,18 +1,26 @@
+a{
+  position: relative;
+  right: 15%;
+  margin: auto 0;
+}
+
 .player-lobby-container{
   display: flex;
   flex-direction: column;
   align-content: center;
+  text-align: center;
   margin: auto 0;
 }
 
 .player-lobby-details{
   display: flex;
+  flex-direction: row;
   justify-content: center;  
   border: 8px solid rgb(190, 153, 73);
   border-style: groove;
   border-radius: 10px;
   margin: 10px;
-  width: 200px;
+  /* width: 200px; */
 }
 
 .user-text{
@@ -20,9 +28,8 @@
 }
 
 #delete-self{
-  position: relative;
-  right: 100%;
   border-radius: 100%;
   font-size:15px;
   background-color: red;
+  margin-left: -10%;
 }
