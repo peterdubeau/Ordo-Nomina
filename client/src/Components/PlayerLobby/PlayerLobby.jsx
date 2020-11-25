@@ -26,13 +26,13 @@ export default function PlayerLobby(props) {
     return <Redirect to={`/combat/${props.match.params.code}/player/${props.match.params.username}`} />
   }
         return (<>
+          <div className='player-lobby-container'>
           <GameWebSocket
           cableApp={props.cableApp}
           updateApp={props.updateApp}
           getGameData={props.getGameData}
           code={props.match.params.code}
           />
-          <div className='player-lobby-container'>
           <h2>{hostDetails}'s game</h2>
         {list.filter(status => status.is_admin === false).map(user => 
           <div className='player-lobby-details'>

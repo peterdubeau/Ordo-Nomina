@@ -4,7 +4,7 @@ import GameWebSocket from '../GameWebSocket/GameWebSocket'
 import Ding from '../../sounds/Ding-sound-effect.mp3'
 import { removeCombatants } from '../../services/games'
 import { Flipped, Flipper } from 'react-flip-toolkit'
-import './PlayerCombat.css' 
+import '../AdminCombat/AdminCombat.css' 
 
 export default function playerCombat(props) {
   const { game } = props.gameData
@@ -43,6 +43,7 @@ export default function playerCombat(props) {
   
   
   return (<>
+    <div className='combat-container'>
     <GameWebSocket
       cableApp={props.cableApp}
       updateApp={props.updateApp}
@@ -53,16 +54,18 @@ export default function playerCombat(props) {
       <div className='user-list'>
         {game.combatants?.map(id =>
             <Flipped key={userMap[id].id + `flipped guy`} flipId={userMap[id].id}>
-          <p className="user-details" key={userMap[id].id}>
+          
           {(userMap[id].username === props.match.params.username ? 
                 <button id='delete' onClick={() => removeCombatant(userMap[id].id)}>X</button>
                 :
-                '')} {userMap[id].username}: {userMap[id].initiative} 
-      
-            </p>
+              '')}
+            <div className="user-details" key={userMap[id].id}>
+              {userMap[id].username}
+            </div>
           </Flipped >
         )}
         </div>
-    </Flipper>
+      </Flipper>
+    </div>
   </>)
 }

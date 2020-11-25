@@ -81,11 +81,11 @@ export default function AdminLobby(props) {
         <h3>Room Code: {code}</h3>
         <h2>{props.match.params.username}'s game!</h2>
         <Flipper key={"flipper-thing"} flipKey={props.gameData} spring={'wobble'}>
-          <div className='user-details-container'>
+          {/* <div className='user-details-container'> */}
           {props.gameData.filter(status => status.is_admin === false).map((user, i) =>
             <Flipped key={user.id + " flip key"} flipId={user.id}>
               <div className='user-details' key={user.id}>
-                <button className ="user-options" id="delete" onClick={() => deleteUser(user.id)}>X</button>
+                <button className ="user-options" id="delete-user" onClick={() => deleteUser(user.id)}>X</button>
                 <p>{user.username} : {user.initiative} </p>
                 <div className='up-down'>
                   <button className="user-options" id="move-up" onClick={() => props.arrange(i)}>↑</button> 
@@ -94,7 +94,7 @@ export default function AdminLobby(props) {
               </div>
            </Flipped>
             )}
-          </div>
+          {/* </div> */}
         </Flipper>
         <label className='combatant-container'>
           <input
@@ -117,7 +117,7 @@ export default function AdminLobby(props) {
         <div className='lobby-buttons'>
           <button className = "add-start-order" onClick={handleSubmit}>Add Enemy</button>
           <button className = "add-start-order" onClick={() => props.sort()}>Quick sort descending</button>
-          <button  className= "add-start-order" onClick={startCombat}>Start Combat</button>
+          <button className= "add-start-order" onClick={startCombat}>Start Combat</button>
         </div>
       </div>
 

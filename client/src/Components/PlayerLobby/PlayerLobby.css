@@ -27,9 +27,8 @@ a{
   font-size: 30px;
 }
 
-#delete-self{
+button#delete-self{
   border-radius: 100%;
   font-size:15px;
   background-color: red;
-  margin-left: -10%;
 }

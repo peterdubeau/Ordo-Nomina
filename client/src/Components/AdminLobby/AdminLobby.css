@@ -36,11 +36,11 @@
 .combatant-container{
   display: flex;
   flex-direction: column;
-  margin: 20px auto;
+  /* margin: 20px auto; */
 }
 
 .combatant-info{
-  margin: 10px auto;
+  /* margin: 10px auto; */
   font-size: 20px;
 }
 
@@ -48,33 +48,32 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 10px;
+  /* margin: 10px; */
 }
 
 #move-up, #move-down{
   border-radius: 10px;
-  margin: auto 5px;
+  /* margin: auto 5px; */
 }
 
 .user-details-container{
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 }
 
 .user-details{
   display: flex;
   justify-content: space-around;   
+  align-items: center;
   border: 8px solid rgb(190, 153, 73);
   border-style: groove;
   border-radius: 10px;
   padding: 10px;
-  margin: 10px;
 }
 
 
 .user-options{
-  display: flex;
+  /* display: flex; */
   align-self: center;
 }
 
@@ -83,12 +82,29 @@
 }
 
 
-#delete{
-  position: relative;
-  right: 15%;
-  bottom: 40px;
+#delete-user{
   border-radius: 100%;
   font-size:15px;
   background-color: red;
-  margin-top: 0px;
+
+}
+
+@media only screen and (max-width: 500px) {
+  body {
+    font-size: 15px;
+  }
+
+  p{
+    font-size: 15px;
+  }
+
+  .user-details-container{
+    align-content: flex-start;
+  }
+
+  .add-start-order{
+    font-size: 20px;
+  }
+
+
 }
