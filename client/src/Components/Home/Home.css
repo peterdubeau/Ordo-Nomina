@@ -1,6 +1,11 @@
 body{
   margin: auto 20%
 }
+
+a.link-style{
+  position: static;
+}
+
 h1{
   font-size: 50px;
   text-align:center;

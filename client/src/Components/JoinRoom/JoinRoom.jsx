@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { postUser, readGame } from '../../services/games'
+import '../CreateRoom/CreateRoom.css'
 
 export default function JoinRoom() {
   
@@ -38,30 +39,33 @@ export default function JoinRoom() {
   
     return (
       <div>
-        <form>
-        <label >
-          <input 
-              name="code"
-              type="text"
-              value={formData.code.toUpperCase()}
-              onChange={handleChange}
-              placeholder = "Game Code"
-          />
+        <form className='create-user'>
+          <label >
             <input 
-                name="username"
+                className='user-input'
+                name="code"
                 type="text"
-                value={formData.username}
+                value={formData.code.toUpperCase()}
                 onChange={handleChange}
-                placeholder = "Character Name"
+                placeholder = "Game Code"
             />
-            <input 
-                name="initiative"
-                type="text"
-                value={formData.initiative}
-                onChange={handleChange}
-                placeholder = "initiative"
-            />
-    </label>
+              <input 
+                  className='user-input'
+                  name="username"
+                  type="text"
+                  value={formData.username}
+                  onChange={handleChange}
+                  placeholder = "Character Name"
+              />
+              <input 
+                  className='user-input'
+                  name="initiative"
+                  type="text"
+                  value={formData.initiative}
+                  onChange={handleChange}
+                  placeholder = "Initiative"
+              />
+          </label>
           <button onClick={handleEnterRoom}>Enter Room</button>
         </form>
       </div>
