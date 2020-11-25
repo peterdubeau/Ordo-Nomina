@@ -35,7 +35,7 @@ export default function PlayerLobby(props) {
           />
           <h2>{hostDetails}'s game</h2>
         {list.filter(status => status.is_admin === false).map(user => 
-          <div className='player-lobby-details'>
+          <div key={user.id} className='player-lobby-details'>
             {(user.username === props.match.params.username ?
               <Link to={'/join-room'}>
                   <button id='delete-self' onClick={() => deleteUser(userId)}>X</button>
