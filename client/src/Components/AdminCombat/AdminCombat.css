@@ -1,41 +1,24 @@
-button{
-  max-width: 30%;
-  align-self: center;
-}
-
-label{
+.user-details{
   display: flex;
-  flex-direction: column;
-}
-
-input {
-  padding: 10px;
+  justify-content: space-between;
+  font-size: 30px;
+  margin: 40px 0;
 }
 
 .room-header{
   display: flex;
   flex-direction: column;
-}
-
-.user-details{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
   align-items: center;
 }
 
-.user-list{
+.combat-container{
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 
-.user-options{
-  font-size: 20px;
-  margin: 10px;
+.delete-user-combat{
+  border-radius: 100px;
+  background-color: red
 }
 
-#delete{
-  background-color: red;
-  color: white;
-  border-radius: 100%;
-}

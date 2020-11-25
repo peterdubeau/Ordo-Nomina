@@ -40,10 +40,11 @@ function CreateRoom(props) {
     return "Something Went Wrong"
   }
 
-  return (<div className="create-user">
-    <form>
+  return (<div >
+    <form className="create-user">
       <label >
         <input
+          className='user-input'
           name="username"
           type="text"
           value={formData.username}

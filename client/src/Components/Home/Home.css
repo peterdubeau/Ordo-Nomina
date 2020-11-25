@@ -1,9 +1,23 @@
-body {
-  background-color: lightgray;
-  text-align: center;
+body{
+  margin: auto 20%
 }
 
-button{
+a.link-style{
+  position: static;
+}
+
+h1{
+  font-size: 50px;
+  text-align:center;
+}
+
+.create-join{
   font-size: 30px;
-  margin: 20px;
+  margin: 30px;
+}
+
+.home{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
