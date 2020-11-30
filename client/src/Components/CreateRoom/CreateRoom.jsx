@@ -9,6 +9,7 @@ function CreateRoom(props) {
     username: "",
   })
 
+  const [formFilled, setFormFilled] = useState(true)
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
 
@@ -19,9 +20,10 @@ function CreateRoom(props) {
 
   const history = useHistory();
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
     if (formData.username === '') {
-      alert('Please enter Host name')
+      setFormFilled(false)
+      e.preventDefault()
     } else {
       try {
         setIsLoading(true)
@@ -48,12 +50,12 @@ function CreateRoom(props) {
     <form className="create-user">
       <label >
         <input
-          className='user-input'
+          className={formFilled ? "user-input" : "user-input-empty"}
           name="username"
           type="text"
           value={formData.username}
           onChange={handleChange}
-          placeholder="Host Name"
+          placeholder={formFilled ? "Host Name" : "Enter Host Name"}
         />
       </label>
         <button disabled={isLoading} onClick={handleSubmit}>

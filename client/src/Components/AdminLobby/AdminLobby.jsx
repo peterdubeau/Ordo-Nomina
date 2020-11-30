@@ -16,11 +16,21 @@ export default function AdminLobby(props) {
     code: '',
     is_admin: false
   })
+
+  const [formFilled, setFormFilled] = useState({
+    username: true,
+    initiative: true
+  });
   
   const handleSubmit = async (e) => {
     if (formData.username == '' || formData.initiative === '' ) {
-      alert('make sure to fill out all combatant details')
-      e.preventDefault()
+      if (formData.username === '') {
+        setFormFilled({ ...formFilled, username: false })
+        e.preventDefault()
+      } if (formData.initiative === '') {
+        setFormFilled({ ...formFilled, initiative: false })
+        e.preventDefault()
+      }
     } else {
       try {
         let roomId = await readGame(props.match.params.code)
@@ -36,6 +46,10 @@ export default function AdminLobby(props) {
           initiative: "",
           code: roomId.id,
           is_admin: false
+        })
+        setFormFilled({
+          username: true,
+          initiative: true
         })
       } catch (error) {
         console.log(error)
@@ -103,20 +117,20 @@ export default function AdminLobby(props) {
         </Flipper>
         <label className='combatant-container'>
           <input
-            className='combatant-info'
-            name="username"
-            type="text"
-            value={formData.username}
-            onChange={handleChange}
-            placeholder="Enemy Name"
+              className={formFilled.username ? 'combatant-info' : 'combatant-info-empty'}
+              name="username"
+              type="text"
+              value={formData.username}
+              onChange={handleChange}
+              placeholder={formFilled.username ? "Enemy Name" : "Enter Enemy Name"}
           />
           <input
-            className='combatant-info'
-            name="initiative"
-            type="text"
-            value={formData.initiative}
-            onChange={handleChange}
-            placeholder="Initiative"
+              className={formFilled.initiative ? 'combatant-info' : 'combatant-info-empty'}
+              name="initiative"
+              type="text"
+              value={formData.initiative}
+              onChange={handleChange}
+              placeholder={formFilled.initiative ? "Initiative" : "Enter initiative"}
           />
         </label>
         <div className='lobby-buttons'>
