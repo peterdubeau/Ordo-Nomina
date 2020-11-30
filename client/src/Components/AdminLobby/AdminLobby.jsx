@@ -17,24 +17,29 @@ export default function AdminLobby(props) {
     is_admin: false
   })
   
-  const handleSubmit = async () => {
-    try {
-      let roomId = await readGame(props.match.params.code)
-      await postUser({
-        username: formData.username,
-        game_id: roomId.id,
-        initiative: formData.initiative,
-        is_admin: false
-      })
-      setFormData({
-        id: "",
-        username: "",
-        initiative: "",
-        code: roomId.id,
-        is_admin: false
-      })
-    } catch (error) {
+  const handleSubmit = async (e) => {
+    if (formData.username == '' || formData.initiative === '' ) {
+      alert('make sure to fill out all combatant details')
+      e.preventDefault()
+    } else {
+      try {
+        let roomId = await readGame(props.match.params.code)
+        await postUser({
+          username: formData.username,
+          game_id: roomId.id,
+          initiative: formData.initiative,
+          is_admin: false
+        })
+        setFormData({
+          id: "",
+          username: "",
+          initiative: "",
+          code: roomId.id,
+          is_admin: false
+        })
+      } catch (error) {
         console.log(error)
+      }
     }
   }
   

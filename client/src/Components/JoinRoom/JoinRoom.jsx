@@ -22,19 +22,24 @@ export default function JoinRoom() {
   const history = useHistory()
 
   const handleSubmit = async () => {
-    let roomId = await readGame(formData.code.toUpperCase())
-        await postUser({
-          username: formData.username,
-          game_id: roomId.id,
-          initiative: formData.initiative,
-          is_admin: false
+      let roomId = await readGame(formData.code.toUpperCase())
+      await postUser({
+        username: formData.username,
+        game_id: roomId.id,
+        initiative: formData.initiative,
+        is_admin: false
       })
-    }
+  }
 
-  function handleEnterRoom(e){
-    handleSubmit()
-    history.push(`/game/${formData.code.toUpperCase()}/user/${formData.username}`)
-    e.preventDefault()
+  function handleEnterRoom(e) {
+    if (formData.username == '' || formData.initiative === '' || formData.code === '') {
+      alert('Please fill out all character info')
+      e.preventDefault()
+    } else {
+      handleSubmit()
+      history.push(`/game/${formData.code.toUpperCase()}/user/${formData.username}`)
+      e.preventDefault()
+    }
   }
   
     return (

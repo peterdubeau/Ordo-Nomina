@@ -20,19 +20,23 @@ function CreateRoom(props) {
   const history = useHistory();
 
   const handleSubmit = async () => {
-    try {
-      setIsLoading(true)
-      await postGame({ code: props.code });
-      let roomId = await readGame(props.code);
-      await postUser({
-        username: formData.username,
-        initiative: 10000,
-        game_id: roomId.id,
-        is_admin: true
-      });
-      history.push(`/game/${props.code}/DM/${formData.username}`);
-    } catch (error) {
-      setError(error)
+    if (formData.username === '') {
+      alert('Please enter Host name')
+    } else {
+      try {
+        setIsLoading(true)
+        await postGame({ code: props.code });
+        let roomId = await readGame(props.code);
+        await postUser({
+          username: formData.username,
+          initiative: 10000,
+          game_id: roomId.id,
+          is_admin: true
+        });
+        history.push(`/game/${props.code}/DM/${formData.username}`);
+      } catch (error) {
+        setError(error)
+      }
     }
   }
 
