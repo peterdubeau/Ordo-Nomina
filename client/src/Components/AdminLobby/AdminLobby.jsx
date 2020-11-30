@@ -23,11 +23,11 @@ export default function AdminLobby(props) {
   });
   
   const handleSubmit = async (e) => {
-    if (formData.username == '' || formData.initiative === '' ) {
-      if (formData.username === '') {
+    if (formData.username.trim().length === 0 || formData.initiative.trim().length === 0 || typeof formData.initiative !== 'number') {
+      if (formData.username.trim().length === 0) {
         setFormFilled({ ...formFilled, username: false })
         e.preventDefault()
-      } if (formData.initiative === '') {
+      } if (formData.initiative.trim().length === 0) {
         setFormFilled({ ...formFilled, initiative: false })
         e.preventDefault()
       }

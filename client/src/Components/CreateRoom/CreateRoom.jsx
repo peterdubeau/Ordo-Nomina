@@ -21,7 +21,7 @@ function CreateRoom(props) {
   const history = useHistory();
 
   const handleSubmit = async (e) => {
-    if (formData.username === '') {
+    if (formData.username.trim().length === 0) {
       setFormFilled(false)
       e.preventDefault()
     } else {
@@ -58,6 +58,7 @@ function CreateRoom(props) {
           placeholder={formFilled ? "Host Name" : "Enter Host Name"}
         />
       </label>
+      {formFilled ? '' : <span style={"color:red"}>Please enter username</span>}
         <button disabled={isLoading} onClick={handleSubmit}>
           {isLoading ? "Loading..." : "Enter Room"}
         </button>
