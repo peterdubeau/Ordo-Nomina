@@ -42,6 +42,10 @@ function CreateRoom(props) {
     }
   }
 
+  const noInfo = {
+    color: "red"
+  }
+
   if (error) {
     return "Something Went Wrong"
   }
@@ -58,7 +62,7 @@ function CreateRoom(props) {
           placeholder={formFilled ? "Host Name" : "Enter Host Name"}
         />
       </label>
-      {formFilled ? '' : <span style={"color:red"}>Please enter username</span>}
+      {formFilled ? '' : <span style={noInfo}>Please enter username</span>}
         <button disabled={isLoading} onClick={handleSubmit}>
           {isLoading ? "Loading..." : "Enter Room"}
         </button>

@@ -23,39 +23,46 @@ export default function AdminLobby(props) {
   });
   
   const handleSubmit = async (e) => {
-    if (formData.username.trim().length === 0 || formData.initiative.trim().length === 0 || typeof formData.initiative !== 'number') {
-      if (formData.username.trim().length === 0) {
+    console.log("top-one")
+    if (formData.username.trim().length === 0 || typeof formData.initiative !== "number") {
+      console.log("top-two")
+      if (formData.username.trim().length === 0 || formData.username === '') {
+        console.log("top-three")
         setFormFilled({ ...formFilled, username: false })
         e.preventDefault()
-      } if (formData.initiative.trim().length === 0) {
+      }
+      if (typeof formData.initiative !== "number" || formData.initiative === '') {
+        console.log("top-4")
         setFormFilled({ ...formFilled, initiative: false })
         e.preventDefault()
-      }
-    } else {
-      try {
-        let roomId = await readGame(props.match.params.code)
-        await postUser({
-          username: formData.username,
-          game_id: roomId.id,
-          initiative: formData.initiative,
-          is_admin: false
-        })
-        setFormData({
-          id: "",
-          username: "",
-          initiative: "",
-          code: roomId.id,
-          is_admin: false
-        })
-        setFormFilled({
-          username: true,
-          initiative: true
-        })
-      } catch (error) {
-        console.log(error)
+      } else {
+        try {
+          console.log("posting")
+          let roomId = await readGame(props.match.params.code)
+          await postUser({
+            username: formData.username,
+            game_id: roomId.id,
+            initiative: formData.initiative,
+            is_admin: false
+          })
+          setFormData({
+            id: "",
+            username: "",
+            initiative: "",
+            code: roomId.id,
+            is_admin: false
+          })
+          setFormFilled({
+            username: true,
+            initiative: true
+          })
+        } catch (error) {
+          console.log(error)
+        }
       }
     }
   }
+  
   
   const handleChange = (e) => {
       setFormData(formData => ({ ...formData, [e.target.name]: e.target.value }))
