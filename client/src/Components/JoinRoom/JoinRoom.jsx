@@ -37,14 +37,14 @@ export default function JoinRoom() {
   }
 
   function handleEnterRoom(e) {
-    if (formData.username === '' || formData.initiative === '' || formData.code === '') {
+    if (formData.username === '' || formData.initiative === '' || formData.code === '' ||  isNaN(formData.initiative)) {
       if (formData.username === '') {
         setFormFilled({ ...formFilled, username: false })
         e.preventDefault()
       } if (formData.code === '') {
         setFormFilled({ ...formFilled, code: false })
         e.preventDefault()
-      } if (formData.initiative === '') {
+      } if (formData.initiative === '' || isNaN(formData.initiative)) {
         setFormFilled({ ...formFilled, initiative: false })
         e.preventDefault()
       }
