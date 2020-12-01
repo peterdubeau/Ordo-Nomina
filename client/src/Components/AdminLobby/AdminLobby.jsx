@@ -16,27 +16,48 @@ export default function AdminLobby(props) {
     code: '',
     is_admin: false
   })
+
+  const [formFilled, setFormFilled] = useState({
+    username: true,
+    initiative: true
+  });
   
-  const handleSubmit = async () => {
-    try {
-      let roomId = await readGame(props.match.params.code)
-      await postUser({
-        username: formData.username,
-        game_id: roomId.id,
-        initiative: formData.initiative,
-        is_admin: false
-      })
-      setFormData({
-        id: "",
-        username: "",
-        initiative: "",
-        code: roomId.id,
-        is_admin: false
-      })
-    } catch (error) {
+  const handleSubmit = async (e) => {
+    if (formData.username.trim().length === 0 || isNaN(formData.initiative) || formData.initiative.trim().length === 0) {
+      if (formData.username.trim().length === 0 || formData.username === '') {
+        setFormFilled({ ...formFilled, username: false })
+        e.preventDefault()
+      }
+      if ( isNaN(formData.initiative) || formData.initiative === '') {
+        setFormFilled({ ...formFilled, initiative: false })
+        e.preventDefault()
+      }
+    } else {
+      try {
+        let roomId = await readGame(props.match.params.code)
+        await postUser({
+          username: formData.username,
+          game_id: roomId.id,
+          initiative: formData.initiative,
+          is_admin: false
+        })
+        setFormData({
+          id: "",
+          username: "",
+          initiative: "",
+          code: roomId.id,
+          is_admin: false
+        })
+        setFormFilled({
+          username: true,
+          initiative: true
+        })
+      } catch (error) {
         console.log(error)
+      }
     }
   }
+  
   
   const handleChange = (e) => {
       setFormData(formData => ({ ...formData, [e.target.name]: e.target.value }))
@@ -98,20 +119,20 @@ export default function AdminLobby(props) {
         </Flipper>
         <label className='combatant-container'>
           <input
-            className='combatant-info'
-            name="username"
-            type="text"
-            value={formData.username}
-            onChange={handleChange}
-            placeholder="Enemy Name"
+              className={formFilled.username ? 'combatant-info' : 'combatant-info-empty'}
+              name="username"
+              type="text"
+              value={formData.username}
+              onChange={handleChange}
+              placeholder={formFilled.username ? "Enemy Name" : "Enter Enemy Name"}
           />
           <input
-            className='combatant-info'
-            name="initiative"
-            type="text"
-            value={formData.initiative}
-            onChange={handleChange}
-            placeholder="Initiative"
+              className={formFilled.initiative ? 'combatant-info' : 'combatant-info-empty'}
+              name="initiative"
+              type="text"
+              value={formData.initiative}
+              onChange={handleChange}
+              placeholder={formFilled.initiative ? "Initiative" : "Enter initiative"}
           />
         </label>
         <div className='lobby-buttons'>
