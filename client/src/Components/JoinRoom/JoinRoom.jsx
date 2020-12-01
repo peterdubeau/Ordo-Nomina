@@ -27,13 +27,17 @@ export default function JoinRoom() {
   const history = useHistory()
 
   const handleSubmit = async () => {
-    let roomId = await readGame(formData.code.toUpperCase())
-    await postUser({
-      username: formData.username,
-      game_id: roomId.id,
-      initiative: formData.initiative,
-      is_admin: false
-    })
+    try {
+      let roomId = await readGame(formData.code.toUpperCase())
+      await postUser({
+        username: formData.username,
+        game_id: roomId.id,
+        initiative: formData.initiative,
+        is_admin: false
+      })
+    } catch (error) {
+      
+    }
   }
 
   function handleEnterRoom(e) {
@@ -52,8 +56,15 @@ export default function JoinRoom() {
         handleSubmit()
         history.push(`/game/${formData.code.toUpperCase()}/user/${formData.username}`)
         e.preventDefault()
+  
       }
-    }
+  }
+  
+  const noInfo = {
+    color: "red",
+    textAlign: "center",
+    margin: "0"
+  }
 
     return (
       <div>
@@ -67,6 +78,7 @@ export default function JoinRoom() {
                 onChange={handleChange}
                 placeholder = { formFilled.code ? 'Game Code' : 'Enter Game Code'}
             />
+            {formFilled.code ? '' : <p style={noInfo}>Please enter a game code</p>}
               <input 
                   className={ formFilled.username ? 'user-input' : 'user-input-empty'}
                   name="username"
@@ -74,15 +86,17 @@ export default function JoinRoom() {
                   value={formData.username}
                   onChange={handleChange}
                   placeholder = { formFilled.username ? 'Character Name' : 'Enter-name'}
-              />
+            />
+            {formFilled.username ? '' : <p style={noInfo}>Please enter your character name</p>}
               <input 
                   className={ formFilled.initiative ? 'user-input' : 'user-input-empty'}
                   name="initiative"
                   type="text"
                   value={formData.initiative}
                   onChange={handleChange}
-                  placeholder = { formFilled.initiative ? 'Initiative' : 'Enter initiative'}
-              />
+                  placeholder={formFilled.initiative ? 'Initiative' : 'Enter initiative'}
+            />
+            {formFilled.initiative ? '' : <p style={noInfo}>Please enter your initiative</p>}
           </label>
           <button onClick={handleEnterRoom}>Enter Room</button>
         </form>
