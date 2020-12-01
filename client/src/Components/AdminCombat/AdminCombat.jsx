@@ -52,7 +52,6 @@ export default function AdminCombat(props) {
           <div className="user-details" key={userMap[id].id}>
             <button className='delete-user-combat' onClick={() => removeCombatant(userMap[id].id)}>X</button>
             <span>{userMap[id].username}</span> <span>{userMap[id].initiative}</span>
-          
           </div>
         </Flipped>)}
       </div>
