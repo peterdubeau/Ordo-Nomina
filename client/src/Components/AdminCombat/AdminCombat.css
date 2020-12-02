@@ -1,6 +1,7 @@
 .user-details{
   display: flex;
-  justify-content: space-between;
+  /* flex-direction: row-reverse; */
+  justify-content: space-around;
   font-size: 30px;
   margin: 40px 0;
 }
@@ -19,6 +20,8 @@
 
 .delete-user-combat{
   border-radius: 100px;
-  background-color: red
+  background-color: red;
+  color: white
 }
+
 
