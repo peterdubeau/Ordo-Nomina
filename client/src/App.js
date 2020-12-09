@@ -36,7 +36,7 @@ export default function App (props) {
         </Route>
 
         <Route path='/join-room'>
-         <JoinRoom />
+        <JoinRoom cableApp={props.cableApp}/>
         </Route>
       
         <Route>
