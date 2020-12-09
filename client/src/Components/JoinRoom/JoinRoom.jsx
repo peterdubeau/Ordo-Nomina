@@ -3,7 +3,11 @@ import { useHistory } from 'react-router-dom'
 import { postUser, readGame } from '../../services/games'
 import '../CreateRoom/CreateRoom.css'
 
-export default function JoinRoom() {
+export default function JoinRoom(props) {
+  
+  if (props.cableApp?.game) {
+    window.location.reload()
+  }
   
   const [formData, setFormData] = useState({
     id: "",
@@ -29,12 +33,17 @@ export default function JoinRoom() {
   const handleSubmit = async () => {
     try {
       let roomId = await readGame(formData.code.toUpperCase())
-      await postUser({
-        username: formData.username,
-        game_id: roomId.id,
-        initiative: formData.initiative,
-        is_admin: false
-      })
+      if (roomId.combatants.length > 0) {
+        alert("Combat already in progress")
+        history.push('/')
+      } else {
+        await postUser({
+          username: formData.username,
+          game_id: roomId.id,
+          initiative: formData.initiative,
+          is_admin: false
+        })
+      }
     } catch (error) {
       
     }
