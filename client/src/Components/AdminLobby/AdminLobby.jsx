@@ -99,8 +99,6 @@ export default function AdminLobby(props) {
           getGameData={props.getGameData}
           code={props.match.params.code}
         />
-        <h3>Room Code: {code}</h3>
-        <h2>{props.match.params.username}'s game!</h2>
         <Flipper key={"flipper-thing"} flipKey={props.gameData} spring={'wobble'}>
           {/* <div className='user-details-container'> */}
           {props.gameData.filter(status => status.is_admin === false).map((user, i) =>
@@ -125,7 +123,7 @@ export default function AdminLobby(props) {
               value={formData.username}
               onChange={handleChange}
               placeholder={formFilled.username ? "Enemy Name" : "Enter Enemy Name"}
-          />
+              />
           <input
               className={formFilled.initiative ? 'combatant-info' : 'combatant-info-empty'}
               name="initiative"
@@ -133,17 +131,19 @@ export default function AdminLobby(props) {
               value={formData.initiative}
               onChange={handleChange}
               placeholder={formFilled.initiative ? "Initiative" : "Enter initiative"}
-          />
+              />
         </label>
         <div className='lobby-buttons'>
           <button className = "add-start-order" onClick={handleSubmit}>Add Enemy</button>
           <button className = "add-start-order" onClick={() => props.sort()}>Quick sort descending</button>
-          <button className= "add-start-order" onClick={startCombat}>Start Combat</button>
+          <button className= "add-start-order" id="start-button" onClick={startCombat}>Start Combat</button>
         </div>
+      <h3>Room Code: {code}</h3>
+      <h2>{props.match.params.username}'s game!</h2>
       </div>
 
       </>)
     }
-
+    
   }
 
