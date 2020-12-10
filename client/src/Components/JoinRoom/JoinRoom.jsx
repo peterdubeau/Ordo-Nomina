@@ -34,8 +34,11 @@ export default function JoinRoom(props) {
     try {
       let roomId = await readGame(formData.code.toUpperCase())
       if (roomId.combatants.length > 0) {
-        alert("Combat already in progress")
-        history.push('/')
+        if (window.confirm("This combat is in progress, would you like to rejoin?")) {
+          history.push(`/combat/${formData.code.toUpperCase()}/player/${formData.username}`)
+        } else {
+          history.push('/')
+        } 
       } else {
         await postUser({
           username: formData.username,
@@ -43,12 +46,15 @@ export default function JoinRoom(props) {
           initiative: formData.initiative,
           is_admin: false
         })
+        
       }
+  
     } catch (error) {
       
     }
-  }
 
+  }
+  
   function handleEnterRoom(e) {
     if (formData.username === '' || formData.initiative === '' || formData.code === '' ||  isNaN(formData.initiative)) {
       if (formData.username === '') {
@@ -62,10 +68,10 @@ export default function JoinRoom(props) {
         e.preventDefault()
       }
     } else {
-        handleSubmit()
-        history.push(`/game/${formData.code.toUpperCase()}/user/${formData.username}`)
-        e.preventDefault()
-  
+      
+      handleSubmit()
+      history.push(`/game/${formData.code.toUpperCase()}/user/${formData.username}`)
+      e.preventDefault()
       }
   }
   
