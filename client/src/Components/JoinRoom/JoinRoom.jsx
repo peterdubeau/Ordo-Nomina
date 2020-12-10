@@ -54,6 +54,7 @@ export default function JoinRoom(props) {
     } catch (error) {
       if (error) {
         alert("Game not found. Please check your Game Code and try again")
+        setIsLoading(false)
       }
     }
 
