@@ -45,12 +45,12 @@ export default function PlayerLobby(props) {
   
     return (<>
       <div className='player-lobby-container'>
-        <GameWebSocket
+        {/* <GameWebSocket
           cableApp={props.cableApp}
           updateApp={props.updateApp}
           getGameData={props.getGameData}
           code={props.match.params.code}
-        />
+        /> */}
         <h2>{hostDetails}'s game</h2>
         {list.filter(status => status.is_admin === false).map(user =>
           <div key={user.id} className='player-lobby-details'>
