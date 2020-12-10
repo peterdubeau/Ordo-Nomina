@@ -51,7 +51,7 @@
 
 .admin-lobby-container{
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   align-items: center;
 }
 
@@ -68,7 +68,7 @@
 
 .lobby-buttons{
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   align-items: center;
   /* margin: 10px; */
 }
@@ -85,7 +85,7 @@
 
 .user-details{
   display: flex;
-  justify-content: space-around;   
+  justify-content: space-between;   
   align-items: center;
   border: 8px solid rgb(190, 153, 73);
   border-style: groove;
@@ -109,6 +109,10 @@
   font-size:15px;
   background-color: red;
   color: white;
+}
+
+#start-button{
+  background-color: red
 }
 
 @media only screen and (max-width: 500px) {
