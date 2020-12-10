@@ -35,10 +35,9 @@ export default function playerCombat(props) {
     return <Redirect to='/' />
   }
   
-  function removeCombatant(id, e) {
+  function removeCombatant(id) {
     game.combatants.splice(game.combatants?.indexOf(id), 1)
     removeCombatants(props.match.params.code, game.combatants)
-    e.preventDefault()
   }
   
   
