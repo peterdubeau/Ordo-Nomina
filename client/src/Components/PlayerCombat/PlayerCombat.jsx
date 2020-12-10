@@ -40,6 +40,19 @@ export default function playerCombat(props) {
     removeCombatants(props.match.params.code, game.combatants)
   }
   
+  if (props.gameData.users?.length === 0) {
+    return (<>
+      <GameWebSocket
+    cableApp={props.cableApp}
+    updateApp={props.updateApp}
+    getGameData={props.getGameData}
+    code={props.match.params.code}
+      />
+      
+    <h3>"Loading game..."</h3>
+    
+    </>)
+  }
   
   return (<>
     <div className='combat-container'>
