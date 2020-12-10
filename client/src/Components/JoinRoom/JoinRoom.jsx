@@ -8,7 +8,7 @@ export default function JoinRoom(props) {
   if (props.cableApp?.game) {
     window.location.reload()
   }
-  
+  const [ isLoading, setIsLoading ] = useState(false)
   const [formData, setFormData] = useState({
     id: "",
     username: "",
@@ -32,10 +32,12 @@ export default function JoinRoom(props) {
 
   const handleSubmit = async () => {
     try {
+      setIsLoading(true)
       let roomId = await readGame(formData.code.toUpperCase())
       if (roomId.combatants.length > 0) {
         if (window.confirm("This combat is in progress, would you like to rejoin?")) {
           history.push(`/combat/${formData.code.toUpperCase()}/player/${formData.username}`)
+          return false
         } else {
           history.push('/')
         } 
@@ -46,16 +48,18 @@ export default function JoinRoom(props) {
           initiative: formData.initiative,
           is_admin: false
         })
-        
+        history.push(`/game/${formData.code.toUpperCase()}/user/${formData.username}`)
       }
   
     } catch (error) {
-      
+      if (error) {
+        alert("Game not found. Please check your Game Code and try again")
+      }
     }
 
   }
   
-  function handleEnterRoom(e) {
+  async function handleEnterRoom(e) {
     if (formData.username === '' || formData.initiative === '' || formData.code === '' ||  isNaN(formData.initiative)) {
       if (formData.username === '') {
         setFormFilled({ ...formFilled, username: false })
@@ -68,9 +72,8 @@ export default function JoinRoom(props) {
         e.preventDefault()
       }
     } else {
-      
       handleSubmit()
-      history.push(`/game/${formData.code.toUpperCase()}/user/${formData.username}`)
+      
       e.preventDefault()
       }
   }
@@ -113,7 +116,9 @@ export default function JoinRoom(props) {
             />
             {formFilled.initiative ? '' : <p style={noInfo}>Please enter your initiative</p>}
           </label>
-          <button onClick={handleEnterRoom}>Enter Room</button>
+          <button disabled={isLoading} onClick={handleEnterRoom}>
+          {isLoading ? "Entering Room" : "Enter Room"}
+          </button>
         </form>
       </div>
     )
