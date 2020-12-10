@@ -68,10 +68,13 @@ export default function playerCombat(props) {
             <Flipped key={userMap[id].id + `flipped guy`} flipId={userMap[id].id}>
           <div className="user-details" key={userMap[id].id}>
           {(userMap[id].username === props.match.params.username ? 
-                <button className='delete-user-combat' onClick={() => removeCombatant(userMap[id].id)}>X</button>
+                <button className='delete-user-combat' onClick={() => removeCombatant(userMap[id].id)}>
+                  X
+                </button>
                 :
-              '')}
-              <span></span><span className="left">{userMap[id].username}</span><span> </span>
+              <span></span>)}
+              <span className="left">{userMap[id].username}</span>
+              <span></span>
           </div>
 
           </Flipped >

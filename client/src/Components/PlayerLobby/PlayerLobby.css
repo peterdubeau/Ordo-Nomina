@@ -15,12 +15,11 @@ a{
 .player-lobby-details{
   display: flex;
   flex-direction: row;
-  justify-content: center;  
+  justify-content: center; 
   border: 8px solid rgb(190, 153, 73);
   border-style: groove;
   border-radius: 10px;
-  margin: 10px;
-  /* width: 200px; */
+  margin: 10px 20%;
 }
 
 .user-text{
@@ -31,4 +30,14 @@ button#delete-self{
   border-radius: 100%;
   font-size:15px;
   background-color: red;
+}
+
+@media only screen and (max-width: 500px) {
+  .player-lobby-details{
+    margin: 10px 0;
+  }
+
+  .user-text{
+    font-size: 20px;
+  }
 }

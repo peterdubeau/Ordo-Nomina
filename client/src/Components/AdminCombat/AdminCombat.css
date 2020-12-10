@@ -1,10 +1,11 @@
 .user-details{
   display: flex;
   /* flex-direction: row-reverse; */
-  justify-content: space-around;
+  justify-content: space-between;
   font-size: 30px;
   margin: 40px 0;
 }
+
 
 .room-header{
   display: flex;

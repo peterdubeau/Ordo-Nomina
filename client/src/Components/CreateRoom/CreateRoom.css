@@ -1,4 +1,7 @@
-
+label{
+  display: flex;
+  flex-direction: column;
+}
 .create-user{
   display: flex;
   flex-direction: column;
