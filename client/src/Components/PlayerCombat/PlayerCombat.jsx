@@ -35,12 +35,24 @@ export default function playerCombat(props) {
     return <Redirect to='/' />
   }
   
-  function removeCombatant(id, e) {
+  function removeCombatant(id) {
     game.combatants.splice(game.combatants?.indexOf(id), 1)
     removeCombatants(props.match.params.code, game.combatants)
-    e.preventDefault()
   }
   
+  if (props.gameData.users?.length === 0) {
+    return (<>
+      <GameWebSocket
+    cableApp={props.cableApp}
+    updateApp={props.updateApp}
+    getGameData={props.getGameData}
+    code={props.match.params.code}
+      />
+      
+    <h3>"Loading game..."</h3>
+    
+    </>)
+  }
   
   return (<>
     <div className='combat-container'>
@@ -56,11 +68,11 @@ export default function playerCombat(props) {
             <Flipped key={userMap[id].id + `flipped guy`} flipId={userMap[id].id}>
           <div className="user-details" key={userMap[id].id}>
           {(userMap[id].username === props.match.params.username ? 
-                <button id='delete' onClick={() => removeCombatant(userMap[id].id)}>X</button>
+                <button className='delete-user-combat' onClick={() => removeCombatant(userMap[id].id)}>X</button>
                 :
               '')}
-              {userMap[id].username}
-              </div>
+              <span></span><span className="left">{userMap[id].username}</span><span> </span>
+          </div>
 
           </Flipped >
         )}
