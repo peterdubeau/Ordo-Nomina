@@ -73,10 +73,6 @@
   /* margin: 10px; */
 }
 
-#move-up, #move-down{
-  border-radius: 10px;
-  /* margin: auto 5px; */
-}
 
 .user-details-container{
   display: flex;
@@ -103,6 +99,9 @@
   display:flex;
 }
 
+.room-code{
+  font-weight: 2000;
+}
 
 #delete-user{
   border-radius: 100%;
@@ -113,6 +112,10 @@
 
 #start-button{
   background-color: red
+}
+
+#move-up, #move-down{
+  border-radius: 10px;
 }
 
 @media only screen and (max-width: 500px) {
