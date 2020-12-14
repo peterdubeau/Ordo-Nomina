@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { useHistory } from 'react-router-dom'
 import { Flipped, Flipper } from 'react-flip-toolkit'
 import { readGame, postUser, deleteUser, sendCombatants } from '../../services/games'
@@ -7,6 +7,23 @@ import './AdminLobby.css'
 
 export default function AdminLobby(props) {
   
+    const baseUrl = process.env.NODE_ENV === 'production'
+      ? `https://`
+      : `http://`
+
+    const [copySuccess, setCopySuccess] = useState('');
+    const textAreaRef = useRef(null);
+  
+    function copyToClipboard(e) {
+      textAreaRef.current.select();
+      document.execCommand('copy');
+      // This is just personal preference.
+      // I prefer to not show the whole text area selected.
+      e.target.focus();
+      setCopySuccess('Copied!');
+    };
+
+
   const history = useHistory();
   
   const [formData, setFormData] = useState({
@@ -21,7 +38,7 @@ export default function AdminLobby(props) {
     username: true,
     initiative: true
   });
-  
+
   const handleSubmit = async (e) => {
     if (formData.username.trim().length === 0 || isNaN(formData.initiative) || formData.initiative.trim().length === 0) {
       if (formData.username.trim().length === 0 || formData.username === '') {
@@ -90,7 +107,7 @@ export default function AdminLobby(props) {
         sendCombatants(code, combatants)
         history.push(`/combat/${code}/DM/${props.match.params.username}`)
       }
-
+      
       return (<>
       <div className='admin-lobby-container'>
         <GameWebSocket
@@ -99,6 +116,27 @@ export default function AdminLobby(props) {
           getGameData={props.getGameData}
           code={props.match.params.code}
         />
+          <button
+            id='link'
+            className='add-start-order'
+            onClick={copyToClipboard}
+        >
+          Copy Game Link to Clipboard
+        </button>
+        <input
+          className='combatant-info'
+            style={{
+              fontSize: '1px',
+              margin: '0',
+              background: "transparent",
+              border: 'none',
+              color: 'transparent'
+            }}
+          ref={textAreaRef}
+          value={`${baseUrl}${window.location.host}/link/${code}`}
+          readOnly
+          />
+          <br />
         <Flipper key={"flipper-thing"} flipKey={props.gameData} spring={'wobble'}>
           {/* <div className='user-details-container'> */}
           {props.gameData.filter(status => status.is_admin === false).map((user, i) =>
@@ -138,7 +176,7 @@ export default function AdminLobby(props) {
           <button className = "add-start-order" onClick={() => props.sort()}>Quick sort descending</button>
           <button className= "add-start-order" id="start-button" onClick={startCombat}>Start Combat</button>
         </div>
-      <h3>Room Code: {code}</h3>
+          <h3>Room Code: {code}</h3>
       <h2>{props.match.params.username}'s game!</h2>
       </div>
 
