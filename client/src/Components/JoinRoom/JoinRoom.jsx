@@ -30,18 +30,35 @@ export default function JoinRoom(props) {
 
   const history = useHistory()
 
+  const checkForUser = (user, room) => {
+    let exists = room.users.filter(username => username.username === user)
+    if (exists.length === 0) {
+      return false
+    } else {
+      return true
+    }
+  }
+  
   const handleSubmit = async () => {
+    let userStorage
     try {
       setIsLoading(true)
       let roomId = await readGame(formData.code.toUpperCase())
       if (roomId.combatants.length > 0) {
         if (window.confirm("This combat is in progress, would you like to rejoin?")) {
-          history.push(`/combat/${formData.code.toUpperCase()}/player/${formData.username}`)
-          return false
+          console.log(checkForUser(formData.username, roomId))
+          if (checkForUser(formData.username, roomId)) {
+            history.push(`/combat/${formData.code.toUpperCase()}/player/${formData.username}`)
+          } else {
+            userStorage = localStorage.getItem('username')
+            history.push(`/combat/${formData.code.toUpperCase()}/player/${userStorage}`)
+            return false
+          } 
         } else {
           history.push('/')
         } 
       } else {
+        localStorage.setItem('username', formData.username)
         await postUser({
           username: formData.username,
           game_id: roomId.id,
