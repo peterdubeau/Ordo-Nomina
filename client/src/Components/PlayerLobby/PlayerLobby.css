@@ -26,6 +26,10 @@ a{
   font-size: 30px;
 }
 
+.room-code{
+  text-align: center;
+}
+
 button#delete-self{
   border-radius: 100%;
   font-size:15px;
