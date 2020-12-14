@@ -7,6 +7,10 @@ import './AdminLobby.css'
 
 export default function AdminLobby(props) {
   
+    const baseUrl = process.env.NODE_ENV === 'production'
+      ? `https://`
+      : `http://`
+
     const [copySuccess, setCopySuccess] = useState('');
     const textAreaRef = useRef(null);
   
@@ -129,7 +133,7 @@ export default function AdminLobby(props) {
               color: 'transparent'
             }}
           ref={textAreaRef}
-          value={`${window.location.host}/link/${code}`}
+          value={`${baseUrl}${window.location.host}/link/${code}`}
           readOnly
           />
           <br />
