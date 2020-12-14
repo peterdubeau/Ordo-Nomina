@@ -2,6 +2,7 @@ import React from 'react';
 import { Route } from 'react-router-dom'
 import CreateRoom from './Components/CreateRoom/CreateRoom'
 import JoinRoom from './Components/JoinRoom/JoinRoom'
+import JoinLink from './Components/JoinLink/JoinLink'
 import Main from './Components/Main/Main'
 import Home from './Components/Home/Home'
 import './App.css';
@@ -36,12 +37,16 @@ export default function App (props) {
         </Route>
 
         <Route path='/join-room'>
-        <JoinRoom cableApp={props.cableApp}/>
+          <JoinRoom cableApp={props.cableApp}/>
         </Route>
       
         <Route>
           <Main cableApp={props.cableApp}/>
-        </Route>
+      </Route>
+      
+      <Route exact path='/link/:code'>
+        <JoinLink />
+      </Route>
 
         
       </div>
