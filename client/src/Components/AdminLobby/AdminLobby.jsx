@@ -116,6 +116,7 @@ export default function AdminLobby(props) {
           getGameData={props.getGameData}
           code={props.match.params.code}
         />
+          <h3 className='room-code'>Room Code: {code}</h3>
           <button
             id='link'
             className='add-start-order'
@@ -176,7 +177,6 @@ export default function AdminLobby(props) {
           <button className = "add-start-order" onClick={() => props.sort()}>Quick sort descending</button>
           <button className= "add-start-order" id="start-button" onClick={startCombat}>Start Combat</button>
         </div>
-          <h3>Room Code: {code}</h3>
       <h2>{props.match.params.username}'s game!</h2>
       </div>
 

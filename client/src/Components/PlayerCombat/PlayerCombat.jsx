@@ -82,5 +82,6 @@ export default function playerCombat(props) {
         </div>
       </Flipper>
     </div>
+    <h3 className='room-code'>Room Code: {props.gameData.game.code}</h3>
   </>)
 }
