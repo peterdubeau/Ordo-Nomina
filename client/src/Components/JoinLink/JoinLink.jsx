@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory, withRouter } from 'react-router-dom'
 import { postUser, readGame } from '../../services/games'
 import '../CreateRoom/CreateRoom.css'
 
-export default function JoinRoom(props) {
+function JoinLink(props) {
   
   if (props.cableApp?.game) {
     window.location.reload()
@@ -13,9 +13,11 @@ export default function JoinRoom(props) {
     id: "",
     username: "",
     initiative: "",
-    code: '',
+    code: props.match.params.code,
     is_admin: false
   })
+
+  console.log(props)
   
   const [formFilled, setFormFilled] = useState({
     username: true,
@@ -71,7 +73,7 @@ export default function JoinRoom(props) {
     } catch (error) {
       if (error) {
         alert("Game not found. Please check your Game Code and try again")
-        setIsLoading(false)
+        history.push('/')
       }
     }
 
@@ -106,14 +108,6 @@ export default function JoinRoom(props) {
       <div>
         <form className='create-user'>
           <label >
-            <input 
-              className={ formFilled.code ? 'user-input' : 'user-input-empty'}
-                name="code"
-                type="text"
-                value={formData.code.toUpperCase()}
-                onChange={handleChange}
-                placeholder = { formFilled.code ? 'Game Code' : 'Enter Game Code'}
-            />
             {formFilled.code ? '' : <p style={noInfo}>Please enter a game code</p>}
               <input 
                   className={ formFilled.username ? 'user-input' : 'user-input-empty'}
@@ -142,3 +136,4 @@ export default function JoinRoom(props) {
     )
   }
 
+export default withRouter(JoinLink)
