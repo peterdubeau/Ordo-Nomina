@@ -34,7 +34,7 @@ export default function AdminCombat(props) {
   }
 
   function endCombat() {
-    if (window.confirm("Are you sure you want to end combat?")) {
+    if (window.confirm("Are you sure you want to end your session? This will delete all users and the current game")) {
       destroyGame(game.code)
       history.push('/')
       window.location.reload()
