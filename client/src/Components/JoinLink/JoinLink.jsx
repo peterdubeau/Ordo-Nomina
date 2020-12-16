@@ -107,7 +107,7 @@ function JoinLink(props) {
     return (
       <div>
         <form className='create-user'>
-          <label >
+          <label className='enter-label'>
             {formFilled.code ? '' : <p style={noInfo}>Please enter a game code</p>}
               <input 
                   className={ formFilled.username ? 'user-input' : 'user-input-empty'}

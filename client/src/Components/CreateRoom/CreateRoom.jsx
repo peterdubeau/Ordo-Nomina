@@ -52,7 +52,7 @@ function CreateRoom(props) {
 
   return (<div >
     <form className="create-user">
-      <label >
+      <label className='enter-label'>
         <input
           className={formFilled ? "user-input" : "user-input-empty"}
           name="username"

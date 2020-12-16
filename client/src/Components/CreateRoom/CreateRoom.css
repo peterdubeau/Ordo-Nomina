@@ -68,7 +68,7 @@ label{
 
 @media only screen and (max-width: 420px) {
 
-  label{
+  .enter-label{
     margin-left: 40px;
   }
 
