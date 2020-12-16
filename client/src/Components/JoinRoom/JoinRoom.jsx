@@ -105,7 +105,7 @@ export default function JoinRoom(props) {
     return (
       <div>
         <form className='create-user'>
-          <label >
+          <label className='enter-label'>
             <input 
               className={ formFilled.code ? 'user-input' : 'user-input-empty'}
                 name="code"
