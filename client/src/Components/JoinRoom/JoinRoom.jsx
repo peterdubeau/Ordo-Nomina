@@ -50,7 +50,7 @@ export default function JoinRoom(props) {
           if (checkForUser(formData.username, roomId)) {
             history.push(`/combat/${formData.code.toUpperCase()}/player/${formData.username}`)
           } else {
-            userStorage = localStorage.getItem('username')
+            userStorage = sessionStorage.getItem('username')
             history.push(`/combat/${formData.code.toUpperCase()}/player/${userStorage}`)
             return false
           } 
@@ -58,7 +58,7 @@ export default function JoinRoom(props) {
           history.push('/')
         } 
       } else {
-        localStorage.setItem('username', formData.username)
+        sessionStorage.setItem('username', formData.username)
         await postUser({
           username: formData.username,
           game_id: roomId.id,

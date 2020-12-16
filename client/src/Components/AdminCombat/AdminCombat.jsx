@@ -26,9 +26,11 @@ export default function AdminCombat(props) {
   }
 
   function sendToLobby() {
-    toLobby(game.code, [])
-    history.push(`/game/${game.code}/DM/${props.match.params.username}`)
-    window.location.reload()
+    if (window.confirm("Are you sure you want to end combat?")) {
+      toLobby(game.code, [])
+      history.push(`/game/${game.code}/DM/${props.match.params.username}`)
+      window.location.reload()
+    }
   }
 
   function endCombat() {

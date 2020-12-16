@@ -9,7 +9,7 @@ function JoinLink(props) {
     window.location.reload()
   }
   const [isLoading, setIsLoading] = useState(false)
-  let previousName = localStorage.getItem('username')
+  let previousName = sessionStorage.getItem('username')
   let standIn = previousName == null ? "" : previousName
   const [formData, setFormData] = useState({
     id: "",
@@ -48,11 +48,10 @@ function JoinLink(props) {
       let roomId = await readGame(formData.code.toUpperCase())
       if (roomId.combatants.length > 0) {
         if (window.confirm("This combat is in progress, would you like to rejoin?")) {
-          console.log(checkForUser(formData.username, roomId))
           if (checkForUser(formData.username, roomId)) {
             history.push(`/combat/${formData.code.toUpperCase()}/player/${formData.username}`)
           } else {
-            userStorage = localStorage.getItem('username')
+            userStorage = sessionStorage.getItem('username')
             history.push(`/combat/${formData.code.toUpperCase()}/player/${userStorage}`)
             return false
           } 
@@ -60,7 +59,7 @@ function JoinLink(props) {
           history.push('/')
         } 
       } else {
-        localStorage.setItem('username', formData.username)
+        sessionStorage.setItem('username', formData.username)
         await postUser({
           username: formData.username,
           game_id: roomId.id,
