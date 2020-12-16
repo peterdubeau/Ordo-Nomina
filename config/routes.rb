@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get '/combat/:code/', to: 'games#combat_view'
   put 'game/:code/turn', to: 'games#take_turn'
   put 'game/:code/kill', to: 'games#remove_character'
+  put 'game/:code/clear', to: 'games#clear_room'
   
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

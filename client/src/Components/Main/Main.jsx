@@ -163,6 +163,17 @@ class Main extends Component {
           combatants: newGame.combatants
         }
       })
+    } else if (newGame.type === "to_lobby") {
+      console.log(newGame)
+      window.location.reload()
+      this.setState({
+        inCombat: "lobby",
+        currentGame: {
+          game: {},
+          users: [],
+          combatants: ''
+        }
+      })
     }
   }
 
