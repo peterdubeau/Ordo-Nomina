@@ -2,7 +2,7 @@ import React from 'react'
 import { useHistory } from 'react-router-dom'
 import GameWebSocket from '../GameWebSocket/GameWebSocket'
 import { Flipped, Flipper } from 'react-flip-toolkit'
-import { takeTurn, destroyGame, removeCombatants } from '../../services/games'
+import { takeTurn, destroyGame, removeCombatants, toLobby } from '../../services/games'
 import '../AdminCombat/AdminCombat.css'
 
 export default function AdminCombat(props) {
@@ -25,8 +25,16 @@ export default function AdminCombat(props) {
     removeCombatants(props.match.params.code, game.combatants)
   }
 
-  function endCombat() {
+  function sendToLobby() {
     if (window.confirm("Are you sure you want to end combat?")) {
+      toLobby(game.code, [])
+      history.push(`/game/${game.code}/DM/${props.match.params.username}`)
+      window.location.reload()
+    }
+  }
+
+  function endCombat() {
+    if (window.confirm("Are you sure you want to end your session? This will delete all users and the current game")) {
       destroyGame(game.code)
       history.push('/')
       window.location.reload()
@@ -42,6 +50,7 @@ export default function AdminCombat(props) {
     />
     <Flipper className='combat-container' key={"flipper-thing"} flipKey={props.gameData} spring={'wobble'}>
       <button className='end-combat' onClick={endCombat}>End Combat</button> 
+      <button className='end-combat' onClick={sendToLobby}>To Lobby</button> 
       <div className='user-list'>
       {game.combatants?.map(id =>
         <Flipped key={userMap[id].id + `flipped guy`} flipId={userMap[id].id}>
