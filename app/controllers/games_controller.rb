@@ -71,6 +71,8 @@ class GamesController < ApplicationController
     else
       render json: @game.errors, status: :unprocessable_entity
   end
+
+  GamesChannel.broadcast_to(@game, { game: @game, type: "to_lobby" } )
 end
 
   # PUT /game/:code/start

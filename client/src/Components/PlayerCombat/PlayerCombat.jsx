@@ -30,6 +30,11 @@ export default function playerCombat(props) {
     alert("The DM has ended combat")
     return <Redirect to='/' />
   }
+
+  if (props.end === 'lobby') {
+    alert("The DM has ended combat")
+    return <Redirect to={`/link/${props.match.params.code}`} />
+  }
   
   if (props.gameData?.combatants === undefined) {
     return <Redirect to='/' />

@@ -44,6 +44,11 @@ export const removeCombatants = async (code, combatants) =>{
   return res.data 
 }
 
+export const toLobby = async (code, combatants) => {
+  const res = await api.put(`/game/${code}/clear`, { code, combatants })
+  return res.data
+}
+
 export const takeTurn = async (code, gameData) => {
   const res = await api.put(`/game/${code}/turn`, { code, combatants: gameData.combatants })
   return res.data
