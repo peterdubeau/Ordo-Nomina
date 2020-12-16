@@ -59,6 +59,20 @@ class GamesController < ApplicationController
     @game.destroy
   end
 
+  def clear_room
+    @game = Game.find_by code: (params[:code])
+    
+    if @game.update(game_params)
+      @users = @game.users.select {|user| user.is_admin == false}
+      @users.each do 
+        |x| x.destroy
+      end
+      render json: @game
+    else
+      render json: @game.errors, status: :unprocessable_entity
+  end
+end
+
   # PUT /game/:code/start
   def start_combat
     @game = Game.find_by code: (params[:code])
