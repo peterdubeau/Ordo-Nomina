@@ -65,3 +65,13 @@ label{
   margin: 20px;
   font-size: 30px;
 }
+
+@media only screen and (max-width: 500px) {
+
+  .create-user{
+    margin: 40px 5%
+  }
+  .user-input[type=text]{
+    margin: 40px auto;
+  }
+}
