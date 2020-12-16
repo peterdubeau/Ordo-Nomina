@@ -66,16 +66,16 @@ label{
   font-size: 30px;
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 420px) {
 
   label{
-    margin: 40px 20px;
+    margin-left: 40px;
   }
 
   .create-user{
-    margin: 40px 5%
+    margin-left: 40px;
   }
   .user-input[type=text]{
-    margin: 40px 20px;
+    margin-left: 40px;
   }
 }
