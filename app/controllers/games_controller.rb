@@ -61,6 +61,7 @@ class GamesController < ApplicationController
 
   def clear_room
     @game = Game.find_by code: (params[:code])
+    GamesChannel.broadcast_to(@game, { game: @game, type: "to_lobby" } )
     
     if @game.update(game_params)
       @users = @game.users.select {|user| user.is_admin == false}
@@ -72,7 +73,6 @@ class GamesController < ApplicationController
       render json: @game.errors, status: :unprocessable_entity
   end
 
-  GamesChannel.broadcast_to(@game, { game: @game, type: "to_lobby" } )
 end
 
   # PUT /game/:code/start

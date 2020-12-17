@@ -49,8 +49,15 @@ export default function AdminCombat(props) {
       code={props.match.params.code}
     />
     <Flipper className='combat-container' key={"flipper-thing"} flipKey={props.gameData} spring={'wobble'}>
-      <button className='end-combat' onClick={endCombat}>End Combat</button> 
-      <button className='end-combat' onClick={sendToLobby}>To Lobby</button> 
+      <div className="exit-buttons">
+        <button className='end-combat' onClick={endCombat}
+        style={{backgroundColor: "red"}}>End Game Session</button> 
+        <button className='end-combat' onClick={sendToLobby}>End Combat</button> 
+      <button
+        onClick={() => handleTakeTurn(game)}
+        className="next-turn"
+      >Next Turn</button>
+      </div>
       <div className='user-list'>
       {game.combatants?.map(id =>
         <Flipped key={userMap[id].id + `flipped guy`} flipId={userMap[id].id}>
@@ -60,7 +67,6 @@ export default function AdminCombat(props) {
           </div>
         </Flipped>)}
       </div>
-      <button onClick={() => handleTakeTurn(game)}>Next Turn</button>
       </Flipper>
     <h3 className='room-code'>Room Code: {game.code}</h3>
   </>)
