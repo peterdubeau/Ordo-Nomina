@@ -48,6 +48,7 @@ export default function AdminCombat(props) {
       getGameData={props.getGameData}
       code={props.match.params.code}
     />
+    <h3 className='room-code'>Room Code: {game.code}</h3>
     <Flipper className='combat-container' key={"flipper-thing"} flipKey={props.gameData} spring={'wobble'}>
       <div className="exit-buttons">
         <button className='end-combat' onClick={endCombat}
@@ -68,6 +69,5 @@ export default function AdminCombat(props) {
         </Flipped>)}
       </div>
       </Flipper>
-    <h3 className='room-code'>Room Code: {game.code}</h3>
   </>)
 }

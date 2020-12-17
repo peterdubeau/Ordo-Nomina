@@ -11,7 +11,7 @@
 }
 
 .end-combat{
-  margin: 30px 30px 0px 30px;
+  margin: 0px 30px 0px 30px;
 }
 
 .exit-buttons{
@@ -24,14 +24,14 @@
 .next-turn{
   position: fixed;
   bottom: 20px;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   padding: 20px;
   width: 80%;
   z-index: 90;
 }
 
 .room-code{
-  margin-top: 60px;
+  margin-top: 20px;
 }
 
 .room-header{
