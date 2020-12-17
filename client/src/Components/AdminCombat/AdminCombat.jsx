@@ -52,7 +52,11 @@ export default function AdminCombat(props) {
     <Flipper className='combat-container' key={"flipper-thing"} flipKey={props.gameData} spring={'wobble'}>
       <div className="exit-buttons">
         <button className='end-combat' onClick={endCombat}
-        style={{backgroundColor: "red"}}>End Game Session</button> 
+          style={{
+            backgroundColor: "darkred",
+            color: "lightgrey"
+          }}>
+          End Game Session</button> 
         <button className='end-combat' onClick={sendToLobby}>End Combat</button> 
       <button
         onClick={() => handleTakeTurn(game)}

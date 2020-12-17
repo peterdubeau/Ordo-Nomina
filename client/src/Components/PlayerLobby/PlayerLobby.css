@@ -33,7 +33,8 @@ a{
 button#delete-self{
   border-radius: 100%;
   font-size:15px;
-  background-color: red;
+  color: white;
+  background-color: darkred;
 }
 
 @media only screen and (max-width: 500px) {

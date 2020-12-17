@@ -106,12 +106,13 @@
 #delete-user{
   border-radius: 100%;
   font-size:15px;
-  background-color: red;
+  background-color: darkred;
   color: white;
 }
 
 #start-button{
-  background-color: red
+  color: lightgrey;
+  background-color: darkred
 }
 
 #move-up, #move-down{
