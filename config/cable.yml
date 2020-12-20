@@ -6,5 +6,5 @@ test:
 
 production:
   adapter: redis
-  url: redis://redistogo:638cc75fe3d5124adfb40f6fbf4c23ef@scat.redistogo.com:10567
+  url: ENV:['REDISTOGO_URL']
   # channel_prefix: tracker_production
