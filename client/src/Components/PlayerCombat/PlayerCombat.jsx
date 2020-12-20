@@ -44,7 +44,7 @@ export default function playerCombat(props) {
     game.combatants.splice(game.combatants?.indexOf(id), 1)
     removeCombatants(props.match.params.code, game.combatants)
   }
-  
+  console.log(props.gameData)
   if (props.gameData.users?.length === 0) {
     return (<>
       <GameWebSocket

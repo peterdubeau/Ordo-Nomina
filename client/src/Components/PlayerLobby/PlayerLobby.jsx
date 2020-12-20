@@ -29,6 +29,8 @@ export default function PlayerLobby(props) {
     return <Redirect to={`/combat/${props.match.params.code}/player/${props.match.params.username}`} />
   }
 
+  console.log(props.gameData)
+
   if (props.gameData.users?.length === 0) {
     return (<>
       <GameWebSocket
@@ -38,7 +40,10 @@ export default function PlayerLobby(props) {
     code={props.match.params.code}
       />
       
-    <h3>"Loading game..."</h3>
+    <h2 style={{
+          textAlign: "center",
+          marginTop: "40px"
+        }}>Loading game...</h2>
     
     </>)
   }
