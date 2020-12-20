@@ -164,7 +164,6 @@ class Main extends Component {
         }
       })
     } else if (newGame.type === "to_lobby") {
-      console.log(newGame)
       window.location.reload()
       this.setState({
         inCombat: "lobby",

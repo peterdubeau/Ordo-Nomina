@@ -1,30 +1,32 @@
 import React from 'react'
 import { Redirect } from 'react-router-dom'
 import GameWebSocket from '../GameWebSocket/GameWebSocket'
-import Ding from '../../sounds/Ding-sound-effect.mp3'
+// import Ding from '../../sounds/Ding-sound-effect.mp3'
 import { removeCombatants } from '../../services/games'
 import { Flipped, Flipper } from 'react-flip-toolkit'
 import '../AdminCombat/AdminCombat.css' 
 
-export default function playerCombat(props) {
+export default function PlayerCombat(props) {
+
+  
   const { game } = props.gameData
   const userMap = game.users?.reduce((map, user) => {
     map[user.id] = user;
     return map;
   }, {});
+  
+  // let onDeck = props.gameData.users.filter(id => id.id === props.gameData.combatants[1])
 
+  // let onDeckName = onDeck[0]?.username
+  // function onDeckAlert() {
+  //   const audio = new Audio(Ding)
+  //   audio.play()
+  // }
   
-  let onDeck = props.gameData.users.filter(id => id.id === props.gameData.combatants[1])
-  let onDeckName = onDeck[0]?.username
-  
-  function onDeckAlert() {
-    const audio = new Audio(Ding)
-    // audio.play()
-  }
-  
-  if (onDeckName === props.match.params.username) {
-    onDeckAlert()
-  }
+  // if (onDeckName === props.match.params.username) {
+  //   onDeckAlert()
+  // }
+
   
   if (props.end === false) {
     alert("The DM has ended combat")
@@ -37,6 +39,7 @@ export default function playerCombat(props) {
   }
   
   if (props.gameData?.combatants === undefined) {
+    alert(`Game (${props.match.params.code}) not found. Make sure you're using the right code`)
     return <Redirect to='/' />
   }
   

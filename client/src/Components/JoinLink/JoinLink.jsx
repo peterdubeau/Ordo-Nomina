@@ -9,8 +9,10 @@ function JoinLink(props) {
     window.location.reload()
   }
   const [isLoading, setIsLoading] = useState(false)
+  
   let previousName = sessionStorage.getItem('username')
   let standIn = previousName == null ? "" : previousName
+  
   const [formData, setFormData] = useState({
     id: "",
     username: standIn,
@@ -18,7 +20,7 @@ function JoinLink(props) {
     code: props.match.params.code,
     is_admin: false
   })
-  console.log(props.match.params.code)
+
   const [formFilled, setFormFilled] = useState({
     username: true,
     initiative: true,

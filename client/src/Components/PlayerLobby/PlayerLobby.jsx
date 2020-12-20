@@ -1,12 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import GameWebSocket from '../GameWebSocket/GameWebSocket'
 import { deleteUser } from '../../services/games'
 import { Redirect, Link } from 'react-router-dom'
 import './PlayerLobby.css'
 
 export default function PlayerLobby(props) {
-
-  const [isLoading, setIsLoading] = useState(true)
 
   
   let host = props.gameData.users.filter(host => host.is_admin === true)
@@ -38,7 +36,7 @@ export default function PlayerLobby(props) {
     code={props.match.params.code}
       />
       
-    <h3>"Loading game..."</h3>
+    <h3 style={{textAlign: "center"}}>Loading game...</h3>
     
     </>)
   }

@@ -11,7 +11,6 @@ export default function AdminLobby(props) {
       ? `https://`
       : `http://`
 
-    const [copySuccess, setCopySuccess] = useState('');
     const textAreaRef = useRef(null);
   
     function copyToClipboard(e) {
@@ -20,7 +19,6 @@ export default function AdminLobby(props) {
       // This is just personal preference.
       // I prefer to not show the whole text area selected.
       e.target.focus();
-      setCopySuccess('Copied!');
     };
 
 
@@ -139,20 +137,18 @@ export default function AdminLobby(props) {
           />
           <br />
         <Flipper key={"flipper-thing"} flipKey={props.gameData} spring={'wobble'}>
-          {/* <div className='user-details-container'> */}
-          {props.gameData.filter(status => status.is_admin === false).map((user, i) =>
-            <Flipped key={user.id + " flip key"} flipId={user.id}>
-              <div className='user-details' key={user.id}>
-                <button className ="user-options" id="delete-user" onClick={() => deleteUser(user.id)}>X</button>
-                <p>{user.username} : {user.initiative} </p>
-                <div className='up-down'>
-                  <button className="user-options" id="move-up" onClick={() => props.arrange(i)}>↑</button> 
-                  <button className="user-options" id="move-down" onClick={() => props.arrangeDown(i)}>↓</button>
+            {props.gameData.filter(status => status.is_admin === false).map((user, i) =>
+              <Flipped key={user.id + " flip key"} flipId={user.id}>
+                <div className='user-details' key={user.id}>
+                  <button className="user-options" id="delete-user" onClick={() => deleteUser(user.id)}>X</button>
+                  <p>{user.username} : {user.initiative} </p>
+                  <div className='up-down'>
+                    <button className="user-options" id="move-up" onClick={() => props.arrange(i)}>↑</button>
+                    <button className="user-options" id="move-down" onClick={() => props.arrangeDown(i)}>↓</button>
+                  </div>
                 </div>
-              </div>
-           </Flipped>
+              </Flipped>
             )}
-          {/* </div> */}
         </Flipper>
         <label className='combatant-container'>
           <input
