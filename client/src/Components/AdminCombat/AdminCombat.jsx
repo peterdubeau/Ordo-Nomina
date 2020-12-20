@@ -1,5 +1,5 @@
 import React from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory, Link } from 'react-router-dom'
 import GameWebSocket from '../GameWebSocket/GameWebSocket'
 import { Flipped, Flipper } from 'react-flip-toolkit'
 import { takeTurn, destroyGame, removeCombatants, toLobby } from '../../services/games'
@@ -41,37 +41,61 @@ export default function AdminCombat(props) {
     }
   }
 
-  return (<>
-    <GameWebSocket
-      cableApp={props.cableApp}
-      updateApp={props.updateApp}
-      getGameData={props.getGameData}
-      code={props.match.params.code}
-    />
-    <h3 className='room-code'>Room Code: {game.code}</h3>
-    <Flipper className='combat-container' key={"flipper-thing"} flipKey={props.gameData} spring={'wobble'}>
-      <div className="exit-buttons">
-        <button className='end-combat' onClick={endCombat}
-          style={{
-            backgroundColor: "darkred",
-            color: "lightgrey"
-          }}>
-          End Game Session</button> 
-        <button className='end-combat' onClick={sendToLobby}>End Combat</button> 
-      <button
-        onClick={() => handleTakeTurn(game)}
-        className="next-turn"
-      >Next Turn</button>
-      </div>
-      <div className='user-list'>
-      {game.combatants?.map(id =>
-        <Flipped key={userMap[id].id + `flipped guy`} flipId={userMap[id].id}>
-          <div className="user-details" key={userMap[id].id}>
-            <button className='delete-user-combat' onClick={() => removeCombatant(userMap[id].id)}>X</button>
-            <span>{userMap[id].username}</span> <span>{userMap[id].initiative}</span>
-          </div>
-        </Flipped>)}
-      </div>
+  if (props.gameData.game.status === 500) {
+    // setTimeout(function () {
+    //   window.location.reload(1);
+    // }, 500);
+  
+    
+    return (<>
+      <GameWebSocket
+        cableApp={props.cableApp}
+        updateApp={props.updateApp}
+        getGameData={props.getGameData}
+        code={props.match.params.code}
+      />
+      <h2 style={{
+        textAlign: "center",
+        topMargin: "40px"
+      }}>
+        Something went Wrong. Please try agian.</h2>
+      <button className='create-join'>
+        <Link className='link-style' to="/create-room"> Create Combat</Link>
+      </button>
+    </>)
+  } else {
+    return (<>
+      <GameWebSocket
+        cableApp={props.cableApp}
+        updateApp={props.updateApp}
+        getGameData={props.getGameData}
+        code={props.match.params.code}
+      />
+      <h3 className='room-code'>Room Code: {game.code}</h3>
+      <Flipper className='combat-container' key={"flipper-thing"} flipKey={props.gameData} spring={'wobble'}>
+        <div className="exit-buttons">
+          <button className='end-combat' onClick={endCombat}
+            style={{
+              backgroundColor: "darkred",
+              color: "lightgrey"
+            }}>
+            End Game Session</button>
+          <button className='end-combat' onClick={sendToLobby}>End Combat</button>
+          <button
+            onClick={() => handleTakeTurn(game)}
+            className="next-turn"
+          >Next Turn</button>
+        </div>
+        <div className='user-list'>
+          {game.combatants?.map(id =>
+            <Flipped key={userMap[id].id + `flipped guy`} flipId={userMap[id].id}>
+              <div className="user-details" key={userMap[id].id}>
+                <button className='delete-user-combat' onClick={() => removeCombatant(userMap[id].id)}>X</button>
+                <span>{userMap[id].username}</span> <span>{userMap[id].initiative}</span>
+              </div>
+            </Flipped>)}
+        </div>
       </Flipper>
-  </>)
+    </>)
+  }
 }
