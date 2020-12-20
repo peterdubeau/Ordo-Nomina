@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory, Link } from 'react-router-dom'
 import { Flipped, Flipper } from 'react-flip-toolkit'
 import { readGame, postUser, deleteUser, sendCombatants } from '../../services/games'
 import GameWebSocket from '../GameWebSocket/GameWebSocket'
@@ -82,9 +82,9 @@ export default function AdminLobby(props) {
     }
   
     if (!props.gameData) {
-      setTimeout(function () {
-        window.location.reload(1);
-      }, 500);
+      // setTimeout(function () {
+      //   window.location.reload(1);
+      // }, 500);
     
       
       return (<>
@@ -94,7 +94,14 @@ export default function AdminLobby(props) {
           getGameData={props.getGameData}
           code={props.match.params.code}
         />
-      "loading game..."
+        <h2 style={{
+          textAlign: "center",
+          topMargin: "40px"
+        }}>
+          Something went Wrong. Please try agian.</h2>
+      <button className='create-join'>
+        <Link className='link-style' to="/create-room"> Create Combat</Link>
+      </button>
       </>)
         
     } else {
