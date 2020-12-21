@@ -4,9 +4,9 @@ import Logo from '../Logo/Logo'
 import './Home.css'
 
 export default function Home() {
-  return (
+  return (<>
+    <Logo />
     <div className="home">
-      <Logo/>
       <button className='create-join'>
         <Link className='link-style' to="/create-room"> Create Combat</Link>
       </button>
@@ -15,5 +15,5 @@ export default function Home() {
       </button>
       
     </div>
-  )
+  </>)
 }

@@ -104,8 +104,9 @@ export default function JoinRoom(props) {
   }
 
   return (
-    <div>
-      <Logo />
+    <div className='create-container'>
+      <><Logo /></>
+      <>
         <form className='create-user'>
           <label className='enter-label'>
             <input 
@@ -140,6 +141,7 @@ export default function JoinRoom(props) {
           {isLoading ? "Entering Room" : "Enter Room"}
           </button>
         </form>
+        </>
       </div>
     )
   }
