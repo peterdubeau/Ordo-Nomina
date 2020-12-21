@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react'
 import { useHistory, Link } from 'react-router-dom'
 import { Flipped, Flipper } from 'react-flip-toolkit'
-import { readGame, postUser, deleteUser, sendCombatants } from '../../services/games'
+import { readGame, postUser, deleteUser, sendCombatants, destroyGame } from '../../services/games'
 import GameWebSocket from '../GameWebSocket/GameWebSocket'
 import './AdminLobby.css'
 
@@ -74,6 +74,14 @@ export default function AdminLobby(props) {
       }
     }
   }
+
+  function sendToLobby() {
+    if (window.confirm("Are you sure you want leave this lobby? You'll have to create a new game")) {
+      destroyGame(props.match.params.code)
+      history.push(`/`)
+      window.location.reload()
+    }
+  }
   
   
   const handleChange = (e) => {
@@ -122,7 +130,14 @@ export default function AdminLobby(props) {
           updateApp={props.updateApp}
           getGameData={props.getGameData}
           code={props.match.params.code}
-        />
+          />
+          <button
+            className="add-start-order"
+            id="exit-button"
+            onClick={sendToLobby}
+          >
+            Exit Game
+          </button>
           <h3 className='room-code'>Room Code: {code}</h3>
           <button
             id='link'
@@ -153,10 +168,12 @@ export default function AdminLobby(props) {
                 <p className='username'>{user.username}</p>
                 <div className='up-down-container'>
                   <p className="initiative">{user.initiative} </p>
-                  <div className='up-down'>
-                    <button className="user-options" id="move-up" onClick={() => props.arrange(i)}>↑</button> 
-                    <button className="user-options" id="move-down" onClick={() => props.arrangeDown(i)}>↓</button>
-                  </div>
+                  {props.gameData.length < 3 ? "" :
+                    <div className='up-down'>
+                      <button className="user-options" id="move-up" onClick={() => props.arrange(i)}>↑</button>
+                      <button className="user-options" id="move-down" onClick={() => props.arrangeDown(i)}>↓</button>
+                    </div>
+                  }
                 </div>
               </div>
            </Flipped>
@@ -189,7 +206,6 @@ export default function AdminLobby(props) {
         </div>
       <h2>{props.match.params.username}'s game!</h2>
       </div>
-
       </>)
     }
     

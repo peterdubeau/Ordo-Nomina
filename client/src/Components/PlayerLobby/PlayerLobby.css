@@ -25,7 +25,9 @@ a{
 }
 
 .user-text{
+  width: 100%;
   font-size: 30px;
+  word-wrap: break-word;
 }
 
 .room-code{

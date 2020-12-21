@@ -4,6 +4,7 @@ import PlayerLobby from '../PlayerLobby/PlayerLobby'
 import AdminLobby from '../AdminLobby/AdminLobby'
 import PlayerCombat from '../PlayerCombat/PlayerCombat'
 import AdminCombat from '../AdminCombat/AdminCombat'
+import LogoMini from '../Logo/LogoMini'
 
 class Main extends Component {
   constructor(props) {
@@ -261,6 +262,14 @@ class Main extends Component {
               <Redirect to='/' />
             )
         }}>
+        </Route>
+
+        <Route path='/combat'>
+          <LogoMini/>
+        </Route>
+
+        <Route path='/game'>
+          <LogoMini/>
         </Route>
 
 
