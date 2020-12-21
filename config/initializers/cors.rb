@@ -7,7 +7,7 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins "#{ENV['LIVE_URL']}"
+    origins ["#{ENV['LIVE_URL']}", 'http://localhost:3001']
 
     resource '*',
       headers: :any,
