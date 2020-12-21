@@ -33,8 +33,6 @@ export default function PlayerLobby(props) {
     return <Redirect to={'/'} />
   }
 
-  console.log(props.gameData)
-
   if (props.gameData.users?.length === 0) {
     return (<>
       <GameWebSocket
