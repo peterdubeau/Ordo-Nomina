@@ -122,9 +122,13 @@
   color: white;
 }
 
-#start-button{
+#start-button, #exit-button{
   color: lightgrey;
   background-color: darkred
+}
+
+#exit-button{
+  margin-top: 40px;
 }
 
 #move-up, #move-down{

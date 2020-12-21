@@ -29,6 +29,10 @@ export default function PlayerLobby(props) {
     return <Redirect to={`/combat/${props.match.params.code}/player/${props.match.params.username}`} />
   }
 
+  if (props.startGame === false) {
+    return <Redirect to={'/'} />
+  }
+
   console.log(props.gameData)
 
   if (props.gameData.users?.length === 0) {
