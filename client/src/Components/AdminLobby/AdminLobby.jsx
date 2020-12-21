@@ -146,20 +146,21 @@ export default function AdminLobby(props) {
           />
           <br />
         <Flipper key={"flipper-thing"} flipKey={props.gameData} spring={'wobble'}>
-          {/* <div className='user-details-container'> */}
           {props.gameData.filter(status => status.is_admin === false).map((user, i) =>
             <Flipped key={user.id + " flip key"} flipId={user.id}>
               <div className='user-details' key={user.id}>
                 <button className ="user-options" id="delete-user" onClick={() => deleteUser(user.id)}>X</button>
-                <p>{user.username} : {user.initiative} </p>
-                <div className='up-down'>
-                  <button className="user-options" id="move-up" onClick={() => props.arrange(i)}>↑</button> 
-                  <button className="user-options" id="move-down" onClick={() => props.arrangeDown(i)}>↓</button>
+                <p className='username'>{user.username}</p>
+                <div className='up-down-container'>
+                  <p className="initiative">{user.initiative} </p>
+                  <div className='up-down'>
+                    <button className="user-options" id="move-up" onClick={() => props.arrange(i)}>↑</button> 
+                    <button className="user-options" id="move-down" onClick={() => props.arrangeDown(i)}>↓</button>
+                  </div>
                 </div>
               </div>
            </Flipped>
             )}
-          {/* </div> */}
         </Flipper>
         <label className='combatant-container'>
           <input
@@ -168,6 +169,7 @@ export default function AdminLobby(props) {
               type="text"
               value={formData.username}
               onChange={handleChange}
+              maxLength= "20"
               placeholder={formFilled.username ? "Enemy Name" : "Enter Enemy Name"}
               />
           <input
@@ -175,6 +177,7 @@ export default function AdminLobby(props) {
               name="initiative"
               type="text"
               value={formData.initiative}
+              maxLength="3"
               onChange={handleChange}
               placeholder={formFilled.initiative ? "Initiative" : "Enter initiative"}
               />

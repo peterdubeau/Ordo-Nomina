@@ -73,10 +73,19 @@
   /* margin: 10px; */
 }
 
+.initiative{
+  margin: 0;
+  text-align: center;
+}
+
 
 .user-details-container{
   display: flex;
   flex-direction: column;
+}
+
+.user-details-player{
+  margin-right: 20%;
 }
 
 .user-details{
@@ -89,10 +98,13 @@
   padding: 10px;
 }
 
-
 .user-options{
   /* display: flex; */
   align-self: center;
+}
+
+.username{
+  margin: auto 10px;
 }
 
 .up-down{
@@ -117,6 +129,7 @@
 
 #move-up, #move-down{
   border-radius: 10px;
+  margin: auto 5px;
 }
 
 @media only screen and (max-width: 500px) {

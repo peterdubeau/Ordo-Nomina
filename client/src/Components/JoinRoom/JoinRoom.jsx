@@ -113,6 +113,7 @@ export default function JoinRoom(props) {
               className={ formFilled.code ? 'user-input' : 'user-input-empty'}
                 name="code"
                 type="text"
+                maxLength= "5"
                 value={formData.code.toUpperCase()}
                 onChange={handleChange}
                 placeholder = { formFilled.code ? 'Game Code' : 'Enter Game Code'}
@@ -122,6 +123,7 @@ export default function JoinRoom(props) {
                   className={ formFilled.username ? 'user-input' : 'user-input-empty'}
                   name="username"
                   type="text"
+                  maxLength= "20"
                   value={formData.username}
                   onChange={handleChange}
                   placeholder = { formFilled.username ? 'Character Name' : 'Enter-name'}
@@ -131,6 +133,7 @@ export default function JoinRoom(props) {
                   className={ formFilled.initiative ? 'user-input' : 'user-input-empty'}
                   name="initiative"
                   type="text"
+                  maxLength= "3"
                   value={formData.initiative}
                   onChange={handleChange}
                   placeholder={formFilled.initiative ? 'Initiative' : 'Enter initiative'}

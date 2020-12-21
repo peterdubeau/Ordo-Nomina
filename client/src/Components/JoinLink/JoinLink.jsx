@@ -115,6 +115,7 @@ function JoinLink(props) {
                   name="username"
                   type="text"
                   value={formData.username}
+                  maxLength= "20"
                   onChange={handleChange}
                   placeholder = { formFilled.username ? 'Character Name' : 'Enter-name'}
             />
@@ -123,6 +124,7 @@ function JoinLink(props) {
                   className={ formFilled.initiative ? 'user-input' : 'user-input-empty'}
                   name="initiative"
                   type="text"
+                  maxLength= "3"
                   value={formData.initiative}
                   onChange={handleChange}
                   placeholder={formFilled.initiative ? 'Initiative' : 'Enter initiative'}

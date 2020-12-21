@@ -1,5 +1,11 @@
+span.left, span{
+  word-wrap: break-word;
+  max-width: 70%;
+}
+
 .combat-container{
   display: flex;
+  width: 95%;
   flex-direction: column;
   justify-content: center;
 }
@@ -8,6 +14,11 @@
   border-radius: 100px;
   background-color: darkred;
   color: white
+}
+
+.user-details-player{
+  border: none;
+  align-content: center;
 }
 
 .end-combat{
@@ -45,6 +56,12 @@
   justify-content: space-between;
   font-size: 30px;
   margin: 40px 0;
+  
+}
+
+.user-list{
+  width: 140%;
+  align-self: center;
 }
 
 
