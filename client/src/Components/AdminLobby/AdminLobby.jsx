@@ -82,9 +82,9 @@ export default function AdminLobby(props) {
     }
   
     if (!props.gameData) {
-      // setTimeout(function () {
-      //   window.location.reload(1);
-      // }, 500);
+      setTimeout(function () {
+        window.location.reload(1);
+      }, 500);
     
       
       return (<>

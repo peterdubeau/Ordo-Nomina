@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Logo from '../Logo/Logo'
 import { useHistory, withRouter } from 'react-router-dom'
 import { postUser, readGame } from '../../services/games'
 import '../CreateRoom/CreateRoom.css'
@@ -105,6 +106,7 @@ function JoinLink(props) {
 
     return (
       <div>
+        <Logo />
         <form className='create-user'>
           <label className='enter-label'>
             {formFilled.code ? '' : <p style={noInfo}>Please enter a game code</p>}

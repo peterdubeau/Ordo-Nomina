@@ -1,0 +1,11 @@
+.logo{
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+}
+
+.on-image{
+  height: 200px;
+  margin-bottom: 70px;
+}

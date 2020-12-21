@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Logo from '../Logo/Logo'
 import { useHistory } from 'react-router-dom'
 import { postUser, readGame } from '../../services/games'
 import '../CreateRoom/CreateRoom.css'
@@ -102,8 +103,9 @@ export default function JoinRoom(props) {
     margin: "0"
   }
 
-    return (
-      <div>
+  return (
+    <div>
+      <Logo />
         <form className='create-user'>
           <label className='enter-label'>
             <input 
