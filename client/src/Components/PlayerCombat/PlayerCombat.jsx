@@ -67,11 +67,12 @@ export default function playerCombat(props) {
       getGameData={props.getGameData}
       code={props.match.params.code}
     />
+        <div className="user-details-player">
     <Flipper flipKey={props.gameData} spring={'wobble'}>
       <div className='user-list'>
         {game.combatants?.map(id =>
             <Flipped key={userMap[id].id + `flipped guy`} flipId={userMap[id].id}>
-          <div className="user-details" key={userMap[id].id}>
+            <div className="user-details" key={userMap[id].id}>
           {(userMap[id].username === props.match.params.username ? 
                 <button className='delete-user-combat' onClick={() => removeCombatant(userMap[id].id)}>
                   X
@@ -79,13 +80,14 @@ export default function playerCombat(props) {
                 :
               <span></span>)}
               <span className="left">{userMap[id].username}</span>
-              <span></span>
+                <span></span>
           </div>
 
           </Flipped >
         )}
         </div>
       </Flipper>
+        </div>
     </div>
     <h3 className='room-code'>Room Code: {props.gameData.game.code}</h3>
   </>)

@@ -2,6 +2,13 @@
   display: flex;
   flex-direction: column;
 }
+
+.create-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
 .create-user{
   display: flex;
   flex-direction: column;

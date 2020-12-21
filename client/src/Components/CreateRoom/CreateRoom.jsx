@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Logo from '../Logo/Logo'
 import { useHistory } from 'react-router-dom'
 import { postGame, postUser, readGame } from '../../services/games'
 import './CreateRoom.css'
@@ -51,6 +52,7 @@ function CreateRoom(props) {
   }
 
   return (<div >
+      <Logo />
     <form className="create-user">
       <label className='enter-label'>
         <input
