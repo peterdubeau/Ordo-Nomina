@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom'
 import CreateRoom from './Components/CreateRoom/CreateRoom'
+import ErrorBoundary from './Components/ErrorBoundary/ErrorBoundary'
 import JoinRoom from './Components/JoinRoom/JoinRoom'
 import JoinLink from './Components/JoinLink/JoinLink'
 import Main from './Components/Main/Main'
@@ -40,9 +41,11 @@ export default function App (props) {
           <JoinRoom cableApp={props.cableApp}/>
         </Route>
       
+      <ErrorBoundary>
         <Route>
           <Main cableApp={props.cableApp}/>
-      </Route>
+        </Route>
+      </ErrorBoundary>
       
       <Route exact path='/link/:code'>
         <JoinLink />

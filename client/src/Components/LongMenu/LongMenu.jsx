@@ -80,14 +80,6 @@ export default function LongMenu(props) {
       >
           <MenuItem
             key="exit"
-            selected='Start Combat'
-            onClick={handleStart}
-          >
-          Start Combat
-          </MenuItem>
-        
-          <MenuItem
-            key="exit"
             selected='Quick Sort'
             name='sort'
             value="sort"
@@ -96,13 +88,6 @@ export default function LongMenu(props) {
           Quick Sort
           </MenuItem>
         
-          <MenuItem
-            key="exit"
-            selected='Start Combat'
-            onClick={handleExit}
-          >
-          Exit Game
-          </MenuItem>
         
           <MenuItem
             key="exit"
@@ -124,6 +109,15 @@ export default function LongMenu(props) {
           readOnly
           />
             Copy Game Link
+          </MenuItem>
+         
+          <MenuItem
+                key="exit"
+                selected='Exit Game'
+                onClick={handleExit}
+                style={{BackgroundColor: "darkred"}}
+              >
+              Exit Game
           </MenuItem>
       </Menu>
     </div>

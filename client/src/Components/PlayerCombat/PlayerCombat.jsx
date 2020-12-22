@@ -44,7 +44,7 @@ export default function playerCombat(props) {
     game.combatants.splice(game.combatants?.indexOf(id), 1)
     removeCombatants(props.match.params.code, game.combatants)
   }
-  console.log(props.gameData)
+  
   if (props.gameData.users?.length === 0) {
     return (<>
       <GameWebSocket
@@ -66,7 +66,14 @@ export default function playerCombat(props) {
       updateApp={props.updateApp}
       getGameData={props.getGameData}
       code={props.match.params.code}
-    />
+      />
+      <div className="code-container">
+          <img 
+            style={{height: '50px'}}
+          src='https://res.cloudinary.com/dyrvlnond/image/upload/v1608509018/Tracker/Artboard_1_llwk43.png' />
+        <h3 className='room-code'>
+          Code: {props.match.params.code}</h3>
+        </div>
         <div className="user-details-player">
     <Flipper flipKey={props.gameData} spring={'wobble'}>
       <div className='user-list'>
@@ -89,6 +96,5 @@ export default function playerCombat(props) {
       </Flipper>
         </div>
     </div>
-    <h3 className='room-code'>Room Code: {props.gameData.game.code}</h3>
   </>)
 }

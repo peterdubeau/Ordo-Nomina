@@ -43,14 +43,22 @@ export default function PlayerLobby(props) {
       />
       
     <h2 style={{
-          textAlign: "center",
-          marginTop: "40px"
+      textAlign: "center",
+      marginTop: "40px"
         }}>Loading game...</h2>
     
     </>)
   }
   
     return (<>
+      
+      <div className="code-container">
+          <img 
+            style={{height: '50px'}}
+          src='https://res.cloudinary.com/dyrvlnond/image/upload/v1608509018/Tracker/Artboard_1_llwk43.png' />
+        <h3 className='room-code'>
+          Code: {props.match.params.code}</h3>
+        </div>
       <div className='player-lobby-container'>
         <h2>{hostDetails}'s game</h2>
         {list.filter(status => status.is_admin === false).map(user =>
@@ -64,8 +72,6 @@ export default function PlayerLobby(props) {
           </div>
         )}
       </div>
-      
-      <h3 className='room-code'>Room Code: {props.gameData.game.code}</h3>
     </>)
   
 }
