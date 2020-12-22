@@ -92,9 +92,9 @@ export default function AdminLobby(props) {
     }
   
     if (!props.gameData) {
-      setTimeout(function () {
-        window.location.reload(1);
-      }, 500);
+      // setTimeout(function () {
+      //   window.location.reload(1);
+      // }, 500);
     
       
       return (<>
@@ -106,12 +106,17 @@ export default function AdminLobby(props) {
         />
         <h2 style={{
           textAlign: "center",
-          topMargin: "40px"
+          topMargin: "80px"
         }}>
-          Something went Wrong. Please try agian.</h2>
+          Something went wrong. Please please make another game.</h2>
+        <div className='error-buttons'>
       <button className='create-join'>
         <Link className='link-style' to="/create-room"> Create Combat</Link>
-      </button>
+        </button>
+      <button className='create-join'>
+        <Link className='link-style' to="/"> Home</Link>
+          </button>
+        </div>
       </>)
         
     } else {
@@ -178,7 +183,9 @@ export default function AdminLobby(props) {
               />
         </label>
         <div className='lobby-buttons'>
-          <button className = "add-start-order" onClick={handleSubmit}>Add Enemy</button>
+            <button className="add-start-order" onClick={handleSubmit}>Add Enemy</button>
+            <br/>
+            <button className= "add-start-order" id="start-button" onClick={startCombat}>Start Combat</button>
         </div>
         <div className='menu'>
             
