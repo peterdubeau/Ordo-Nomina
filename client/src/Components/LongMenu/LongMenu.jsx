@@ -98,8 +98,9 @@ export default function LongMenu(props) {
         
           <MenuItem
             key="exit"
-            selected='Start Combat'
+            selected='Exit Game'
             onClick={handleExit}
+            style={{BackgroundColor: "darkred"}}
           >
           Exit Game
           </MenuItem>
