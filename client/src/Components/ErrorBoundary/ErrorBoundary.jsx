@@ -24,7 +24,6 @@ export default class ErrorBoundary extends Component {
       window.location.replace(`${window.location.protocol}//${window.location.host}`)
     }
 
-console.log(window.location)
     if (this.state.hasError) {
       // You can render any custom fallback UI
       return (<div className="container">
