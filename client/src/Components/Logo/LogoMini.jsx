@@ -44,6 +44,15 @@ export default function Logo() {
     
     setState({ ...state, [anchor]: open });
   };
+
+  const navLocations = new Object([
+    ['Home', ''],
+    ['Join Combat', 'join-room'],
+    ['Create Combat', 'create-room'],
+    ['FAQ', 'faq'],
+  ])
+
+  const navOptions = Object.fromEntries(navLocations)
   
   
   const list = (anchor) => (
@@ -57,9 +66,9 @@ export default function Logo() {
     
     >
       <List>
-        {['Home', 'FAQ', 'Join Combat', 'Create combat'].map((text) => (
+        {navLocations.map(([text, action]) => (
           <ListItem button key={text}>
-            <ListItemText primary={text} onClick={() => history.push(`/${text}`)}/>
+            <ListItemText primary={text} onClick={() => history.push(`/${action}`)}/>
           </ListItem>
         ))}
       </List>
