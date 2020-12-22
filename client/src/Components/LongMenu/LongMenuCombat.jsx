@@ -8,13 +8,12 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 const ITEM_HEIGHT = 48;
 
-export default function LongMenu(props) {
+export default function LongMenuCombat(props) {
 
     const [copySuccess, setCopySuccess] = useState('');
     const textAreaRef = useRef(null);
     const history = useHistory()
   
-
     function copyToClipboard(e) {
       textAreaRef.current.select();
       document.execCommand('copy');
@@ -34,13 +33,8 @@ export default function LongMenu(props) {
     setAnchorEl(null);
   };
 
-  const handleSort = (e) => {
-    props.sort()
-    setAnchorEl(null);
-  };
-
-  const handleStart = (e) => {
-    props.start()
+  const handleLobby = (e) => {
+    props.lobby()
     setAnchorEl(null);
   };
   
@@ -78,52 +72,21 @@ export default function LongMenu(props) {
           },
         }}
       >
+
           <MenuItem
             key="exit"
-            selected='Start Combat'
-            onClick={handleStart}
-          >
-          Start Combat
-          </MenuItem>
-        
-          <MenuItem
-            key="exit"
-            selected='Quick Sort'
-            name='sort'
-            value="sort"
-            onClick={handleSort}
-          >
-          Quick Sort
-          </MenuItem>
-        
-          <MenuItem
-            key="exit"
-            selected='Start Combat'
+            selected='Exit Combat'
             onClick={handleExit}
           >
-          Exit Game
+          End Game Session
           </MenuItem>
         
           <MenuItem
             key="exit"
-            selected='Copy Game Link'
-            onClick={copyToClipboard}
+            selected='End Game Session'
+            onClick={handleLobby}
         >
-          <input
-          className='combatant-info'
-            style={{
-              position: "fixed",
-              fontSize: '1px',
-              margin: '0',
-              background: "transparent",
-              border: 'none',
-              color: 'transparent'
-            }}
-          ref={textAreaRef}
-          value={`${props.url}`}
-          readOnly
-          />
-            Copy Game Link
+            End Combat
           </MenuItem>
       </Menu>
     </div>

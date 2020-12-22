@@ -24,6 +24,7 @@ export default function AdminLobby(props) {
       setCopySuccess('Copied!');
     };
 
+  let gameUrl = `${baseUrl}${window.location.host}/link/${props.match.params.code}`
 
   const history = useHistory();
   
@@ -134,35 +135,9 @@ export default function AdminLobby(props) {
           getGameData={props.getGameData}
           code={props.match.params.code}
           />
-          {/* <button
-            className="add-start-order"
-            id="exit-button"
-            onClick={sendToLobby}
-          >
-            Exit Game
-          </button> */}
+        
           <h3 className='room-code'>Room Code: {code}</h3>
-          <button
-            id='link'
-            className='add-start-order'
-            onClick={copyToClipboard}
-        >
-          Copy Game Link to Clipboard
-        </button>
-        <input
-          className='combatant-info'
-            style={{
-              fontSize: '1px',
-              margin: '0',
-              background: "transparent",
-              border: 'none',
-              color: 'transparent'
-            }}
-          ref={textAreaRef}
-          value={`${baseUrl}${window.location.host}/link/${code}`}
-          readOnly
-          />
-          <br />
+
         <Flipper key={"flipper-thing"} flipKey={props.gameData} spring={'wobble'}>
           {props.gameData.filter(status => status.is_admin === false).map((user, i) =>
             <Flipped key={user.id + " flip key"} flipId={user.id}>
@@ -204,19 +179,18 @@ export default function AdminLobby(props) {
         </label>
         <div className='lobby-buttons'>
           <button className = "add-start-order" onClick={handleSubmit}>Add Enemy</button>
-          {/* <button className = "add-start-order" onClick={() => props.sort()}>Quick sort descending</button>
-          <button className= "add-start-order" id="start-button" onClick={startCombat}>Start Combat</button> */}
         </div>
         <div className='menu'>
             
             <LongMenu
+              className='menu'
               gameData={props.gameData}
               sort={props.sort}
               start={startCombat}
               copy={copyToClipboard}
               exit={sendToLobby}
               code={textAreaRef}
-            
+              url={gameUrl}
             />
         </div>   
       <h2>{props.match.params.username}'s game!</h2>
