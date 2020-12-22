@@ -27,16 +27,17 @@ export default function Contact() {
 
 
   return (
-    <div className>
-      <h1>Contact Me</h1>
-      {details.map(page => 
+    <h1>Coming soon</h1>
+    // <div className>
+    //   <h1>Contact Me</h1>
+    //   {details.map(page => 
         
-        <div className='user'>
-        <p><Link to={{ pathname: `${page.url}` }} target="_blank">{page.title}</Link></p>
-        </div>
+    //     <div className='user'>
+    //     <p><Link to={{ pathname: `${page.url}` }} target="_blank">{page.title}</Link></p>
+    //     </div>
 
-      )
-      }
-    </div>
+    //   )
+    //   }
+    // </div>
   )
 }
