@@ -5,6 +5,7 @@ import AdminLobby from '../AdminLobby/AdminLobby'
 import PlayerCombat from '../PlayerCombat/PlayerCombat'
 import AdminCombat from '../AdminCombat/AdminCombat'
 import LogoMini from '../Logo/LogoMini'
+import ScopedCssBaseline from '@material-ui/core/ScopedCssBaseline'; 
 
 class Main extends Component {
   constructor(props) {
@@ -183,7 +184,7 @@ class Main extends Component {
     return (
       <div className="App">
 
-
+      <ScopedCssBaseline style={{background: "transparent"}}>
         <Route exact path='/game/:code/DM/:username' render={(props) => {
           return this.state.currentGame ?
             (<AdminLobby
@@ -203,7 +204,7 @@ class Main extends Component {
             )
         }}>
         </Route>
-
+      </ScopedCssBaseline>
 
         <Route exact path='/combat/:code/DM/:username' render={(props) => {
           return this.state.currentGame ?
