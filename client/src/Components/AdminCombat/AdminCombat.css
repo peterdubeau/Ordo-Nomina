@@ -16,10 +16,6 @@ span.left, span{
   color: white
 }
 
-.user-details-player{
-  border: none;
-  align-content: center;
-}
 
 .end-combat{
   margin: 0px 30px 0px 30px;
@@ -58,6 +54,11 @@ span.left, span{
   font-size: 30px;
   margin: 40px 0;
   
+}
+
+.user-details-player{
+  border: none;
+  align-content: center;
 }
 
 .user-list{

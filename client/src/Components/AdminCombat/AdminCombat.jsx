@@ -72,9 +72,17 @@ export default function AdminCombat(props) {
         getGameData={props.getGameData}
         code={props.match.params.code}
       />
+      <LongMenuCombat />
       <h3 className='room-code'>Room Code: {game.code}</h3>
       <Flipper className='combat-container' key={"flipper-thing"} flipKey={props.gameData} spring={'wobble'}>
         <div className="exit-buttons">
+          <button className='end-combat' onClick={endCombat}
+            style={{
+              backgroundColor: "darkred",
+              color: "lightgrey"
+            }}>
+            End Game Session</button>
+          <button className='end-combat' onClick={sendToLobby}>End Combat</button>
           <button
             onClick={() => handleTakeTurn(game)}
             className="next-turn"
@@ -90,13 +98,6 @@ export default function AdminCombat(props) {
             </Flipped>)}
         </div>
       </Flipper>
-      <div className='menu'>
-            <LongMenuCombat
-              gameData={props.gameData}
-              lobby={sendToLobby}
-              exit={endCombat}
-            />
-      </div>
     </>)
   }
 }
