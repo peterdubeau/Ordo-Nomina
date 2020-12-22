@@ -4,7 +4,6 @@ import PlayerLobby from '../PlayerLobby/PlayerLobby'
 import AdminLobby from '../AdminLobby/AdminLobby'
 import PlayerCombat from '../PlayerCombat/PlayerCombat'
 import AdminCombat from '../AdminCombat/AdminCombat'
-import LogoMini from '../Logo/LogoMini'
 import ScopedCssBaseline from '@material-ui/core/ScopedCssBaseline'; 
 
 class Main extends Component {
@@ -264,15 +263,6 @@ class Main extends Component {
             )
         }}>
         </Route>
-
-        <Route path='/combat'>
-          <LogoMini/>
-        </Route>
-
-        <Route path='/game'>
-          <LogoMini/>
-        </Route>
-
 
       </div>
     );

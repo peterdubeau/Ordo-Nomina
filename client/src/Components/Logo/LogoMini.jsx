@@ -51,6 +51,7 @@ export default function Logo() {
     ['Join Combat', 'join-room'],
     ['Create Combat', 'create-room'],
     ['FAQ', 'faq'],
+    ['Contact', "contact"]
   ])
 
   const navOptions = Object.fromEntries(navLocations)
