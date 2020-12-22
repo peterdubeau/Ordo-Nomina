@@ -141,7 +141,6 @@ export default function AdminLobby(props) {
           code={props.match.params.code}
           />
         
-          <h3 className='room-code'>Room Code: {code}</h3>
 
         <Flipper key={"flipper-thing"} flipKey={props.gameData} spring={'wobble'}>
           {props.gameData.filter(status => status.is_admin === false).map((user, i) =>
@@ -201,6 +200,13 @@ export default function AdminLobby(props) {
             />
         </div>   
       <h2>{props.match.params.username}'s game!</h2>
+        <div className="code-container">
+          <img 
+            style={{height: '50px'}}
+          src='https://res.cloudinary.com/dyrvlnond/image/upload/v1608509018/Tracker/Artboard_1_llwk43.png' />
+        <h3 className='room-code'>
+          Code: {code}</h3>
+        </div>
       </div>
       </>)
     }
