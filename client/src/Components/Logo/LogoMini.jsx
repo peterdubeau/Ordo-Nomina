@@ -1,16 +1,12 @@
 import React from 'react'
-import {useHistory} from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
 import './Logo.css'
 
 const useStyles = makeStyles({
@@ -52,8 +48,10 @@ export default function Logo() {
     ['FAQ', 'faq'],
   ])
 
-  const navOptions = Object.fromEntries(navLocations)
-  
+  const handleNav = (option) => {
+    history.push(`/${option}`)
+    window.location.reload()
+  }
   
   const list = (anchor) => (
     <div
@@ -67,8 +65,12 @@ export default function Logo() {
     >
       <List>
         {navLocations.map(([text, action]) => (
-          <ListItem button key={text}>
-            <ListItemText primary={text} onClick={() => history.push(`/${action}`)}/>
+          <ListItem button key={text}
+            onClick={() => handleNav(action)}
+          >
+              <ListItemText
+                primary={text}
+                />
           </ListItem>
         ))}
       </List>

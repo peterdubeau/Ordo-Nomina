@@ -1,6 +1,5 @@
 import React from 'react'
 import { useHistory, Link } from 'react-router-dom'
-import LongMenuCombat from '../LongMenu/LongMenuCombat'
 import GameWebSocket from '../GameWebSocket/GameWebSocket'
 import { Flipped, Flipper } from 'react-flip-toolkit'
 import { takeTurn, destroyGame, removeCombatants, toLobby } from '../../services/games'
@@ -75,6 +74,13 @@ export default function AdminCombat(props) {
       <h3 className='room-code'>Room Code: {game.code}</h3>
       <Flipper className='combat-container' key={"flipper-thing"} flipKey={props.gameData} spring={'wobble'}>
         <div className="exit-buttons">
+          <button className='end-combat' onClick={endCombat}
+            style={{
+              backgroundColor: "darkred",
+              color: "lightgrey"
+            }}>
+            End Game Session</button>
+          <button className='end-combat' onClick={sendToLobby}>End Combat</button>
           <button
             onClick={() => handleTakeTurn(game)}
             className="next-turn"
@@ -90,13 +96,6 @@ export default function AdminCombat(props) {
             </Flipped>)}
         </div>
       </Flipper>
-      <div className='menu'>
-            <LongMenuCombat
-              gameData={props.gameData}
-              lobby={sendToLobby}
-              exit={endCombat}
-            />
-      </div>
     </>)
   }
 }
