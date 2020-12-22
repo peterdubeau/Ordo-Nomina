@@ -72,7 +72,14 @@ export default function AdminCombat(props) {
         getGameData={props.getGameData}
         code={props.match.params.code}
       />
-      <h3 className='room-code'>Room Code: {game.code}</h3>
+      <div className="code-container">
+        <img 
+          style={{height: '50px'}}
+        src='https://res.cloudinary.com/dyrvlnond/image/upload/v1608509018/Tracker/Artboard_1_llwk43.png' />
+      <h3 className='room-code'>
+        
+        Code: {game.code}</h3>
+      </div>
       <Flipper className='combat-container' key={"flipper-thing"} flipKey={props.gameData} spring={'wobble'}>
         <div className="exit-buttons">
           <button

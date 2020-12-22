@@ -11,6 +11,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
+import MenuIcon from '@material-ui/icons/Menu';
 import './Logo.css'
 
 const useStyles = makeStyles({
@@ -90,7 +91,9 @@ export default function Logo() {
         </React.Fragment>
       ))}
     </div>
-      <img className='on-mini'
-        src='https://res.cloudinary.com/dyrvlnond/image/upload/v1608509018/Tracker/Artboard_1_llwk43.png' />
+    <div className='on-mini'>
+      <MenuIcon/>
+      </div>
+       
   </>)
 }
