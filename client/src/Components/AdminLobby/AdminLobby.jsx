@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react'
 import { useHistory, Link } from 'react-router-dom'
 import { Flipped, Flipper } from 'react-flip-toolkit'
+import LongMenu from '../LongMenu/LongMenu'
 import { readGame, postUser, deleteUser, sendCombatants, destroyGame } from '../../services/games'
 import GameWebSocket from '../GameWebSocket/GameWebSocket'
 import './AdminLobby.css'
@@ -119,8 +120,10 @@ export default function AdminLobby(props) {
       let combatants = props.userList(list)
 
       function startCombat() {
-        sendCombatants(code, combatants)
-        history.push(`/combat/${code}/DM/${props.match.params.username}`)
+        if (window.confirm("Are you sure you want to start combat?")) {
+          sendCombatants(code, combatants)
+          history.push(`/combat/${code}/DM/${props.match.params.username}`)
+        }
       }
       
       return (<>
@@ -131,13 +134,13 @@ export default function AdminLobby(props) {
           getGameData={props.getGameData}
           code={props.match.params.code}
           />
-          <button
+          {/* <button
             className="add-start-order"
             id="exit-button"
             onClick={sendToLobby}
           >
             Exit Game
-          </button>
+          </button> */}
           <h3 className='room-code'>Room Code: {code}</h3>
           <button
             id='link'
@@ -201,9 +204,21 @@ export default function AdminLobby(props) {
         </label>
         <div className='lobby-buttons'>
           <button className = "add-start-order" onClick={handleSubmit}>Add Enemy</button>
-          <button className = "add-start-order" onClick={() => props.sort()}>Quick sort descending</button>
-          <button className= "add-start-order" id="start-button" onClick={startCombat}>Start Combat</button>
+          {/* <button className = "add-start-order" onClick={() => props.sort()}>Quick sort descending</button>
+          <button className= "add-start-order" id="start-button" onClick={startCombat}>Start Combat</button> */}
         </div>
+        <div className='menu'>
+            
+            <LongMenu
+              gameData={props.gameData}
+              sort={props.sort}
+              start={startCombat}
+              copy={copyToClipboard}
+              exit={sendToLobby}
+              code={textAreaRef}
+            
+            />
+        </div>   
       <h2>{props.match.params.username}'s game!</h2>
       </div>
       </>)

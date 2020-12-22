@@ -78,6 +78,11 @@
   text-align: center;
 }
 
+.menu{
+  position: fixed;
+  right: 20px;
+  top: 20px;
+}
 
 .user-details-container{
   display: flex;
