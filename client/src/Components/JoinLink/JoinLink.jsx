@@ -19,7 +19,7 @@ function JoinLink(props) {
     code: props.match.params.code,
     is_admin: false
   })
-  console.log(props.match.params.code)
+  
   const [formFilled, setFormFilled] = useState({
     username: true,
     initiative: true,

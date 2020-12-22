@@ -28,8 +28,9 @@ span.left, span{
 .exit-buttons{
   display: flex;
   justify-content: space-evenly;
-  align-content: center;
-  margin-bottom: 10px;
+  align-self: center;
+  margin: 10px;
+  width: 120%;
 }
 
 .next-turn{
