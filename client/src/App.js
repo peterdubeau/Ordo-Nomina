@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Route } from 'react-router-dom'
 import CreateRoom from './Components/CreateRoom/CreateRoom'
 import ErrorBoundary from './Components/ErrorBoundary/ErrorBoundary'
@@ -9,6 +9,7 @@ import Home from './Components/Home/Home'
 import FAQ from './Components/FAQ/FAQ'
 import Contact from './Components/Contact/Contact'
 import LogoMini from './Components/Logo/LogoMini'
+import Tutorial from './Components/Tutorial/Tutorial'
 import './App.css';
 
 
@@ -24,17 +25,21 @@ export default function App (props) {
     return code.slice(0, 5)
   }
   
-  
+  const [showTutorial, setShowTutorial] = useState(false);
+  const displayTutorial = () => {
+    setShowTutorial(!showTutorial)
+  }
 
   let roomCode = generateCode()
   
   return (
 
     <div className="App">
-      <LogoMini />
+      <LogoMini show={displayTutorial}/>
+      {showTutorial ? <Tutorial show={displayTutorial}/> : ''}
 
         <Route path='/' exact>
-          <Home />
+          <Home show={displayTutorial}/>
         </Route>
 
         <Route path='/create-room' exact>

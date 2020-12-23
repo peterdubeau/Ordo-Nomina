@@ -4,7 +4,7 @@ import Logo from '../Logo/Logo'
 import Welcome from '../Welcom/Welcome'
 import './Home.css'
 
-export default function Home() {
+export default function Home(props) {
 
   let status = localStorage.getItem('returnUser')
 
@@ -17,7 +17,10 @@ export default function Home() {
   return (<>
     <Logo />
 
-    {firstTime ?  '' : <Welcome first={isFirstVisit} />  }
+    {firstTime ? '' : <Welcome
+      first={isFirstVisit}
+      show={props.show}
+    />}
     
     <div className="home">
       <button className='create-join'>
