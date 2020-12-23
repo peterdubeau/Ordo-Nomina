@@ -12,10 +12,7 @@ export default function Welcome(props) {
   
   const handleSubmit = () => {
     props.first()
-    if (check) {
-      console.log("no cookie")
-    } else {
-      console.log('First time stored')
+    if (!check) {
       localStorage.setItem('returnUser', true)
     }
   }
@@ -25,9 +22,9 @@ export default function Welcome(props) {
       <div className='welcome-container'>
         <div className="welcome-body">
           <h2>Welcome to Ordo Nomina</h2>
-          <p>It looks like this is your first time here.</p>
-          <p>I suggest checking out the <Link className='welcome-link' to={''}>video tutorial </Link>before getting get started.</p>
-          <p>You can also checkout the <Link className='welcome-link' to='/faq'>FAQ</Link> in the nav bar</p>
+          <p className='welcome-info'>It looks like this is your first time here.</p>
+          <p className='welcome-info'>I suggest checking out the <Link className='welcome-link' to={''}>video tutorial </Link>before getting get started.</p>
+          <p className='welcome-info'>You can also checkout the <Link className='welcome-link' to='/faq'>FAQ</Link> in the nav bar</p>
           <div className='welcome-checkbox'>
           <input
               type='checkbox'
