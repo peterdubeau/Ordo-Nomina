@@ -1,11 +1,27 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Link } from 'react-router-dom'
 import Logo from '../Logo/Logo'
+import Welcome from '../Welcom/Welcome'
 import './Home.css'
 
-export default function Home() {
+export default function Home(props) {
+
+  let status = localStorage.getItem('returnUser')
+
+  const [firstTime, setFirstTime] = useState(JSON.parse(status))
+  
+  const isFirstVisit = () => {
+    setFirstTime(!firstTime)
+  }
+  
   return (<>
     <Logo />
+
+    {firstTime ? '' : <Welcome
+      first={isFirstVisit}
+      show={props.show}
+    />}
+    
     <div className="home">
       <button className='create-join'>
         <Link className='link-style' to="/create-room"> Create Combat</Link>

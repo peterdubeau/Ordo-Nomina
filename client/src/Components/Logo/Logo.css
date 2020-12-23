@@ -15,3 +15,7 @@
 .on-image{
   height: 200px;
 }
+
+.left{
+  display: none;
+}
