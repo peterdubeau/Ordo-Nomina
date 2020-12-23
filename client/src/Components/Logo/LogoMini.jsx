@@ -30,7 +30,7 @@ const useStyles = makeStyles({
 });
 
 
-export default function Logo() {
+export default function Logo(props) {
   
   const classes = useStyles();
   const history = useHistory();
@@ -51,10 +51,19 @@ export default function Logo() {
     ['Join Combat', 'join-room'],
     ['Create Combat', 'create-room'],
     ['FAQ', 'faq'],
-    ['Contact', "contact"]
+    ['Contact', "contact"],
+    ['Tutorial', 'thing']
   ])
 
   const navOptions = Object.fromEntries(navLocations)
+
+  const navControl = (option, action) => {
+    if (option === 'Tutorial') {
+      props.show()
+    } else {
+      history.push(`/${action}`)
+    }
+  }
   
   
   const list = (anchor) => (
@@ -70,7 +79,7 @@ export default function Logo() {
       <List>
         {navLocations.map(([text, action]) => (
           <ListItem button key={text}>
-            <ListItemText primary={text} onClick={() => history.push(`/${action}`)}/>
+            <ListItemText primary={text} onClick={() => navControl(text, action)}/>
           </ListItem>
         ))}
       </List>
