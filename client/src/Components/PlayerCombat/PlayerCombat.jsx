@@ -44,6 +44,12 @@ export default function playerCombat(props) {
     game.combatants.splice(game.combatants?.indexOf(id), 1)
     removeCombatants(props.match.params.code, game.combatants)
   }
+
+  const leaveGame = (id) => {
+    if (window.confirm("Are you sure? This will delete your character and remove you from combat")) {
+      removeCombatant(id)
+    }
+  }
   
   if (props.gameData.users?.length === 0) {
     return (<>
@@ -81,7 +87,7 @@ export default function playerCombat(props) {
             <Flipped key={userMap[id].id + `flipped guy`} flipId={userMap[id].id}>
             <div className="user-details" key={userMap[id].id}>
           {(userMap[id].username === props.match.params.username ? 
-                <button className='delete-user-combat' onClick={() => removeCombatant(userMap[id].id)}>
+                <button className='delete-user-combat' onClick={() => leaveGame(userMap[id].id)}>
                   X
                 </button>
                 :

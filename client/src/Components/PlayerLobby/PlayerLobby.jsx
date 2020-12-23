@@ -6,8 +6,7 @@ import './PlayerLobby.css'
 
 export default function PlayerLobby(props) {
 
-  const [isLoading, setIsLoading] = useState(true)
-
+  
   
   let host = props.gameData.users.filter(host => host.is_admin === true)
   const hostDetails = host.map(hostName => hostName.username)
@@ -64,11 +63,9 @@ export default function PlayerLobby(props) {
         {list.filter(status => status.is_admin === false).map(user =>
           <div key={user.id} className='player-lobby-details'>
             {(user.username === props.match.params.username ?
-              <Link to={'/join-room'}>
                 <button id='delete-self' onClick={() => deleteUser(userId)}>X</button>
-              </Link>
               :
-              "")} <p className='user-text' key={`info ${user.id}`}>{user.username} : {user.initiative} </p>
+              "")} <p className='user-text' key={`info ${user.id}`}>{user.username} : <span>{user.initiative}</span> </p>
           </div>
         )}
       </div>
