@@ -57,7 +57,7 @@ class Main extends Component {
   handleDownClick = (index) => {
     if (index !== this.state.currentGame.users.length - 1) {
       this.setState(prevState => {
-        let list = [...prevState.currentGame.users.filter(user => user.is_admin === false)]
+        let list = [...prevState.currentGame.users]
         let temp = list[index + 1];
         list[index + 1] = list[index];
         list[index] = temp;
@@ -85,11 +85,8 @@ class Main extends Component {
   makeArray = (data) => {
     let players = []
     data.forEach(user => {
-      if (user.is_admin === false) {
         players.push(user.id)
-      } else {
-      }
-    })
+      })
     return players
   }
 
