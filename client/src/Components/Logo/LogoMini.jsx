@@ -35,7 +35,7 @@ export default function Logo() {
   const classes = useStyles();
   const history = useHistory();
   const [state, setState] = React.useState({
-    logo: false,
+    '   ': false,
   });
   
   const toggleDrawer = (anchor, open) => (event) => {
@@ -80,9 +80,9 @@ export default function Logo() {
   
   return (<>
     <div className='on-mini' style={{ zIndex: "99" }}>
-      {['   '].map((anchor) => (
+      {['left'].map((anchor) => (
         <React.Fragment key={anchor}>
-          <Button style={{ height: "60px", width: "30px" }}
+          <Button style={{ height: "60px", width: "30px", color: "rgba(0,0,0,0)" }}
             onClick={toggleDrawer(anchor, true)}>
             {anchor}
           </Button>

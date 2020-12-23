@@ -1,0 +1,46 @@
+
+.welcome-aura{
+  position: fixed;
+  top:0;
+  left: 0;
+  z-index: 99;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, .5)
+}
+
+.welcome-body{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 10px 20px;
+}
+
+.welcome-checkbox{
+  display: flex;
+  align-items: center;
+}
+
+.welcome-container{
+  position: fixed;
+  z-index: 99;
+  height: 60vh;
+  width: 80vw;
+  top: 10%;
+  left: 10%;
+  background-color: #21072A;
+  color: #DFDF8E;
+  border: 5px solid #DFDF8E;
+  border-radius: 30px;
+  background-size: cover;
+}
+
+.welcome-info{
+  font-size: 20px;
+}
+
+.welcome-link{
+  color: inherit;
+  position: inherit;
+}
