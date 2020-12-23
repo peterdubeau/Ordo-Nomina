@@ -6,6 +6,9 @@ import JoinRoom from './Components/JoinRoom/JoinRoom'
 import JoinLink from './Components/JoinLink/JoinLink'
 import Main from './Components/Main/Main'
 import Home from './Components/Home/Home'
+import FAQ from './Components/FAQ/FAQ'
+import Contact from './Components/Contact/Contact'
+import LogoMini from './Components/Logo/LogoMini'
 import './App.css';
 
 
@@ -28,10 +31,11 @@ export default function App (props) {
   return (
 
     <div className="App">
-      
-      <Route path='/' exact>
-        <Home />
-      </Route>
+      <LogoMini />
+
+        <Route path='/' exact>
+          <Home />
+        </Route>
 
         <Route path='/create-room' exact>
           <CreateRoom code={roomCode}/>
@@ -49,6 +53,14 @@ export default function App (props) {
       
       <Route exact path='/link/:code'>
         <JoinLink />
+      </Route>
+
+      <Route exact path='/faq'>
+        <FAQ />
+      </Route>
+
+      <Route exact path ='/contact'>
+        <Contact />
       </Route>
 
         
