@@ -86,7 +86,7 @@ export default function playerCombat(props) {
                 </button>
                 :
               <span></span>)}
-              <span >{userMap[id].username}</span>
+              <span className="user-name">{userMap[id].username}</span>
                 <span></span>
           </div>
 
