@@ -150,16 +150,18 @@ export default function AdminLobby(props) {
             <Flipped key={user.id + " flip key"} flipId={user.id}>
               <div className='user-details' key={user.id}>
                 <button className ="user-options" id="delete-user" onClick={() => deleteUser(user.id)}>X</button>
-                <p className='username'>{user.username} {i}</p>
+                <p className='username'>{user.username}</p>
                 <div className='up-down-container'>
                   <p className="initiative">{user.initiative} </p>
                   
                     <div className='up-down'>
-                    { i === 0 ?  ''
-                       : <button className="user-options" id="move-up" onClick={() => props.arrange(i)}>↑</button>
+                    {i === 0 ? '' :
+                      <>
+                        <button className="user-options" id="move-up" onClick={() => props.arrange(i)}>↑</button>
+                        <button className="user-options" id="move-down" onClick={() => props.arrangeDown(i)}>↓</button>
+                      </>
                     }
-                      <button className="user-options" id="move-down" onClick={() => props.arrangeDown(i)}>↓</button>
-                    </div>
+                  </div>
                   
                 </div>
               </div>
