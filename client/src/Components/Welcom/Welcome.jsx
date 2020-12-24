@@ -32,10 +32,10 @@ export default function Welcome(props) {
               style={linkStyle}
             >tutorial video</span> before getting started.</p>
           
-            <p className='welcome-info'>You can also checkout the
+            <p className='welcome-info'>You can also check out the
             <span
                style={linkStyle}
-            ><Link className='welcome-link' to='/faq'> FAQ </Link></span> in the nav bar</p>
+            ><Link className='welcome-link' to='/faq'> FAQ </Link></span> in the navigation menu</p>
           <div className='welcome-checkbox'>
             <input
                 type='checkbox'
