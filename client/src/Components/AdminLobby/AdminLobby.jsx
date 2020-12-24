@@ -120,10 +120,12 @@ export default function AdminLobby(props) {
       </>)
         
     } else {
+
+    
   
       let code = props.match.params.code
-      let list = props.gameData
-      let combatants = props.userList(list)
+      let players = props.gameData.filter(player => player.is_admin === false)
+      let combatants = props.userList(players)
 
       function startCombat() {
         if (window.confirm("Are you sure you want to start combat?")) {
@@ -143,19 +145,24 @@ export default function AdminLobby(props) {
         
 
         <Flipper key={"flipper-thing"} flipKey={props.gameData} spring={'wobble'}>
-          {props.gameData.filter(status => status.is_admin === false).map((user, i) =>
+          
+          {players.filter(status => status.is_admin === false).map((user, i) =>
             <Flipped key={user.id + " flip key"} flipId={user.id}>
               <div className='user-details' key={user.id}>
                 <button className ="user-options" id="delete-user" onClick={() => deleteUser(user.id)}>X</button>
                 <p className='username'>{user.username}</p>
                 <div className='up-down-container'>
                   <p className="initiative">{user.initiative} </p>
-                  {props.gameData.length < 3 ? "" :
+                  
                     <div className='up-down'>
-                      <button className="user-options" id="move-up" onClick={() => props.arrange(i)}>↑</button>
-                      <button className="user-options" id="move-down" onClick={() => props.arrangeDown(i)}>↓</button>
-                    </div>
-                  }
+                    {i === 0 ? '' :
+                      <>
+                        <button className="user-options" id="move-up" onClick={() => props.arrange(i)}>↑</button>
+                        <button className="user-options" id="move-down" onClick={() => props.arrangeDown(i)}>↓</button>
+                      </>
+                    }
+                  </div>
+                  
                 </div>
               </div>
            </Flipped>

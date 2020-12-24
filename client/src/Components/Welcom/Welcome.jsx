@@ -30,7 +30,7 @@ export default function Welcome(props) {
               onClick={props.show}
               className='links'
               style={linkStyle}
-            >video tutorial</span> before getting started.</p>
+            >tutorial video</span> before getting started.</p>
           
             <p className='welcome-info'>You can also checkout the
             <span
@@ -41,7 +41,7 @@ export default function Welcome(props) {
                 type='checkbox'
                 onClick={handleCheck}
             />
-              <p>Don't show this message again</p>
+              <p className="check-box">Don't show this message again</p>
           </div>
           <button onClick={handleSubmit}>Ok, got it.</button>
         </div>
