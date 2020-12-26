@@ -8,6 +8,11 @@ import './AdminLobby.css'
 
 export default function AdminLobby(props) {
   
+    sessionStorage.setItem('gameStatus', 'lobby')
+    sessionStorage.setItem('lastUrl', `${window.location.pathname}`)
+  
+ 
+
     const baseUrl = process.env.NODE_ENV === 'production'
       ? `https://`
       : `http://`

@@ -79,7 +79,7 @@ export default function LongMenu(props) {
         }}
       >
           <MenuItem
-            key="exit"
+            key="quick"
             selected='Quick Sort'
             name='sort'
             value="sort"
@@ -90,7 +90,7 @@ export default function LongMenu(props) {
         
         
           <MenuItem
-            key="exit"
+            key="copy"
             selected='Copy Game Link'
             onClick={copyToClipboard}
         >
@@ -115,7 +115,7 @@ export default function LongMenu(props) {
                 key="exit"
                 selected='Exit Game'
                 onClick={handleExit}
-                style={{BackgroundColor: "darkred"}}
+                style={{color: "red"}}
               >
               Exit Game
           </MenuItem>

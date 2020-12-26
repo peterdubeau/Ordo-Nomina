@@ -76,7 +76,8 @@ export default function LongMenuCombat(props) {
           <MenuItem
             key="exit"
             selected='Exit Combat'
-            onClick={handleExit}
+          onClick={handleExit}
+          style={{color: "red"}}
           >
           End Game Session
           </MenuItem>

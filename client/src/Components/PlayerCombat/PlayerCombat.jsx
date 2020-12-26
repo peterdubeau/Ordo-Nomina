@@ -17,6 +17,9 @@ export default function playerCombat(props) {
   let onDeck = props.gameData.users.filter(id => id.id === props.gameData.combatants[1])
   let onDeckName = onDeck[0]?.username
   
+  sessionStorage.setItem('gameStatus', 'combat')
+  sessionStorage.setItem('lastUrl', `${window.location.pathname}`)
+  
   function onDeckAlert() {
     const audio = new Audio(Ding)
     // audio.play()
@@ -40,6 +43,10 @@ export default function playerCombat(props) {
     return <Redirect to='/' />
   }
   
+  if (props.end === '') {
+    return <Redirect to={`/link/${props.match.params.code}`}/>
+  }
+
   function removeCombatant(id) {
     game.combatants.splice(game.combatants?.indexOf(id), 1)
     removeCombatants(props.match.params.code, game.combatants)

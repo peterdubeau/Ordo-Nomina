@@ -1,0 +1,16 @@
+.page-links{
+  color: rgb(67, 22, 20);
+  font-size: 40px;
+}
+
+.contact-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.pages{
+  font-size: 30px;
+  margin-left: 20px;
+}
