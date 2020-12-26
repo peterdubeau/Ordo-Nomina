@@ -54,7 +54,7 @@ export default function Logo(props) {
     ['Home', '/'],
     ['Join Combat', '/join-room'],
     ['Create Combat', '/create-room'],
-    ['FAQ', 'faq'],
+    ['FAQ', '/faq'],
     ['Contact', "/contact"],
     ['Tutorial', 'thing']
   ])

@@ -8,7 +8,7 @@ import './PlayerLobby.css'
 export default function PlayerLobby(props) {
 
   const history = useHistory()
-  sessionStorage.setItem('gameStatus', 'combat')
+  sessionStorage.setItem('gameStatus', 'lobby')
   sessionStorage.setItem('lastUrl', `${window.location.pathname}`)
   
   let host = props.gameData.users.filter(host => host.is_admin === true)
@@ -64,7 +64,6 @@ export default function PlayerLobby(props) {
   }
   checkForUser().then(response => {
     if (response == undefined) {
-      console.log("found")
     } else {
       history.push(`/link/${props.match.params.code}`)
     }
