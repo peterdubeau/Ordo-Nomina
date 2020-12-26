@@ -8,6 +8,10 @@ import '../AdminCombat/AdminCombat.css'
 
 export default function AdminCombat(props) {
 
+
+  sessionStorage.setItem('gameStatus', 'combat')
+  sessionStorage.setItem('lastUrl', `${window.location.pathname}`)
+
   const history = useHistory()
 
   function handleTakeTurn(arr) {
@@ -28,6 +32,8 @@ export default function AdminCombat(props) {
 
   function sendToLobby() {
     if (window.confirm("Are you sure you want to end combat?")) {
+      sessionStorage.setItem('gameStatus', 'none')
+      sessionStorage.setItem('lastUrl', 'none')
       toLobby(game.code, [])
       history.push(`/game/${game.code}/DM/${props.match.params.username}`)
       window.location.reload()
@@ -36,6 +42,8 @@ export default function AdminCombat(props) {
 
   function endCombat() {
     if (window.confirm("Are you sure you want to end your session? This will delete all users and the current game")) {
+      sessionStorage.setItem('gameStatus', 'none')
+      sessionStorage.setItem('lastUrl', 'none')
       destroyGame(game.code)
       history.push('/')
       window.location.reload()

@@ -143,6 +143,8 @@ class Main extends Component {
       })
 
     } else if (newGame.type === "delete_game") {
+      sessionStorage.setItem('gameStatus', 'none')
+      sessionStorage.setItem('lastUrl', 'none')
       this.setState({
         inCombat: false,
         currentGame: {

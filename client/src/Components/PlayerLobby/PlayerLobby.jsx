@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React from 'react'
+import {useHistory} from 'react-router-dom'
 import GameWebSocket from '../GameWebSocket/GameWebSocket'
 import { deleteUser } from '../../services/games'
 import { Redirect, Link } from 'react-router-dom'
@@ -6,7 +7,9 @@ import './PlayerLobby.css'
 
 export default function PlayerLobby(props) {
 
-  
+  const history = useHistory()
+  sessionStorage.setItem('gameStatus', 'combat')
+  sessionStorage.setItem('lastUrl', `${window.location.pathname}`)
   
   let host = props.gameData.users.filter(host => host.is_admin === true)
   const hostDetails = host.map(hostName => hostName.username)
@@ -32,6 +35,17 @@ export default function PlayerLobby(props) {
     return <Redirect to={'/'} />
   }
 
+  let test = props.gameData.users?.filter(current => current.username === props.match.params.username)
+  
+  let checkForUser = async () => {
+    await test 
+    if (test.length == 0) {
+      return <Redirect to={`/link/${props.match.params.code}`} />
+    }
+  }
+
+  
+
   if (props.gameData.users?.length === 0) {
     return (<>
       <GameWebSocket
@@ -48,7 +62,13 @@ export default function PlayerLobby(props) {
     
     </>)
   }
-  
+  checkForUser().then(response => {
+    if (response == undefined) {
+      console.log("found")
+    } else {
+      history.push(`/link/${props.match.params.code}`)
+    }
+  })
     return (<>
       
       <div className="code-container">

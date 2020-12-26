@@ -17,6 +17,9 @@ export default function playerCombat(props) {
   let onDeck = props.gameData.users.filter(id => id.id === props.gameData.combatants[1])
   let onDeckName = onDeck[0]?.username
   
+  sessionStorage.setItem('gameStatus', 'combat')
+  sessionStorage.setItem('lastUrl', `${window.location.pathname}`)
+  
   function onDeckAlert() {
     const audio = new Audio(Ding)
     // audio.play()
