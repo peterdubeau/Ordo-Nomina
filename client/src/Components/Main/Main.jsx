@@ -164,7 +164,8 @@ class Main extends Component {
         }
       })
     } else if (newGame.type === "to_lobby") {
-      
+      sessionStorage.setItem('gameStatus', 'lobby')
+      // sessionStorage.setItem('lastUrl', 'none')
       this.setState({
         inCombat: "lobby",
         currentGame: {

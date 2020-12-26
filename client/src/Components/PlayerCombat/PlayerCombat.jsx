@@ -43,6 +43,10 @@ export default function playerCombat(props) {
     return <Redirect to='/' />
   }
   
+  if (props.end === '') {
+    return <Redirect to={`/link/${props.match.params.code}`}/>
+  }
+
   function removeCombatant(id) {
     game.combatants.splice(game.combatants?.indexOf(id), 1)
     removeCombatants(props.match.params.code, game.combatants)
