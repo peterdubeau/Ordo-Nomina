@@ -76,6 +76,7 @@ export default function Logo(props) {
       props.show()
     } else {
       history.push(`${action}`)
+      window.location.reload()
     }
   }
   
