@@ -7,7 +7,6 @@ export default function Welcome(props) {
 
   const handleCheck = () => {
     setCheck(!check)
-    console.log(check)
   }
   
   const handleSubmit = () => {

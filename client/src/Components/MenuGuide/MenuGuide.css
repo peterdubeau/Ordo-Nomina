@@ -1,0 +1,91 @@
+.lobby-guide-aura{
+  position: fixed;
+  top:0;
+  left: 0;
+  z-index: 88;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, .5)
+}
+
+.lobby-guide-body{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  padding: 10px 20px;
+  height: 95%;
+}
+
+.lobby-guide-container{
+  position: fixed;
+  z-index: 88;
+  height: 40vh;
+  width: 40vw;
+  top: 20%;
+  right: 10%;
+  background-color: #21072A;
+  color: #DFDF8E;
+  border: 5px solid #DFDF8E;
+  border-radius: 30px;
+  background-size: cover;
+}
+
+.lobby-guide-info{
+  font-size: 20px;
+}
+
+.lobby-guide-link{
+  color: inherit;
+  position: inherit;
+}
+
+.circle-menu{
+  position: fixed;
+  border: 3px solid red;
+  width: 180px;
+  height: 80px;
+  border-radius: 30px;
+  top: 20px;
+  /* transform: translate(0, -400%); */
+  justify-self: center;
+  background-color: rgb(255,255,255, .3);
+}
+
+.circle-code{
+  position: fixed;
+  border: 3px solid red;
+  width: 30px;
+  height: 50px;
+  border-radius: 30px;
+  right: 28px;
+  top: 8px;
+  background-color: rgb(255,255,255, .3);
+}
+
+.lobby-guide-close{
+  position: absolute;
+  bottom: 75%;
+  left: 90%;
+}
+
+
+@media only screen and (max-width: 500px) {
+  .lobby-guide-container{
+    height: 40vh;
+    width: 50vw;  
+  }
+
+  .lobby-guide-close{
+    left: 80%;
+  }
+
+  .lobby-guide-info{
+    font-size: 17px;
+  }
+
+  .check-box{
+    font-size: 12px;
+  }
+}

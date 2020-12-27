@@ -110,7 +110,8 @@ export default function AdminCombat(props) {
               gameData={props.gameData}
               lobby={sendToLobby}
               exit={endCombat}
-            />
+        />
+        
       </div>
     </>)
   }
