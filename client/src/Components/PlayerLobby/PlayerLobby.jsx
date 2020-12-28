@@ -32,8 +32,8 @@ export default function PlayerLobby(props) {
   }
 
   if (props.startGame === false) {
-    sessionStorage.setItem('gameStatus', 'none')
-  sessionStorage.setItem('lastUrl', `none`)
+    sessionStorage.setItem('gameStatus', 'lobby')
+    sessionStorage.setItem('lastUrl', `none`)
     return <Redirect to={'/'} />
   }
 

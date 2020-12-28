@@ -6,6 +6,9 @@ import '../CreateRoom/CreateRoom.css'
 
 function JoinLink(props) {
   
+  sessionStorage.setItem('gameStatus', 'lobby')
+  sessionStorage.setItem('lastUrl', `${window.location.pathname}`)
+
   if (props.cableApp?.game) {
     window.location.reload()
   }
