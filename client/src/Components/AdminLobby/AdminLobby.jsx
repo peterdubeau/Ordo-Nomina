@@ -8,6 +8,11 @@ import './AdminLobby.css'
 
 export default function AdminLobby(props) {
   
+    sessionStorage.setItem('gameStatus', 'lobby')
+    sessionStorage.setItem('lastUrl', `${window.location.pathname}`)
+  
+ 
+
     const baseUrl = process.env.NODE_ENV === 'production'
       ? `https://`
       : `http://`
@@ -80,6 +85,8 @@ export default function AdminLobby(props) {
   function sendToLobby() {
     if (window.confirm("Are you sure you want leave this lobby? You'll have to create a new game")) {
       destroyGame(props.match.params.code)
+      sessionStorage.setItem('gameStatus', 'none')
+      sessionStorage.setItem('lastUrl', 'none')
       history.push(`/`)
       window.location.reload()
     }

@@ -46,14 +46,28 @@ export default function Logo(props) {
     setState({ ...state, [anchor]: open });
   };
 
+  let status = sessionStorage.getItem('gameStatus')
+  let prevPage = sessionStorage.getItem('lastUrl')
+ 
+
   const navLocations = new Object([
-    ['Home', ''],
-    ['Join Combat', 'join-room'],
-    ['Create Combat', 'create-room'],
-    ['FAQ', 'faq'],
-    ['Contact', "contact"],
+    ['Home', '/'],
+    ['Join Combat', '/join-room'],
+    ['Create Combat', '/create-room'],
+    ['FAQ', '/faq'],
+    ['Contact', "/contact"],
     ['Tutorial', 'thing']
   ])
+  console.log(window.location.pathname.includes('/link/'))
+  if ((status === "lobby" && prevPage !== window.location.pathname) && !window.location.pathname.includes('/link/')) {
+    navLocations.push(['Return to Lobby', prevPage.slice(1)])
+  } else if (status === "combat" && prevPage !== window.location.pathname) {
+    navLocations.push(['Return to Combat', prevPage.slice(1)])
+  } else if (status === "none" || prevPage === 'none') {
+    navLocations.splice(-1,1)
+  }
+  
+
 
   const navOptions = Object.fromEntries(navLocations)
 
@@ -61,7 +75,7 @@ export default function Logo(props) {
     if (option === 'Tutorial') {
       props.show()
     } else {
-      history.push(`/${action}`)
+      history.push(`${action}`)
     }
   }
   
@@ -79,7 +93,17 @@ export default function Logo(props) {
       <List>
         {navLocations.map(([text, action]) => (
           <ListItem button key={text}>
-            <ListItemText primary={text} onClick={() => navControl(text, action)}/>
+            { text === 'Return to Lobby' || text === 'Return to Combat' ? 
+              <ListItemText
+              style={{color: "red"}}
+              primary={text}
+              onClick={() => navControl(text, action)} />
+              :
+              <ListItemText
+                primary={text}
+                onClick={() => navControl(text, action)} />
+              
+        }
           </ListItem>
         ))}
       </List>
@@ -91,7 +115,11 @@ export default function Logo(props) {
     <div className='on-mini' style={{ zIndex: "99" }}>
       {['left'].map((anchor) => (
         <React.Fragment key={anchor}>
-          <Button style={{ height: "60px", width: "30px", color: "rgba(0,0,0,0)" }}
+          <Button style={{
+            height: "60px",
+            width: "30px",
+            color:"rgba(0,0,0,0)"
+          }}
             onClick={toggleDrawer(anchor, true)}>
             {anchor}
           </Button>
