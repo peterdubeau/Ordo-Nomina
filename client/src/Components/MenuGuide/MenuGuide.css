@@ -32,6 +32,21 @@
   background-size: cover;
 }
 
+.combat-guide-container{
+  position: fixed;
+  z-index: 88;
+  height: 60vh;
+  width: 40vw;
+  top: 20%;
+  right: 10%;
+  background-color: #21072A;
+  color: #DFDF8E;
+  border: 5px solid #DFDF8E;
+  border-radius: 30px;
+  background-size: cover;
+}
+
+
 .lobby-guide-info{
   font-size: 20px;
 }
@@ -70,6 +85,17 @@
   left: 90%;
 }
 
+.combat-guide-close{
+  position: absolute;
+  bottom: 85%;
+  left: 85%;
+}
+
+.combat-guide-info{
+  font-size: 16px;
+}
+
+
 
 @media only screen and (max-width: 500px) {
   .lobby-guide-container{
@@ -87,5 +113,18 @@
 
   .check-box{
     font-size: 12px;
+  }
+
+  .combat-guide-container{
+    width: 60vw
+  }
+}
+
+@media only screen and (min-width:  800px) {
+  .combat-guide-info{
+    font-size: 20px;
+  }
+  .combat-guide-container{
+    max-width: 30vh
   }
 }
