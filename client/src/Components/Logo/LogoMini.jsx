@@ -58,8 +58,8 @@ export default function Logo(props) {
     ['Contact', "/contact"],
     ['Tutorial', 'thing']
   ])
-  
-  if (status === "lobby" && prevPage !== window.location.pathname) {
+  console.log(window.location.pathname.includes('/link/'))
+  if ((status === "lobby" && prevPage !== window.location.pathname) && !window.location.pathname.includes('/link/')) {
     navLocations.push(['Return to Lobby', prevPage.slice(1)])
   } else if (status === "combat" && prevPage !== window.location.pathname) {
     navLocations.push(['Return to Combat', prevPage.slice(1)])
