@@ -1,24 +1,34 @@
-# README
+# Ordo Nomina
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+_A real-time initiative tracker for Dungeons and Dragons 5th Edition_
 
-Things you may want to cover:
+### Requirements
 
-* Ruby version
+ruby 2.6.4
+Rails 6.0.3.3
+Node.js (v14)
+React (v17)
 
-* System dependencies
+### Setup/Installation
+- Clone the repo onto your machine. from the root directory run:
 
-* Configuration
+```
+bundle install
+cd client
+npm install
+```
+### Starting the server
 
-* Database creation
+- From the root directory (tracker) run 
 
-* Database initialization
+```
+rails s 
+```
 
-* How to run the test suite
+- From a new CLI tab move into the client directory
 
-* Services (job queues, cache servers, search engines, etc.)
+```
+npm start
+```
 
-* Deployment instructions
-
-* ...
+- Once both servers are running, you can access the development verison of the front end at <localhost:3001>
