@@ -62,7 +62,8 @@ class GamesController < ApplicationController
 
   def clear_room
     @game = Game.find_by code: (params[:code])
-    GamesChannel.broadcast_to(@game, { game: @game, type: "to_lobby" } )
+    @game.in_combat = false
+    GamesChannel.broadcast_to(@game, { game: @game, inCombat: @game.in_combat, type: "to_lobby" } )
     
     if @game.update(game_params)
       @users = @game.users.select {|user| user.is_admin == false}
@@ -79,6 +80,7 @@ end
   # PUT /game/:code/start
   def start_combat
     @game = Game.find_by code: (params[:code])
+    @game.in_combat = true
 
     if @game.update(game_params)
       users = @game.users.all
@@ -88,7 +90,7 @@ end
         hash[user.id] = user.username
       end
 
-      GamesChannel.broadcast_to(@game, { code: @game.code, users: users, combatants: combatants, type: "game_start" })
+      GamesChannel.broadcast_to(@game, { code: @game.code, users: users, combatants: combatants, inCombat: @game.in_combat, type: "game_start" })
       render json: names
     else
       render json: @game.errors, status: :unprocessable_entity

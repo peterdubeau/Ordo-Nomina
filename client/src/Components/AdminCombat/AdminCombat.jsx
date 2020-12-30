@@ -1,6 +1,7 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { useHistory, Link } from 'react-router-dom'
 import LongMenuCombat from '../LongMenu/LongMenuCombat'
+import CombatMenuGuide from '../MenuGuide/CombatMenuGuide'
 import GameWebSocket from '../GameWebSocket/GameWebSocket'
 import { Flipped, Flipper } from 'react-flip-toolkit'
 import { takeTurn, destroyGame, removeCombatants, toLobby } from '../../services/games'
@@ -47,6 +48,15 @@ export default function AdminCombat(props) {
       destroyGame(game.code)
       history.push('/')
       window.location.reload()
+    }
+  }
+
+  const [hasViewedGuide, setHasViewedGuide] = useState(JSON.parse(localStorage.getItem('hasViewedCombatGuide')))
+  const showTutorial = () => {
+    
+    if (hasViewedGuide !== 'true') {
+      setHasViewedGuide(true)
+      localStorage.setItem('hasViewedCombatGuide', 'true')
     }
   }
 
@@ -110,7 +120,9 @@ export default function AdminCombat(props) {
               gameData={props.gameData}
               lobby={sendToLobby}
               exit={endCombat}
-            />
+        />
+        {hasViewedGuide ? " " : <CombatMenuGuide close={showTutorial} /> }
+        
       </div>
     </>)
   }

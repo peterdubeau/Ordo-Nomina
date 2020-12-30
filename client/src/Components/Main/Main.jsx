@@ -143,10 +143,8 @@ class Main extends Component {
       })
 
     } else if (newGame.type === "delete_game") {
-      sessionStorage.setItem('gameStatus', 'none')
-      sessionStorage.setItem('lastUrl', 'none')
       this.setState({
-        inCombat: false,
+        inCombat: 'exit',
         currentGame: {
           game: {},
           users: [],
@@ -164,10 +162,8 @@ class Main extends Component {
         }
       })
     } else if (newGame.type === "to_lobby") {
-      sessionStorage.setItem('gameStatus', 'none')
-      sessionStorage.setItem('lastUrl', 'none')
       this.setState({
-        inCombat: "lobby",
+        inCombat: false,
         currentGame: {
           game: {},
           users: [],

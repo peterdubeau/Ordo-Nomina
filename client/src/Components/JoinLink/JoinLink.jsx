@@ -6,6 +6,9 @@ import '../CreateRoom/CreateRoom.css'
 
 function JoinLink(props) {
   
+  sessionStorage.setItem('gameStatus', 'lobby')
+  sessionStorage.setItem('lastUrl', `${window.location.pathname}`)
+
   if (props.cableApp?.game) {
     window.location.reload()
   }
@@ -47,7 +50,7 @@ function JoinLink(props) {
     try {
       setIsLoading(true)
       let roomId = await readGame(formData.code.toUpperCase())
-      if (roomId.combatants.length > 0) {
+      if (roomId.in_combat == true) {
         if (window.confirm("This combat is in progress, would you like to rejoin?")) {
           if (checkForUser(formData.username, roomId)) {
             history.push(`/combat/${formData.code.toUpperCase()}/player/${formData.username}`)

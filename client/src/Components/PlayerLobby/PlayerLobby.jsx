@@ -7,6 +7,7 @@ import './PlayerLobby.css'
 
 export default function PlayerLobby(props) {
 
+  console.log(props.gameData)
   const history = useHistory()
   sessionStorage.setItem('gameStatus', 'lobby')
   sessionStorage.setItem('lastUrl', `${window.location.pathname}`)
@@ -27,14 +28,13 @@ export default function PlayerLobby(props) {
     return <Redirect to='/' />
   }
 
-  if (props.startGame === true) {
-    return <Redirect to={`/combat/${props.match.params.code}/player/${props.match.params.username}`} />
+  if (props?.startGame === 'exit') {
+    console.log("here")
+    return <Redirect to={`/`} />
   }
 
-  if (props.startGame === false) {
-    sessionStorage.setItem('gameStatus', 'none')
-  sessionStorage.setItem('lastUrl', `none`)
-    return <Redirect to={'/'} />
+  if (props.startGame === true || props.gameData.game.in_combat == true) {
+    return <Redirect to={`/combat/${props.match.params.code}/player/${props.match.params.username}`} />
   }
 
   let test = props.gameData.users?.filter(current => current.username === props.match.params.username)
@@ -45,6 +45,7 @@ export default function PlayerLobby(props) {
       return <Redirect to={`/link/${props.match.params.code}`} />
     }
   }
+
 
   
 

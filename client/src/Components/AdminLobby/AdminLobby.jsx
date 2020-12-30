@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react'
 import { useHistory, Link } from 'react-router-dom'
 import { Flipped, Flipper } from 'react-flip-toolkit'
 import LongMenu from '../LongMenu/LongMenu'
+import MenuGuide from '../MenuGuide/MenuGuide'
 import { readGame, postUser, deleteUser, sendCombatants, destroyGame } from '../../services/games'
 import GameWebSocket from '../GameWebSocket/GameWebSocket'
 import './AdminLobby.css'
@@ -18,6 +19,7 @@ export default function AdminLobby(props) {
       : `http://`
 
     const [copySuccess, setCopySuccess] = useState('');
+
     const textAreaRef = useRef(null);
   
     function copyToClipboard(e) {
@@ -45,6 +47,15 @@ export default function AdminLobby(props) {
     username: true,
     initiative: true
   });
+
+  const [hasViewedGuide, setHasViewedGuide] = useState(JSON.parse(localStorage.getItem('hasViewedAdminGuide')))
+  const showTutorial = () => {
+    
+    if (hasViewedGuide !== 'true') {
+      setHasViewedGuide(true)
+      localStorage.setItem('hasViewedAdminGuide', 'true')
+    }
+  }
 
   const handleSubmit = async (e) => {
     if (formData.username.trim().length === 0 || isNaN(formData.initiative) || formData.initiative.trim().length === 0) {
@@ -220,7 +231,8 @@ export default function AdminLobby(props) {
           src='https://res.cloudinary.com/dyrvlnond/image/upload/v1608509018/Tracker/Artboard_1_llwk43.png' />
         <h3 className='room-code'>
           Code: {code}</h3>
-        </div>
+          </div>
+          {hasViewedGuide ? " " : <MenuGuide close={showTutorial} /> }
       </div>
       </>)
     }

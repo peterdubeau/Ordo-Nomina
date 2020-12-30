@@ -5,12 +5,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
 import MenuIcon from '@material-ui/icons/Menu';
 import './Logo.css'
 
@@ -25,7 +21,7 @@ const useStyles = makeStyles({
   fullList: {
     width: 'auto',
     height: "100vh",
-    // backgroundColor: 'blue'
+
   },
 });
 
@@ -58,8 +54,8 @@ export default function Logo(props) {
     ['Contact', "/contact"],
     ['Tutorial', 'thing']
   ])
-  
-  if (status === "lobby" && prevPage !== window.location.pathname) {
+  console.log(window.location.pathname.includes('/link/'))
+  if ((status === "lobby" && prevPage !== window.location.pathname) && !window.location.pathname.includes('/link/')) {
     navLocations.push(['Return to Lobby', prevPage.slice(1)])
   } else if (status === "combat" && prevPage !== window.location.pathname) {
     navLocations.push(['Return to Combat', prevPage.slice(1)])
@@ -76,6 +72,7 @@ export default function Logo(props) {
       props.show()
     } else {
       history.push(`${action}`)
+      window.location.reload()
     }
   }
   
