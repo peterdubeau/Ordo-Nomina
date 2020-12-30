@@ -59,8 +59,8 @@ export default function Logo(props) {
     navLocations.push(['Return to Lobby', prevPage.slice(1)])
   } else if (status === "combat" && prevPage !== window.location.pathname) {
     navLocations.push(['Return to Combat', prevPage.slice(1)])
-  } else if (status === "none" || prevPage === 'none') {
-    navLocations.splice(-1,1)
+  } else {
+
   }
   
 
