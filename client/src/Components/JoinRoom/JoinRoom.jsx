@@ -45,7 +45,7 @@ export default function JoinRoom(props) {
     try {
       setIsLoading(true)
       let roomId = await readGame(formData.code.toUpperCase())
-      if (roomId.combatants.length > 0) {
+      if (roomId.in_combat == true) {
         if (window.confirm("This combat is in progress, would you like to rejoin?")) {
           console.log(checkForUser(formData.username, roomId))
           if (checkForUser(formData.username, roomId)) {
