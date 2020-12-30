@@ -116,7 +116,7 @@ export default function AdminCombat(props) {
         </div>
       </Flipper>
       <div className='menu'>
-            <LongMenuCombat
+        <LongMenuCombat
               gameData={props.gameData}
               lobby={sendToLobby}
               exit={endCombat}
