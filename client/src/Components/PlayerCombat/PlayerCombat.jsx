@@ -63,7 +63,10 @@ export default function playerCombat(props) {
     code={props.match.params.code}
       />
       
-    <h3>"Loading game..."</h3>
+      <h2 style={{
+      textAlign: "center",
+      marginTop: "40px"
+        }}>Loading game...</h2>
     
     </>)
   }
