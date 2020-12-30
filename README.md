@@ -4,10 +4,10 @@ _A real-time initiative tracker for Dungeons and Dragons 5th Edition_
 
 ### Requirements
 
-ruby 2.6.4
-Rails 6.0.3.3
-Node.js (v14)
-React (v17)
+##### ruby 2.6.4
+##### Rails 6.0.3.3
+##### Node.js (v14)
+##### React (v17)
 
 ### Setup/Installation
 - Clone the repo onto your machine. from the root directory run:
