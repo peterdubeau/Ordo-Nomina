@@ -28,23 +28,19 @@ export default function playerCombat(props) {
   if (onDeckName === props.match.params.username) {
     onDeckAlert()
   }
-  
-  if (props.end === false) {
-    alert("The DM has ended combat")
-    return <Redirect to='/' />
-  }
 
-  if (props.end === 'lobby') {
+
+  if (props.gameData.game.in_combat == false) {
     alert("The DM has ended combat")
     return <Redirect to={`/link/${props.match.params.code}`} />
   }
   
-  if (props.gameData?.combatants === undefined) {
+  if (props.gameData?.combatants.length === undefined) {
     return <Redirect to='/' />
   }
   
-  if (props.end === '') {
-    return <Redirect to={`/link/${props.match.params.code}`}/>
+  if (props.end === 'exit') {
+    return <Redirect to={`/`}/>
   }
 
   function removeCombatant(id) {
