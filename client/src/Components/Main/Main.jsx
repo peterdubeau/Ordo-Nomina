@@ -28,6 +28,7 @@ class Main extends Component {
         .then(response => response.json())
         .then(results => {
           this.setState({
+            inCombat: results.inCombat,
             currentGame: {
               game: results,
               users: results.users,
@@ -133,7 +134,7 @@ class Main extends Component {
 
     } else if (newGame.type === 'game_start') {
       this.setState({
-        inCombat: true,
+        inCombat: newGame.inCombat,
         currentGame: {
           game: newGame,
           code: newGame.code,
@@ -163,7 +164,7 @@ class Main extends Component {
       })
     } else if (newGame.type === "to_lobby") {
       this.setState({
-        inCombat: false,
+        inCombat: newGame.inCombat,
         currentGame: {
           game: {},
           users: [],
