@@ -8,7 +8,7 @@ export default function Tutorial(props) {
       <div className='tutorial-container'>
         <div className='tutorial-body'>
           <ReactPlayer
-            url='https://www.youtube.com/watch?v=odhMmAPDc54'
+            url='youtube.com/watch?v=SlMLXjewQP8'
             width='80%'
             controls='true'
           />
