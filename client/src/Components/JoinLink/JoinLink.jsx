@@ -76,6 +76,8 @@ function JoinLink(props) {
     } catch (error) {
       if (error) {
         alert("Game not found. Please check your Game Code and try again")
+        sessionStorage.removeItem('gameStatus')
+        sessionStorage.removeItem('lastUrl')
         history.push('/')
       }
     }

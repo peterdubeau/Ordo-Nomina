@@ -40,6 +40,8 @@ export default function playerCombat(props) {
   }
   
   if (props.end === 'exit') {
+    sessionStorage.removeItem('gameStatus')
+    sessionStorage.removeItem('lastUrl')
     return <Redirect to={`/`}/>
   }
 

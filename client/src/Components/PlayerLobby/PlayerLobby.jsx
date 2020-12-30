@@ -7,7 +7,6 @@ import './PlayerLobby.css'
 
 export default function PlayerLobby(props) {
 
-  console.log(props.gameData)
   const history = useHistory()
   sessionStorage.setItem('gameStatus', 'lobby')
   sessionStorage.setItem('lastUrl', `${window.location.pathname}`)
@@ -29,7 +28,8 @@ export default function PlayerLobby(props) {
   }
 
   if (props?.startGame === 'exit') {
-    console.log("here")
+    sessionStorage.removeItem('gameStatus')
+    sessionStorage.removeItem('lastUrl')
     return <Redirect to={`/`} />
   }
 
@@ -85,7 +85,7 @@ export default function PlayerLobby(props) {
         {list.filter(status => status.is_admin === false).map(user =>
           <div key={user.id} className='player-lobby-details'>
             {(user.username === props.match.params.username ?
-                <button id='delete-self' onClick={() => deleteUser(userId)}>X</button>
+              <button id='delete-self' key={`delete ${user.id}`}onClick={() => deleteUser(userId)}>X</button>
               :
               "")} <p className='user-text' key={`info ${user.id}`}>{user.username} : <span>{user.initiative}</span> </p>
           </div>

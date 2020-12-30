@@ -92,7 +92,7 @@
 }
 
 .combat-guide-info{
-  font-size: 16px;
+  font-size: 3vh;
 }
 
 
@@ -108,7 +108,7 @@
   }
 
   .lobby-guide-info{
-    font-size: 17px;
+    font-size: 3vh;
   }
 
   .check-box{
@@ -122,7 +122,7 @@
 
 @media only screen and (min-width:  800px) {
   .combat-guide-info{
-    font-size: 20px;
+    font-size: 3vh;
   }
   .combat-guide-container{
     max-width: 30vh
