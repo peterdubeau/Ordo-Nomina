@@ -56,7 +56,6 @@ class GamesController < ApplicationController
   # DELETE /games/1
   def destroy
     GamesChannel.broadcast_to(@game, { type: "delete_game" } )
-    sleep 3
     @game.destroy
   end
 
