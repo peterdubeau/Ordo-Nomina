@@ -35,9 +35,9 @@
 .combat-guide-container{
   position: fixed;
   z-index: 88;
-  height: 60vh;
+  height: 70vh;
   width: 40vw;
-  top: 20%;
+  top: 10%;
   right: 10%;
   background-color: #21072A;
   color: #DFDF8E;
@@ -99,7 +99,7 @@
 
 @media only screen and (max-width: 500px) {
   .lobby-guide-container{
-    height: 40vh;
+    height: 50vh;
     width: 50vw;  
   }
 
