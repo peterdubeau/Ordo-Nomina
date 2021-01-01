@@ -52,7 +52,7 @@ export default function Logo(props) {
     ['Create Combat', '/create-room'],
     ['FAQ', '/faq'],
     ['Contact', "/contact"],
-    ['Tutorial', 'thing']
+    ['Introduction', 'thing']
   ])
   
   if ((status === "lobby" && prevPage !== window.location.pathname) && !window.location.pathname.includes('/link/')) {
@@ -68,7 +68,7 @@ export default function Logo(props) {
   const navOptions = Object.fromEntries(navLocations)
 
   const navControl = (option, action) => {
-    if (option === 'Tutorial') {
+    if (option === 'Introduction') {
       props.show()
     } else {
       history.push(`${action}`)
