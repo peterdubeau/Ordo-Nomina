@@ -29,7 +29,7 @@ export default function Welcome(props) {
               onClick={props.show}
               className='links'
               style={linkStyle}
-            >tutorial video</span> before getting started.</p>
+            >introduction video</span> before getting started.</p>
           
             <p className='welcome-info'>You can also check out the
             <span
