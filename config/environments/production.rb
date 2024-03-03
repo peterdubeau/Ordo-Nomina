@@ -33,9 +33,9 @@ Rails.application.configure do
   
   # Mount Action Cable outside main process or domain.
   # config.action_cable.mount_path = nil
-  config.action_cable.url = 'wss://ordo-nomina-backend.onrender.com'
+  config.action_cable.url = 'wss://ordo-nomina-backend.onrender.com/cable'
   # config.action_cable.allowed_request_origins = [ 'http://example.com', /http:\/\/example.*/ ]
-  config.web_socket_server_url = 'wss://ordo-nomina-backend.onrender.com'
+  config.web_socket_server_url = 'wss://ordo-nomina-backend.onrender.com/cable'
 
 
   config.action_cable.allowed_request_origins = [ "#{ENV['LIVE_URL']}", "#{ENV['LIVE_URL']}" ]
