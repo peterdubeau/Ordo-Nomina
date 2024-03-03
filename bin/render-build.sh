@@ -4,4 +4,3 @@ set -o errexit
 
 bundle install
 rails db:setup
-rails s
