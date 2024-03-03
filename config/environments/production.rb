@@ -38,11 +38,11 @@ Rails.application.configure do
   config.web_socket_server_url = 'wss://ordo-nomina-backend.onrender.com/cable'
 
 
-  config.action_cable.allowed_request_origins = [ "#{ENV['LIVE_URL']}", "#{ENV['LIVE_URL']}" ]
+  config.action_cable.allowed_request_origins = [ "https://ordo-nomina.onrender.com", "https://ordo-nomina-backend.onrender.com" ]
 
   
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  config.force_ssl = true
+  config.force_ssl = false
 
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.
