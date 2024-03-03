@@ -13,22 +13,22 @@ export default function playerCombat(props) {
     return map;
   }, {});
 
-  let onDeck = props.gameData.users.filter(
-    (id) => id.id === props.gameData.combatants[1]
-  );
-  let onDeckName = onDeck[0]?.username;
+    sessionStorage.setItem("gameStatus", "combat");
+    sessionStorage.setItem("lastUrl", `${window.location.pathname}`);
 
-  sessionStorage.setItem("gameStatus", "combat");
-  sessionStorage.setItem("lastUrl", `${window.location.pathname}`);
+  // let onDeck = props.gameData.users.filter(
+  //   (id) => id.id === props.gameData.combatants[1]
+  // );
+  // let onDeckName = onDeck[0]?.username;
 
-  function onDeckAlert() {
-    const audio = new Audio(Ding);
-    audio.play()
-  }
+  // function onDeckAlert() {
+    // const audio = new Audio(Ding);
+    // audio.play()
+  // }
 
-  if (onDeckName === props.match.params.username) {
-    onDeckAlert();
-  }
+  // if (onDeckName === props.match.params.username) {
+  //   onDeckAlert();
+  // }
 
   if (props.gameData.game.in_combat === false) {
     alert("The DM has ended combat");
