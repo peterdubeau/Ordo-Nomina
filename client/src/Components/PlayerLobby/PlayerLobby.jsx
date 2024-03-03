@@ -2,7 +2,7 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import GameWebSocket from "../GameWebSocket/GameWebSocket";
 import { deleteUser } from "../../services/games";
-import { Redirect, Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import "./PlayerLobby.css";
 
 export default function PlayerLobby(props) {
@@ -33,7 +33,7 @@ export default function PlayerLobby(props) {
     return <Redirect to={`/`} />;
   }
 
-  if (props.startGame === true || props.gameData.game.in_combat == true) {
+  if (props.startGame === true || props.gameData.game.in_combat === true) {
     return (
       <Redirect
         to={`/combat/${props.match.params.code}/player/${props.match.params.username}`}
@@ -47,7 +47,7 @@ export default function PlayerLobby(props) {
 
   let checkForUser = async () => {
     await test;
-    if (test.length == 0) {
+    if (test.length === 0) {
       return <Redirect to={`/link/${props.match.params.code}`} />;
     }
   };
@@ -74,7 +74,7 @@ export default function PlayerLobby(props) {
     );
   }
   checkForUser().then((response) => {
-    if (response == undefined) {
+    if (response === undefined) {
     } else {
       history.push(`/link/${props.match.params.code}`);
     }
@@ -84,6 +84,7 @@ export default function PlayerLobby(props) {
       <div className="code-container">
         <img
           style={{ height: "50px" }}
+          alt="Ordo Nomina Logo"
           src="https://res.cloudinary.com/dyrvlnond/image/upload/v1608509018/Tracker/Artboard_1_llwk43.png"
         />
         <h3 className="room-code">Code: {props.match.params.code}</h3>

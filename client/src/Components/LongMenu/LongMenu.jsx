@@ -1,5 +1,4 @@
-import React, { useState, useRef } from 'react';
-import { useHistory } from 'react-router-dom'
+import React, { useRef } from 'react';
 import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -9,11 +8,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 const ITEM_HEIGHT = 48;
 
 export default function LongMenu(props) {
-
-    const [copySuccess, setCopySuccess] = useState('');
-    const textAreaRef = useRef(null);
-    const history = useHistory()
-  
+    const textAreaRef = useRef(null);  
 
     function copyToClipboard(e) {
       textAreaRef.current.select();
@@ -21,7 +16,6 @@ export default function LongMenu(props) {
       // This is just personal preference.
       // I prefer to not show the whole text area selected.
       e.target.focus();
-      setCopySuccess('Copied!');
       setAnchorEl(null)
     };
 
@@ -39,11 +33,6 @@ export default function LongMenu(props) {
     setAnchorEl(null);
   };
 
-  const handleStart = (e) => {
-    props.start()
-    setAnchorEl(null);
-  };
-  
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };

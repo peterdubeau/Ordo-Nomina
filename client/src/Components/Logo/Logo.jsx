@@ -14,6 +14,7 @@ export default function Logo() {
         Ordo Nomina
       </h1>
       <img
+        alt="Ordo Nomina Logo"
         className="on-image"
         src="https://res.cloudinary.com/dyrvlnond/image/upload/v1608509018/Tracker/Artboard_1_llwk43.png"
       />

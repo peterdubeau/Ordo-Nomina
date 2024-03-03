@@ -23,14 +23,14 @@ export default function playerCombat(props) {
 
   function onDeckAlert() {
     const audio = new Audio(Ding);
-    // audio.play()
+    audio.play()
   }
 
   if (onDeckName === props.match.params.username) {
     onDeckAlert();
   }
 
-  if (props.gameData.game.in_combat == false) {
+  if (props.gameData.game.in_combat === false) {
     alert("The DM has ended combat");
     return <Redirect to={`/link/${props.match.params.code}`} />;
   }
@@ -94,6 +94,7 @@ export default function playerCombat(props) {
         <div className="code-container">
           <img
             style={{ height: "50px" }}
+            alt="Ordo Nomina Logo"
             src="https://res.cloudinary.com/dyrvlnond/image/upload/v1608509018/Tracker/Artboard_1_llwk43.png"
           />
           <h3 className="room-code">Code: {props.match.params.code}</h3>

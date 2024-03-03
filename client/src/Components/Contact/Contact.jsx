@@ -30,7 +30,7 @@ export default function Contact() {
     <div className="contact-container">
       <h1>Contact Me</h1>
       {details.map((page) => (
-        <p className="pages">
+        <p className="pages" key={page.title}>
           <Link
             className="page-links"
             to={{ pathname: `${page.url}` }}

@@ -20,17 +20,13 @@ export default function AdminLobby(props) {
   const baseUrl =
     process.env.NODE_ENV === "production" ? `https://` : `http://`;
 
-  const [copySuccess, setCopySuccess] = useState("");
 
   const textAreaRef = useRef(null);
 
   function copyToClipboard(e) {
     textAreaRef.current.select();
     document.execCommand("copy");
-    // This is just personal preference.
-    // I prefer to not show the whole text area selected.
     e.target.focus();
-    setCopySuccess("Copied!");
   }
 
   let gameUrl = `${baseUrl}${window.location.host}/link/${props.match.params.code}`;
@@ -288,6 +284,7 @@ export default function AdminLobby(props) {
           <div className="code-container">
             <img
               style={{ height: "50px" }}
+              alt="Ordo Nomina Logo"
               src="https://res.cloudinary.com/dyrvlnond/image/upload/v1608509018/Tracker/Artboard_1_llwk43.png"
             />
             <h3 className="room-code">Code: {code}</h3>

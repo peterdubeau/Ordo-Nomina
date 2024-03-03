@@ -1,5 +1,4 @@
 import React from "react";
-import LogoMini from "../Logo/LogoMini";
 import "./FAQ.css";
 
 export default function FAQ() {
@@ -9,6 +8,7 @@ export default function FAQ() {
         <div className="faq-header">
           <img
             className="logo"
+            alt="Ordo Nomina Logo"
             style={{ height: "50px" }}
             src="https://res.cloudinary.com/dyrvlnond/image/upload/v1608509018/Tracker/Artboard_1_llwk43.png"
           />
