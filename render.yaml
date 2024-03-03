@@ -1,6 +1,6 @@
 databases:
   - name: ordo-nomina
-    databaseName: live_tracker
+    databaseName: live_tracker_g0xv
     user: pete
     plan: free
 

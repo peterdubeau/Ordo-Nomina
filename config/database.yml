@@ -58,7 +58,7 @@ test:
 production:
   adapter: postgresql
   encoding: unicode
-  database: live_tracker
+  database: live_tracker_g0xv
   pool: 5
   username: pete
   password:
